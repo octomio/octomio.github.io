@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Annie Chan</title> <!-- Updated title for bookmarks & tabs -->
+    <title>Get Annie Chan</title> <!-- Title for bookmarks & tabs -->
     
     <!-- Favicon for bookmarks -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -35,15 +35,19 @@
             padding: 15px 25px;
             font-size: 18px;
             cursor: pointer;
-            background-color: #ff69b4; /* Pink color */
-            color: white;
             border: none;
             border-radius: 5px;
             transition: background-color 0.3s;
             margin: 10px;
         }
-        button:hover {
-            background-color: #ff1493; /* Darker pink */
+        .green-btn {
+            background-color: green;
+            color: white;
+        }
+        .gray-btn {
+            background-color: gray;
+            color: white;
+            cursor: not-allowed;
         }
         .container {
             background: white;
@@ -68,23 +72,54 @@
             margin-top: 5px;
         }
     </style>
+
     <script>
-        function getIOSVersion() {
-            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-            return match ? parseInt(match[1], 10) : null;
+        function getDeviceInfo() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            var isAndroid = /android/i.test(userAgent);
+            var isWindows = /windows/i.test(userAgent) || /Win64/.test(userAgent);
+
+            return { isIOS, isAndroid, isWindows };
         }
 
-        function handleDownload() {
+        function getIOSVersion() {
+            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return match ? parseFloat(match[1] + "." + match[2]) : null;
+        }
+
+        function checkDevice() {
+            var device = getDeviceInfo();
             var iOSVersion = getIOSVersion();
-            if (iOSVersion && iOSVersion <= 8) {
-                window.open("annie_chan.png", "_blank"); // Open in a new tab for iOS 8 and lower
+            var exclusiveButton = document.getElementById("exclusiveButton");
+
+            if (device.isIOS) {
+                if (iOSVersion && iOSVersion >= 14.3) {
+                    exclusiveButton.innerText = "Set Annie Chan";
+                    exclusiveButton.className = "green-btn";
+                    exclusiveButton.style.cursor = "pointer";
+                    exclusiveButton.disabled = false;
+                } else {
+                    exclusiveButton.innerText = "Not Supported on Your iOS Version";
+                    exclusiveButton.className = "gray-btn";
+                    exclusiveButton.disabled = true;
+                }
+            } else if (device.isAndroid || device.isWindows) {
+                exclusiveButton.innerText = "iOS Exclusive Feature";
+                exclusiveButton.className = "gray-btn";
+                exclusiveButton.disabled = true;
+            }
+        }
+
+        function openShareSheet() {
+            if (navigator.share) {
+                navigator.share({
+                    title: "Set Annie Chan Wallpaper",
+                    text: "Use this image as your wallpaper!",
+                    url: "https://getanniechan.org/annie_chan.png" // Ensure this is the correct image URL
+                }).catch((error) => console.log("Error sharing:", error));
             } else {
-                var link = document.createElement("a");
-                link.href = "annie_chan.png";
-                link.download = "Annie_Chan.png";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                alert("Sharing is not supported on your device.");
             }
         }
     </script>
@@ -96,11 +131,14 @@
         
         <!-- View Button -->
         <a href="annie_chan.png" target="_blank">
-            <button>View Annie Chan</button>
+            <button class="green-btn">View Annie Chan</button>
         </a>
 
         <!-- Download Button -->
-        <button onclick="handleDownload()">Download Annie Chan</button>
+        <button onclick="handleDownload()" class="green-btn">Download Annie Chan</button>
+
+        <!-- iOS Exclusive Wallpaper Button -->
+        <button id="exclusiveButton" onclick="openShareSheet()" disabled>Checking Device...</button>
 
         <!-- Website credit -->
         <p class="footer">Website made with ❤️</p>
@@ -109,6 +147,10 @@
     <!-- Disclaimer and Copyright -->
     <p class="disclaimer">GAC does not claim or own any artwork used.</p>
     <p class="copyright">© 2015 - 2025 GAC</p>
+
+    <script>
+        checkDevice(); // Run device check on page load
+    </script>
 
 </body>
 </html>
