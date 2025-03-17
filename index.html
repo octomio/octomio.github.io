@@ -29,7 +29,7 @@
             font-family: Arial, sans-serif; 
             text-align: center; 
             padding: 50px; 
-            background-color: #f4f4f4; 
+            background-color: #f8c8dc; /* Soft Pink Background */
         }
         button {
             padding: 15px 25px;
@@ -40,7 +40,7 @@
             transition: background-color 0.3s;
             margin: 10px;
         }
-        /* View & Download buttons (Keep default style) */
+        /* View & Download buttons */
         .default-btn {
             background-color: #ff69b4; /* Pink */
             color: white;
@@ -48,7 +48,7 @@
         .default-btn:hover {
             background-color: #ff1493; /* Darker Pink */
         }
-        /* Exclusive iOS/macOS button */
+        /* Exclusive iOS button */
         .green-btn {
             background-color: green;
             color: white;
@@ -108,33 +108,24 @@
         function getDeviceInfo() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            var isMac = /Mac/.test(userAgent) && !isIOS;
             var isAndroid = /android/i.test(userAgent);
             var isWindows = /windows/i.test(userAgent) || /Win64/.test(userAgent);
 
-            return { isIOS, isMac, isAndroid, isWindows };
+            return { isIOS, isAndroid, isWindows };
         }
 
-        function getOSVersion() {
-            var userAgent = navigator.userAgent;
-            var macMatch = userAgent.match(/Mac OS X (\d+)_(\d+)/);
-            var iOSMatch = userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-
-            if (macMatch) {
-                return parseFloat(macMatch[1] + "." + macMatch[2]); // macOS version
-            } else if (iOSMatch) {
-                return parseFloat(iOSMatch[1] + "." + iOSMatch[2]); // iOS version
-            }
-            return null;
+        function getIOSVersion() {
+            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return match ? parseFloat(match[1] + "." + match[2]) : null;
         }
 
         function checkDevice() {
             var device = getDeviceInfo();
-            var osVersion = getOSVersion();
+            var iOSVersion = getIOSVersion();
             var exclusiveButton = document.getElementById("exclusiveButton");
 
             if (device.isIOS) {
-                if (osVersion && osVersion >= 14.3) {
+                if (iOSVersion && iOSVersion >= 14.3) {
                     exclusiveButton.innerText = "Set Annie Chan";
                     exclusiveButton.className = "green-btn";
                     exclusiveButton.style.cursor = "pointer";
@@ -144,19 +135,8 @@
                     exclusiveButton.className = "gray-btn";
                     exclusiveButton.disabled = true;
                 }
-            } else if (device.isMac) {
-                if (osVersion && osVersion >= 12) {
-                    exclusiveButton.innerText = "Set Annie Chan";
-                    exclusiveButton.className = "green-btn";
-                    exclusiveButton.style.cursor = "pointer";
-                    exclusiveButton.disabled = false;
-                } else {
-                    exclusiveButton.innerText = "Not Supported on Your macOS Version";
-                    exclusiveButton.className = "gray-btn";
-                    exclusiveButton.disabled = true;
-                }
             } else {
-                exclusiveButton.innerText = "iOS/macOS Exclusive Feature";
+                exclusiveButton.innerText = "iOS Exclusive Feature";
                 exclusiveButton.className = "gray-btn";
                 exclusiveButton.disabled = true;
             }
@@ -191,9 +171,9 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
-                <li>✅ Fully fixed macOS detection (supports Sequoia 15+)</li>
-                <li>✅ Introduced Changelog section (click to view updates)</li>
-                <li>✅ "Extras" is now collapsible.</li>
+                <li>🚫 Removed macOS support (iPhone, iPad, and iPod Touch only)</li>
+                <li>🎨 Background is now soft pink</li>
+                <li>🆕 Introduced Changelog section (click to view updates)</li>
             </ul>
         </div>
 
