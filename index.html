@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Get Annie Chan</title>
+    <title>Welcome to Get Annie Chan 🌸</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -20,6 +20,7 @@
             border: none;
             border-radius: 5px;
             transition: background-color 0.3s;
+            margin: 10px;
         }
         button:hover {
             background-color: #ff1493; /* Darker pink */
@@ -32,14 +33,37 @@
             display: inline-block;
         }
     </style>
+    <script>
+        function getIOSVersion() {
+            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return match ? parseInt(match[1], 10) : null;
+        }
+
+        function handleDownload() {
+            var iOSVersion = getIOSVersion();
+            if (iOSVersion && iOSVersion <= 8) {
+                // Open in a new tab for iOS 8 and lower
+                window.open("annie_chan.png", "_blank");
+            } else {
+                // Auto-download for iOS 9+
+                var link = document.createElement("a");
+                link.href = "annie_chan.png";
+                link.download = "Annie_Chan.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Get Annie Chan</h1>
-        <p>I do not own any artwork and website made with love</p>
-        <a href="https://cdn.donmai.us/original/7f/51/__annie_mei_and_sera_chan_annie_mei_project_drawn_by_caleb_thomas__7f51c66f6db4a897980e3d9a53f8afbb.png">
-            <button>Get Annie Chan!</button>
+        <h1>Welcome to Get Annie Chan 🌸</h1>
+        <p>Features artwork from CT Studios</p>
+        <a href="annie_chan.png" target="_blank">
+            <button>View Annie Chan</button>
         </a>
+        <button onclick="handleDownload()">Download Annie Chan</button>
     </div>
 </body>
 </html>
