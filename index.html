@@ -40,6 +40,15 @@
             transition: background-color 0.3s;
             margin: 10px;
         }
+        /* View & Download buttons (Keep default style) */
+        .default-btn {
+            background-color: #ff69b4; /* Pink */
+            color: white;
+        }
+        .default-btn:hover {
+            background-color: #ff1493; /* Darker Pink */
+        }
+        /* Exclusive iOS button */
         .green-btn {
             background-color: green;
             color: white;
@@ -131,11 +140,11 @@
         
         <!-- View Button -->
         <a href="annie_chan.png" target="_blank">
-            <button class="green-btn">View Annie Chan</button>
+            <button class="default-btn">View Annie Chan</button>
         </a>
 
         <!-- Download Button -->
-        <button onclick="handleDownload()" class="green-btn">Download Annie Chan</button>
+        <button onclick="handleDownload()" class="default-btn">Download Annie Chan</button>
 
         <!-- iOS Exclusive Wallpaper Button -->
         <button id="exclusiveButton" onclick="openShareSheet()" disabled>Checking Device...</button>
