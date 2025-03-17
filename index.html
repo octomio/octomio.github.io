@@ -108,9 +108,9 @@
         function getDeviceInfo() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            var isMac = /Macintosh|Mac OS X/.test(userAgent);
+            var isMac = /Mac/.test(userAgent) && !isIOS;
             var isAndroid = /android/i.test(userAgent);
-            var isWindows = /windows/i.test(userAgent);
+            var isWindows = /windows/i.test(userAgent) || /Win64/.test(userAgent);
 
             return { isIOS, isMac, isAndroid, isWindows };
         }
@@ -191,8 +191,8 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
-                <li>✅ Added **macOS 12+ support** for "Set Annie Chan".</li>
-                <li>✅ Introduced **Changelog section** (click to view updates).</li>
+                <li>✅ Fully fixed macOS detection (supports Sequoia 15+)</li>
+                <li>✅ Introduced Changelog section (click to view updates)</li>
                 <li>✅ "Extras" is now collapsible.</li>
             </ul>
         </div>
