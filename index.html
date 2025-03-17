@@ -48,7 +48,7 @@
         .default-btn:hover {
             background-color: #ff1493; /* Darker Pink */
         }
-        /* Exclusive iOS button */
+        /* Exclusive Mobile button */
         .green-btn {
             background-color: green;
             color: white;
@@ -124,8 +124,8 @@
         function getDeviceInfo() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-
-            return { isIOS };
+            var isMac = /Macintosh|Mac OS X/.test(userAgent) && !isIOS;
+            return { isIOS, isMac };
         }
 
         function getIOSVersion() {
@@ -149,8 +149,12 @@
                     exclusiveButton.className = "gray-btn";
                     exclusiveButton.disabled = true;
                 }
+            } else if (device.isMac) {
+                exclusiveButton.innerText = "Mobile Devices Only";
+                exclusiveButton.className = "gray-btn";
+                exclusiveButton.disabled = true;
             } else {
-                exclusiveButton.innerText = "iOS Exclusive Feature";
+                exclusiveButton.innerText = "Mobile Devices Only";
                 exclusiveButton.className = "gray-btn";
                 exclusiveButton.disabled = true;
             }
@@ -194,17 +198,15 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
-                <li>📱 Mobile scaling now only applies to legacy iPhones</li>
-                <li>🖥️ Mac users will now see the original layout (not giant text/buttons)</li>
+                <li>🐞 Fixed "Set Annie Chan" button</li>
+                <li>🔄 Changed "iOS Exclusive Feature" to "Mobile Devices Only" for Mac users</li>
             </ul>
             <br>
             <p class="section-title">Previous Changes</p>
             <ul>
+                <li>📱 Mobile scaling now only applies to legacy iPhones</li>
+                <li>🖥️ Mac users will now see the original layout (not giant text/buttons)</li>
                 <li>🐞 Fixed "Download Annie Chan" button</li>
-                <li>📜 Moved "Previous Changes" inside Changelog</li>
-                <li>🎨 Changed blue text to pink</li>
-                <li>🎨 Background changed to soft pink</li>
-                <li>🚫 Removed macOS support (iPhone, iPad, and iPod Touch only)</li>
             </ul>
         </div>
 
