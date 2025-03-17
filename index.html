@@ -144,19 +144,28 @@
                     exclusiveButton.className = "green-btn";
                     exclusiveButton.style.cursor = "pointer";
                     exclusiveButton.disabled = false;
+                    exclusiveButton.onclick = openShareSheet;
                 } else {
                     exclusiveButton.innerText = "Not Supported on Your iOS Version";
                     exclusiveButton.className = "gray-btn";
                     exclusiveButton.disabled = true;
                 }
-            } else if (device.isMac) {
-                exclusiveButton.innerText = "Mobile Devices Only";
-                exclusiveButton.className = "gray-btn";
-                exclusiveButton.disabled = true;
             } else {
                 exclusiveButton.innerText = "Mobile Devices Only";
                 exclusiveButton.className = "gray-btn";
                 exclusiveButton.disabled = true;
+            }
+        }
+
+        function openShareSheet() {
+            if (navigator.share) {
+                navigator.share({
+                    title: "Set Annie Chan Wallpaper",
+                    text: "Use this image as your wallpaper!",
+                    url: "https://getanniechan.org/annie_chan.png"
+                }).catch((error) => console.log("Error sharing:", error));
+            } else {
+                alert("Sharing is not supported on your device. Please use the manual method.");
             }
         }
 
@@ -190,24 +199,7 @@
 
         <div id="extrasSection" class="extras-section">
             <p class="section-title">Welcome to Extras, new features MAY be added</p>
-            <button id="exclusiveButton" onclick="openShareSheet()" disabled>Checking Device...</button>
-        </div>
-
-        <span class="changelog-tab" onclick="toggleSection('changelogSection')">Changelog</span>
-
-        <div id="changelogSection" class="changelog-section">
-            <p class="section-title">Latest Updates</p>
-            <ul>
-                <li>🐞 Fixed "Set Annie Chan" button</li>
-                <li>🔄 Changed "iOS Exclusive Feature" to "Mobile Devices Only" for Mac users</li>
-            </ul>
-            <br>
-            <p class="section-title">Previous Changes</p>
-            <ul>
-                <li>📱 Mobile scaling now only applies to legacy iPhones</li>
-                <li>🖥️ Mac users will now see the original layout (not giant text/buttons)</li>
-                <li>🐞 Fixed "Download Annie Chan" button</li>
-            </ul>
+            <button id="exclusiveButton" disabled>Checking Device...</button>
         </div>
 
         <p class="footer">Website made with ❤️</p>
