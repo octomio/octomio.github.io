@@ -80,8 +80,8 @@
             color: #999;
             margin-top: 5px;
         }
-        /* Extras tab */
-        .extras-tab, .changelog-tab {
+        /* Extras, Changelog, and Previous Changes tabs */
+        .extras-tab, .changelog-tab, .prev-changes-tab {
             display: block;
             color: blue;
             text-decoration: underline;
@@ -89,8 +89,8 @@
             font-size: 16px;
             margin-top: 20px;
         }
-        /* Extras & Changelog sections (Hidden by default) */
-        .extras-section, .changelog-section {
+        /* Sections (Hidden by default) */
+        .extras-section, .changelog-section, .prev-changes-section {
             display: none;
             margin-top: 20px;
             background: white;
@@ -171,9 +171,21 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
+                <li>🎨 Background changed to soft pink</li>
                 <li>🚫 Removed macOS support (iPhone, iPad, and iPod Touch only)</li>
-                <li>🎨 Background is now soft pink</li>
-                <li>🆕 Introduced Changelog section (click to view updates)</li>
+                <li>🆕 Changelog now limited to 5 latest changes</li>
+                <li>📜 Added "Previous Changes" section</li>
+            </ul>
+        </div>
+
+        <span class="prev-changes-tab" onclick="toggleSection('prevChangesSection')">Previous Changes</span>
+
+        <div id="prevChangesSection" class="prev-changes-section">
+            <p class="section-title">Older Updates</p>
+            <ul>
+                <li>✅ Introduced Changelog section (click to view updates)</li>
+                <li>✅ Extras section is now collapsible</li>
+                <li>✅ Improved iOS version detection</li>
             </ul>
         </div>
 
