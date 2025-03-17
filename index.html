@@ -25,16 +25,15 @@
     <meta name="twitter:image" content="https://getanniechan.org/preview.jpg">
 
     <style>
-        /* Responsive Design */
         body { 
             font-family: Arial, sans-serif; 
             text-align: center; 
-            padding: 5vw; /* Adjust padding based on screen size */
+            padding: 50px;
             background-color: #f8c8dc; /* Soft Pink Background */
         }
         button {
-            padding: 12px 20px;
-            font-size: 4vw; /* Adjust button size dynamically */
+            padding: 15px 25px;
+            font-size: 18px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
@@ -61,24 +60,23 @@
         }
         .container {
             background: white;
-            padding: 5vw; /* Scales based on screen */
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: inline-block;
-            max-width: 90vw; /* Keeps the box from getting too wide */
         }
         .footer {
-            font-size: 3vw;
+            font-size: 14px;
             margin-top: 15px;
             color: #666;
         }
         .disclaimer {
-            font-size: 2.5vw;
+            font-size: 12px;
             color: #666;
             margin-top: 30px;
         }
         .copyright {
-            font-size: 2.5vw;
+            font-size: 12px;
             color: #999;
             margin-top: 5px;
         }
@@ -88,7 +86,7 @@
             color: #ff69b4; /* Pink */
             text-decoration: underline;
             cursor: pointer;
-            font-size: 4vw;
+            font-size: 16px;
             margin-top: 20px;
         }
         /* Sections (Hidden by default) */
@@ -96,21 +94,25 @@
             display: none;
             margin-top: 20px;
             background: white;
-            padding: 5vw;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .section-title {
-            font-size: 4vw;
+            font-size: 18px;
             font-weight: bold;
         }
-        /* Mobile Optimization */
+        /* Mobile Optimization - Only for Small Legacy iPhones */
         @media screen and (max-width: 600px) {
+            body {
+                padding: 5vw;
+            }
             button {
-                font-size: 5vw; /* Bigger buttons on small screens */
+                font-size: 4vw; /* Bigger buttons only for legacy devices */
             }
             .container {
-                width: 95%; /* Make the box full width on small screens */
+                width: 95%; /* Makes the box fill more space on small screens */
+                padding: 5vw;
             }
             .footer, .disclaimer, .copyright {
                 font-size: 3vw;
@@ -192,8 +194,8 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
-                <li>📱 Made site fully responsive for all iPhones & iPads</li>
-                <li>🔄 Buttons & text now scale properly on smaller screens</li>
+                <li>📱 Mobile scaling now only applies to legacy iPhones</li>
+                <li>🖥️ Mac users will now see the original layout (not giant text/buttons)</li>
             </ul>
         </div>
 
