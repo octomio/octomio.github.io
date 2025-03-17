@@ -81,7 +81,7 @@
             margin-top: 5px;
         }
         /* Extras tab */
-        .extras-tab {
+        .extras-tab, .changelog-tab {
             display: block;
             color: blue;
             text-decoration: underline;
@@ -89,12 +89,16 @@
             font-size: 16px;
             margin-top: 20px;
         }
-        /* Extras section (Hidden by default) */
-        .extras-section {
+        /* Extras & Changelog sections (Hidden by default) */
+        .extras-section, .changelog-section {
             display: none;
             margin-top: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .extras-title {
+        .section-title {
             font-size: 18px;
             font-weight: bold;
         }
@@ -106,7 +110,7 @@
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
             var isMac = /Macintosh|Mac OS X/.test(userAgent);
             var isAndroid = /android/i.test(userAgent);
-            var isWindows = /windows/i.test(userAgent) || /Win64/.test(userAgent);
+            var isWindows = /windows/i.test(userAgent);
 
             return { isIOS, isMac, isAndroid, isWindows };
         }
@@ -158,30 +162,9 @@
             }
         }
 
-        function openShareSheet() {
-            if (navigator.share) {
-                navigator.share({
-                    title: "Set Annie Chan Wallpaper",
-                    text: "Use this image as your wallpaper!",
-                    url: "https://getanniechan.org/annie_chan.png"
-                }).catch((error) => console.log("Error sharing:", error));
-            } else {
-                alert("Sharing is not supported on your device.");
-            }
-        }
-
-        function handleDownload() {
-            var link = document.createElement("a");
-            link.href = "annie_chan.png"; // Ensure this is the correct image path
-            link.download = "Annie_Chan.png";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function toggleExtras() {
-            var extrasSection = document.getElementById("extrasSection");
-            extrasSection.style.display = (extrasSection.style.display === "none" || extrasSection.style.display === "") ? "block" : "none";
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
         }
     </script>
 </head>
@@ -190,22 +173,28 @@
         <h1>Welcome to Get Annie Chan 🌸</h1>
         <p>Features artwork from CT Studios</p>
         
-        <!-- View Button -->
         <a href="annie_chan.png" target="_blank">
             <button class="default-btn">View Annie Chan</button>
         </a>
 
-        <!-- Download Button -->
         <button onclick="handleDownload()" class="default-btn">Download Annie Chan</button>
 
-        <!-- Extras Tab (Opens the Extras Section) -->
-        <span class="extras-tab" onclick="toggleExtras()">Extras</span>
+        <span class="extras-tab" onclick="toggleSection('extrasSection')">Extras</span>
 
-        <!-- Hidden Extras Section -->
         <div id="extrasSection" class="extras-section">
-            <p class="extras-title">Welcome to Extras, new features MAY be added</p>
-            <!-- iOS/macOS Exclusive Wallpaper Button -->
+            <p class="section-title">Welcome to Extras, new features MAY be added</p>
             <button id="exclusiveButton" onclick="openShareSheet()" disabled>Checking Device...</button>
+        </div>
+
+        <span class="changelog-tab" onclick="toggleSection('changelogSection')">Changelog</span>
+
+        <div id="changelogSection" class="changelog-section">
+            <p class="section-title">Latest Updates</p>
+            <ul>
+                <li>✅ Added **macOS 12+ support** for "Set Annie Chan".</li>
+                <li>✅ Introduced **Changelog section** (click to view updates).</li>
+                <li>✅ "Extras" is now collapsible.</li>
+            </ul>
         </div>
 
         <p class="footer">Website made with ❤️</p>
@@ -215,7 +204,7 @@
     <p class="copyright">© 2015 - 2025 GAC</p>
 
     <script>
-        checkDevice(); // Run device check on page load
+        checkDevice();
     </script>
 
 </body>
