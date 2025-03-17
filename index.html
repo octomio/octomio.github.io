@@ -25,15 +25,16 @@
     <meta name="twitter:image" content="https://getanniechan.org/preview.jpg">
 
     <style>
+        /* Responsive Design */
         body { 
             font-family: Arial, sans-serif; 
             text-align: center; 
-            padding: 50px; 
+            padding: 5vw; /* Adjust padding based on screen size */
             background-color: #f8c8dc; /* Soft Pink Background */
         }
         button {
-            padding: 15px 25px;
-            font-size: 18px;
+            padding: 12px 20px;
+            font-size: 4vw; /* Adjust button size dynamically */
             cursor: pointer;
             border: none;
             border-radius: 5px;
@@ -60,33 +61,34 @@
         }
         .container {
             background: white;
-            padding: 20px;
+            padding: 5vw; /* Scales based on screen */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: inline-block;
+            max-width: 90vw; /* Keeps the box from getting too wide */
         }
         .footer {
-            font-size: 14px;
+            font-size: 3vw;
             margin-top: 15px;
             color: #666;
         }
         .disclaimer {
-            font-size: 12px;
+            font-size: 2.5vw;
             color: #666;
             margin-top: 30px;
         }
         .copyright {
-            font-size: 12px;
+            font-size: 2.5vw;
             color: #999;
             margin-top: 5px;
         }
-        /* Extras, Changelog, and Previous Changes tabs */
+        /* Extras, Changelog */
         .extras-tab, .changelog-tab {
             display: block;
             color: #ff69b4; /* Pink */
             text-decoration: underline;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 4vw;
             margin-top: 20px;
         }
         /* Sections (Hidden by default) */
@@ -94,13 +96,25 @@
             display: none;
             margin-top: 20px;
             background: white;
-            padding: 15px;
+            padding: 5vw;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .section-title {
-            font-size: 18px;
+            font-size: 4vw;
             font-weight: bold;
+        }
+        /* Mobile Optimization */
+        @media screen and (max-width: 600px) {
+            button {
+                font-size: 5vw; /* Bigger buttons on small screens */
+            }
+            .container {
+                width: 95%; /* Make the box full width on small screens */
+            }
+            .footer, .disclaimer, .copyright {
+                font-size: 3vw;
+            }
         }
     </style>
 
@@ -108,10 +122,8 @@
         function getDeviceInfo() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            var isAndroid = /android/i.test(userAgent);
-            var isWindows = /windows/i.test(userAgent) || /Win64/.test(userAgent);
 
-            return { isIOS, isAndroid, isWindows };
+            return { isIOS };
         }
 
         function getIOSVersion() {
@@ -180,16 +192,8 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
-                <li>🐞 Fixed "Download Annie Chan" button</li>
-                <li>📜 Moved "Previous Changes" inside Changelog</li>
-                <li>🎨 Changed blue text to pink</li>
-            </ul>
-            <br>
-            <p class="section-title">Previous Changes</p>
-            <ul>
-                <li>🎨 Background changed to soft pink</li>
-                <li>🚫 Removed macOS support (iPhone, iPad, and iPod Touch only)</li>
-                <li>🆕 Changelog now limited to 5 latest changes</li>
+                <li>📱 Made site fully responsive for all iPhones & iPads</li>
+                <li>🔄 Buttons & text now scale properly on smaller screens</li>
             </ul>
         </div>
 
