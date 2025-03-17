@@ -81,16 +81,16 @@
             margin-top: 5px;
         }
         /* Extras, Changelog, and Previous Changes tabs */
-        .extras-tab, .changelog-tab, .prev-changes-tab {
+        .extras-tab, .changelog-tab {
             display: block;
-            color: blue;
+            color: #ff69b4; /* Pink */
             text-decoration: underline;
             cursor: pointer;
             font-size: 16px;
             margin-top: 20px;
         }
         /* Sections (Hidden by default) */
-        .extras-section, .changelog-section, .prev-changes-section {
+        .extras-section, .changelog-section {
             display: none;
             margin-top: 20px;
             background: white;
@@ -142,6 +142,15 @@
             }
         }
 
+        function handleDownload() {
+            var link = document.createElement("a");
+            link.href = "annie_chan.png"; // Correct image path
+            link.download = "Annie_Chan.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         function toggleSection(id) {
             var section = document.getElementById(id);
             section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
@@ -171,21 +180,16 @@
         <div id="changelogSection" class="changelog-section">
             <p class="section-title">Latest Updates</p>
             <ul>
+                <li>🐞 Fixed "Download Annie Chan" button</li>
+                <li>📜 Moved "Previous Changes" inside Changelog</li>
+                <li>🎨 Changed blue text to pink</li>
+            </ul>
+            <br>
+            <p class="section-title">Previous Changes</p>
+            <ul>
                 <li>🎨 Background changed to soft pink</li>
                 <li>🚫 Removed macOS support (iPhone, iPad, and iPod Touch only)</li>
                 <li>🆕 Changelog now limited to 5 latest changes</li>
-                <li>📜 Added "Previous Changes" section</li>
-            </ul>
-        </div>
-
-        <span class="prev-changes-tab" onclick="toggleSection('prevChangesSection')">Previous Changes</span>
-
-        <div id="prevChangesSection" class="prev-changes-section">
-            <p class="section-title">Older Updates</p>
-            <ul>
-                <li>✅ Introduced Changelog section (click to view updates)</li>
-                <li>✅ Extras section is now collapsible</li>
-                <li>✅ Improved iOS version detection</li>
             </ul>
         </div>
 
