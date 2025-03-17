@@ -48,7 +48,7 @@
         .default-btn:hover {
             background-color: #ff1493; /* Darker Pink */
         }
-        /* Exclusive iOS button */
+        /* Exclusive iOS/macOS button */
         .green-btn {
             background-color: green;
             color: white;
@@ -104,24 +104,33 @@
         function getDeviceInfo() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            var isMac = /Macintosh|Mac OS X/.test(userAgent);
             var isAndroid = /android/i.test(userAgent);
             var isWindows = /windows/i.test(userAgent) || /Win64/.test(userAgent);
 
-            return { isIOS, isAndroid, isWindows };
+            return { isIOS, isMac, isAndroid, isWindows };
         }
 
-        function getIOSVersion() {
-            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-            return match ? parseFloat(match[1] + "." + match[2]) : null;
+        function getOSVersion() {
+            var userAgent = navigator.userAgent;
+            var macMatch = userAgent.match(/Mac OS X (\d+)_(\d+)/);
+            var iOSMatch = userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+
+            if (macMatch) {
+                return parseFloat(macMatch[1] + "." + macMatch[2]); // macOS version
+            } else if (iOSMatch) {
+                return parseFloat(iOSMatch[1] + "." + iOSMatch[2]); // iOS version
+            }
+            return null;
         }
 
         function checkDevice() {
             var device = getDeviceInfo();
-            var iOSVersion = getIOSVersion();
+            var osVersion = getOSVersion();
             var exclusiveButton = document.getElementById("exclusiveButton");
 
             if (device.isIOS) {
-                if (iOSVersion && iOSVersion >= 14.3) {
+                if (osVersion && osVersion >= 14.3) {
                     exclusiveButton.innerText = "Set Annie Chan";
                     exclusiveButton.className = "green-btn";
                     exclusiveButton.style.cursor = "pointer";
@@ -131,8 +140,19 @@
                     exclusiveButton.className = "gray-btn";
                     exclusiveButton.disabled = true;
                 }
-            } else if (device.isAndroid || device.isWindows) {
-                exclusiveButton.innerText = "iOS Exclusive Feature";
+            } else if (device.isMac) {
+                if (osVersion && osVersion >= 12) {
+                    exclusiveButton.innerText = "Set Annie Chan";
+                    exclusiveButton.className = "green-btn";
+                    exclusiveButton.style.cursor = "pointer";
+                    exclusiveButton.disabled = false;
+                } else {
+                    exclusiveButton.innerText = "Not Supported on Your macOS Version";
+                    exclusiveButton.className = "gray-btn";
+                    exclusiveButton.disabled = true;
+                }
+            } else {
+                exclusiveButton.innerText = "iOS/macOS Exclusive Feature";
                 exclusiveButton.className = "gray-btn";
                 exclusiveButton.disabled = true;
             }
@@ -143,7 +163,7 @@
                 navigator.share({
                     title: "Set Annie Chan Wallpaper",
                     text: "Use this image as your wallpaper!",
-                    url: "https://getanniechan.org/annie_chan.png" // Ensure this is the correct image URL
+                    url: "https://getanniechan.org/annie_chan.png"
                 }).catch((error) => console.log("Error sharing:", error));
             } else {
                 alert("Sharing is not supported on your device.");
@@ -184,15 +204,13 @@
         <!-- Hidden Extras Section -->
         <div id="extrasSection" class="extras-section">
             <p class="extras-title">Welcome to Extras, new features MAY be added</p>
-            <!-- iOS Exclusive Wallpaper Button -->
+            <!-- iOS/macOS Exclusive Wallpaper Button -->
             <button id="exclusiveButton" onclick="openShareSheet()" disabled>Checking Device...</button>
         </div>
 
-        <!-- Website credit -->
         <p class="footer">Website made with ❤️</p>
     </div>
 
-    <!-- Disclaimer and Copyright -->
     <p class="disclaimer">GAC does not claim or own any artwork used.</p>
     <p class="copyright">© 2015 - 2025 GAC</p>
 
