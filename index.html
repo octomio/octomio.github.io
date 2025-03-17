@@ -39,31 +39,19 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: inline-block;
         }
-        .counter {
-            font-size: 16px;
-            margin-top: 10px;
+        .footer {
+            font-size: 14px;
+            margin-top: 15px;
+            color: #666;
         }
     </style>
     <script>
-        let viewCount = localStorage.getItem("viewCount") ? parseInt(localStorage.getItem("viewCount")) : 0;
-        let downloadCount = localStorage.getItem("downloadCount") ? parseInt(localStorage.getItem("downloadCount")) : 0;
-
-        function updateCounters() {
-            document.getElementById("viewCounter").innerText = viewCount;
-            document.getElementById("downloadCounter").innerText = downloadCount;
+        function getIOSVersion() {
+            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return match ? parseInt(match[1], 10) : null;
         }
 
-        function incrementView() {
-            viewCount++;
-            localStorage.setItem("viewCount", viewCount);
-            updateCounters();
-        }
-
-        function incrementDownload() {
-            downloadCount++;
-            localStorage.setItem("downloadCount", downloadCount);
-            updateCounters();
-
+        function handleDownload() {
             var iOSVersion = getIOSVersion();
             if (iOSVersion && iOSVersion <= 8) {
                 window.open("annie_chan.png", "_blank"); // Open in a new tab for iOS 8 and lower
@@ -76,13 +64,6 @@
                 document.body.removeChild(link);
             }
         }
-
-        function getIOSVersion() {
-            var match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-            return match ? parseInt(match[1], 10) : null;
-        }
-
-        window.onload = updateCounters;
     </script>
 </head>
 <body>
@@ -90,15 +71,16 @@
         <h1>Welcome to Get Annie Chan 🌸</h1>
         <p>Features artwork from CT Studios</p>
         
-        <!-- View Button with Counter -->
+        <!-- View Button -->
         <a href="annie_chan.png" target="_blank">
-            <button onclick="incrementView()">View Annie Chan</button>
+            <button>View Annie Chan</button>
         </a>
-        <p class="counter">Viewed: <span id="viewCounter">0</span> times</p>
 
-        <!-- Download Button with Counter -->
-        <button onclick="incrementDownload()">Download Annie Chan</button>
-        <p class="counter">Downloaded: <span id="downloadCounter">0</span> times</p>
+        <!-- Download Button -->
+        <button onclick="handleDownload()">Download Annie Chan</button>
+
+        <!-- Website credit -->
+        <p class="footer">Website made with ❤️</p>
     </div>
 </body>
 </html>
