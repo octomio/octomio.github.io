@@ -165,17 +165,8 @@
                     url: "https://getanniechan.org/annie_chan.png"
                 }).catch((error) => console.log("Error sharing:", error));
             } else {
-                alert("Sharing is not supported on your device. Please use the manual method.");
+                alert("Sharing is not supported on your device.");
             }
-        }
-
-        function handleDownload() {
-            var link = document.createElement("a");
-            link.href = "annie_chan.png"; // Correct image path
-            link.download = "Annie_Chan.png";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
         }
 
         function toggleSection(id) {
@@ -200,6 +191,16 @@
         <div id="extrasSection" class="extras-section">
             <p class="section-title">Welcome to Extras, new features MAY be added</p>
             <button id="exclusiveButton" disabled>Checking Device...</button>
+        </div>
+
+        <span class="changelog-tab" onclick="toggleSection('changelogSection')">Changelog</span>
+
+        <div id="changelogSection" class="changelog-section">
+            <p class="section-title">Latest Updates</p>
+            <ul>
+                <li>🐞 Fixed "Set Annie Chan" button functionality</li>
+                <li>🔄 Changed "iOS Exclusive Feature" to "Mobile Devices Only" for Mac users</li>
+            </ul>
         </div>
 
         <p class="footer">Website made with ❤️</p>
