@@ -131,6 +131,15 @@
                 alert("Sharing is not supported on your device.");
             }
         }
+
+        function handleDownload() {
+            var link = document.createElement("a");
+            link.href = "annie_chan.png"; // Ensure this is the correct image path
+            link.download = "Annie_Chan.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </head>
 <body>
@@ -143,7 +152,7 @@
             <button class="default-btn">View Annie Chan</button>
         </a>
 
-        <!-- Download Button -->
+        <!-- Download Button (Now Fixed) -->
         <button onclick="handleDownload()" class="default-btn">Download Annie Chan</button>
 
         <!-- iOS Exclusive Wallpaper Button -->
