@@ -80,8 +80,8 @@
             color: #999;
             margin-top: 5px;
         }
-        /* Extras, Changelog */
-        .extras-tab, .changelog-tab {
+        /* Extras tab */
+        .extras-tab {
             display: block;
             color: #ff69b4; /* Pink */
             text-decoration: underline;
@@ -90,7 +90,7 @@
             margin-top: 20px;
         }
         /* Sections (Hidden by default) */
-        .extras-section, .changelog-section {
+        .extras-section {
             display: none;
             margin-top: 20px;
             background: white;
@@ -140,7 +140,7 @@
 
             if (device.isIOS) {
                 if (iOSVersion && iOSVersion >= 14.3) {
-                    exclusiveButton.innerText = "Set Annie Chan";
+                    exclusiveButton.innerText = "Set Annie Chan (Beta)";
                     exclusiveButton.className = "green-btn";
                     exclusiveButton.style.cursor = "pointer";
                     exclusiveButton.disabled = false;
@@ -169,6 +169,15 @@
             }
         }
 
+        function handleDownload() {
+            var link = document.createElement("a");
+            link.href = "annie_chan.png"; // Correct image path
+            link.download = "Annie_Chan.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         function toggleSection(id) {
             var section = document.getElementById(id);
             section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
@@ -191,16 +200,6 @@
         <div id="extrasSection" class="extras-section">
             <p class="section-title">Welcome to Extras, new features MAY be added</p>
             <button id="exclusiveButton" disabled>Checking Device...</button>
-        </div>
-
-        <span class="changelog-tab" onclick="toggleSection('changelogSection')">Changelog</span>
-
-        <div id="changelogSection" class="changelog-section">
-            <p class="section-title">Latest Updates</p>
-            <ul>
-                <li>🐞 Fixed "Set Annie Chan" button functionality</li>
-                <li>🔄 Changed "iOS Exclusive Feature" to "Mobile Devices Only" for Mac users</li>
-            </ul>
         </div>
 
         <p class="footer">Website made with ❤️</p>
