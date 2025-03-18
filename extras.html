@@ -125,7 +125,8 @@
             try {
                 const response = await fetch(imageUrl);
                 if (!response.ok) {
-                    throw new Error("Network response was not ok.");
+                    console.error("Network response was not ok.");
+                    return;
                 }
 
                 const blob = await response.blob();
@@ -133,13 +134,11 @@
 
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({ files: [file] });
-                    return; // Stop script after sharing
                 } else {
                     alert("Sharing is not supported on this device.");
                 }
             } catch (error) {
                 console.error("Image fetch failed:", error);
-                alert("Failed to load image. Please check your internet connection.");
             }
         }
     </script>
@@ -158,6 +157,6 @@
         <p class="copyright">© 2015 - 2025 GAC</p>
     </div>
 
-    <p class="version">Version 1.0.1</p> <!-- Version Number -->
+    <p class="version">Version 1.0.2</p> <!-- Version Number -->
 </body>
 </html>
