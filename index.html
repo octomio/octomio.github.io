@@ -64,6 +64,11 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: inline-block;
+            width: 80%;
+            max-width: 600px;
+        }
+        .log-container {
+            margin-top: 20px;
         }
         .log-box {
             background: black;
@@ -71,13 +76,11 @@
             font-family: monospace;
             text-align: left;
             padding: 10px;
-            margin-top: 20px;
             border-radius: 5px;
-            width: 80%;
-            max-width: 600px;
+            width: 100%;
             height: 150px;
             overflow-y: auto;
-            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .footer {
             font-size: 14px;
@@ -116,16 +119,10 @@
             font-size: 18px;
             font-weight: bold;
         }
-        /* Mobile Optimization - Only for Small Legacy iPhones */
+        /* Mobile Optimization */
         @media screen and (max-width: 600px) {
-            body {
-                padding: 5vw;
-            }
-            button {
-                font-size: 4vw; /* Bigger buttons only for legacy devices */
-            }
             .container {
-                width: 95%; /* Makes the box fill more space on small screens */
+                width: 95%;
                 padding: 5vw;
             }
             .footer, .disclaimer, .copyright {
@@ -138,8 +135,7 @@
         function getDeviceInfo() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            var isMac = /Macintosh|Mac OS X/.test(userAgent) && !isIOS;
-            return { isIOS, isMac };
+            return { isIOS };
         }
 
         function checkDevice() {
@@ -198,7 +194,7 @@
             <button class="default-btn">Get Annie Chan</button>
         </a>
 
-        <p><small>📱 Long press to save on mobile • 🖥️ Right-click to save on desktop</small></p>
+        <p><small>Long press to save on mobile. Right-click to save on desktop.</small></p>
 
         <span class="extras-tab" onclick="toggleSection('extrasSection')">Extras</span>
 
@@ -208,8 +204,10 @@
         </div>
     </div>
 
-    <div id="log" class="log-box">
-        <p>[Log Initialized]</p>
+    <div class="log-container">
+        <div id="log" class="log-box">
+            <p>[Log Initialized]</p>
+        </div>
     </div>
 
     <p class="footer">Website made with ❤️</p>
