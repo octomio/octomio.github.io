@@ -7,9 +7,6 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
-    
-    <!-- Include JSZip for ZIP file creation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <!-- Styles -->
     <style>
@@ -36,13 +33,6 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             margin: 10px;
-        }
-        .default-btn {
-            background-color: #ff69b4; /* Pink */
-            color: white;
-        }
-        .default-btn:hover {
-            background-color: #ff1493; /* Darker Pink */
         }
         .green-btn {
             background-color: green;
@@ -83,24 +73,23 @@
     </style>
 
     <script>
-        function getDeviceInfo() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            return { isIOS };
+        function getIOSVersion() {
+            let match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return match ? parseFloat(match[1] + "." + match[2]) : null;
         }
 
         function checkDevice() {
-            var device = getDeviceInfo();
-            var exclusiveButton = document.getElementById("exclusiveButton");
+            let iosVersion = getIOSVersion();
+            let exclusiveButton = document.getElementById("exclusiveButton");
 
-            if (device.isIOS) {
+            if (iosVersion && iosVersion >= 14.3) {
                 exclusiveButton.innerText = "Set Annie Chan (Beta)";
                 exclusiveButton.className = "green-btn";
                 exclusiveButton.style.cursor = "pointer";
                 exclusiveButton.disabled = false;
                 exclusiveButton.onclick = openShareSheet;
             } else {
-                exclusiveButton.innerText = "Mobile Devices Only";
+                exclusiveButton.innerText = "Not Supported on Your iOS Version";
                 exclusiveButton.className = "gray-btn";
                 exclusiveButton.disabled = true;
             }
@@ -117,39 +106,6 @@
                 alert("Sharing is not supported on your device.");
             }
         }
-
-        function confirmDownload() {
-            alert("Speeds may vary on internet and device.");
-            generateZip();
-        }
-
-        async function generateZip() {
-            let zip = new JSZip();
-            let folder = zip.folder("Annie_Chan_999");
-
-            const imageUrl = "https://getanniechan.org/annie_chan.png";
-
-            try {
-                let response = await fetch(imageUrl);
-                let blob = await response.blob();
-
-                for (let i = 1; i <= 999; i++) {
-                    folder.file(`annie_chan_${i}.png`, blob);
-                }
-
-                zip.generateAsync({ type: "blob" }).then(function(content) {
-                    let link = document.createElement("a");
-                    link.href = URL.createObjectURL(content);
-                    link.download = "Annie_Chan_999.zip";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                });
-
-            } catch (error) {
-                alert("Failed to download images. Please check your internet connection.");
-            }
-        }
     </script>
 </head>
 <body onload="checkDevice()">
@@ -158,8 +114,6 @@
         <p>Additional features & experimental options.</p>
 
         <button id="exclusiveButton" disabled>Checking Device...</button>
-
-        <button class="default-btn" onclick="confirmDownload()">Get Anni3 Ch4n</button>
 
         <a href="index.html" class="pink-link">Back to Main Page</a>
 
