@@ -85,23 +85,35 @@
     </style>
 
     <script>
-        function getIOSVersion() {
-            let match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-            return match ? parseFloat(match[1] + "." + match[2]) : null;
+        function getDeviceInfo() {
+            let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            let isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            let isAndroid = /android/i.test(userAgent);
+            let isMacOrPC = !isIOS && !isAndroid;
+
+            let match = userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            let iosVersion = match ? parseFloat(match[1] + "." + match[2]) : null;
+
+            return { isIOS, isAndroid, isMacOrPC, iosVersion };
         }
 
         function checkDevice() {
-            let iosVersion = getIOSVersion();
+            let device = getDeviceInfo();
             let exclusiveButton = document.getElementById("exclusiveButton");
 
-            if (iosVersion && iosVersion >= 14.3) {
-                exclusiveButton.innerText = "Set Annie Chan (Beta)";
+            if (device.isIOS && device.iosVersion >= 10) {
+                exclusiveButton.innerText = "Share Annie Chan";
                 exclusiveButton.className = "green-btn";
                 exclusiveButton.style.cursor = "pointer";
                 exclusiveButton.disabled = false;
                 exclusiveButton.onclick = shareImage;
-            } else {
-                exclusiveButton.innerText = "Not Supported on Your iOS Version";
+            } else if (device.isMacOrPC) {
+                exclusiveButton.innerText = "Mobile Devices Only";
+                exclusiveButton.className = "gray-btn";
+                exclusiveButton.disabled = true;
+            } else if (device.isAndroid) {
+                exclusiveButton.innerText = "iOS or iPadOS Only";
                 exclusiveButton.className = "gray-btn";
                 exclusiveButton.disabled = true;
             }
@@ -138,7 +150,7 @@
         <p>Additional features & experimental options.</p>
 
         <button id="exclusiveButton" disabled>Checking Device...</button>
-        <p class="small-text">Use this as your wallpaper.</p> <!-- Small text under button -->
+        <p class="small-text">Use this to share Annie Chan on various platforms!</p> <!-- Updated small text -->
 
         <a href="index.html" class="pink-link">Back to Main Page</a>
 
@@ -146,6 +158,6 @@
         <p class="copyright">© 2015 - 2025 GAC</p>
     </div>
 
-    <p class="version">Version 1.0</p> <!-- Version Number -->
+    <p class="version">Version 1.0.1</p> <!-- Version Number -->
 </body>
 </html>
