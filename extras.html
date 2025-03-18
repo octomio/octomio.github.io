@@ -92,7 +92,7 @@
                 exclusiveButton.className = "green-btn";
                 exclusiveButton.style.cursor = "pointer";
                 exclusiveButton.disabled = false;
-                exclusiveButton.onclick = openShareSheet;
+                exclusiveButton.onclick = shareImage;
             } else {
                 exclusiveButton.innerText = "Not Supported on Your iOS Version";
                 exclusiveButton.className = "gray-btn";
@@ -100,13 +100,21 @@
             }
         }
 
-        function openShareSheet() {
-            if (navigator.share) {
-                navigator.share({
-                    files: [new File([""], "annie_chan.png", { type: "image/png" })]
-                }).catch((error) => console.log("Error sharing:", error));
-            } else {
-                alert("Sharing is not supported on your device.");
+        async function shareImage() {
+            const imageUrl = "https://getanniechan.org/annie_chan.png";
+
+            try {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                const file = new File([blob], "annie_chan.png", { type: "image/png" });
+
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({ files: [file] });
+                } else {
+                    alert("Sharing is not supported on this device.");
+                }
+            } catch (error) {
+                alert("Failed to load image. Please check your internet connection.");
             }
         }
     </script>
