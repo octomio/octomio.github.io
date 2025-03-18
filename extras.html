@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Annie Chan Extras</title> <!-- Updated Title -->
+    <title>Get Annie Chan Extras</title> <!-- Page Title -->
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
     
+    <!-- Include JSZip for ZIP file creation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
     <!-- Styles -->
     <style>
         body { 
@@ -52,6 +55,15 @@
             background-color: gray;
             color: white;
             cursor: not-allowed;
+        }
+        /* Small pink underline text */
+        .pink-link {
+            display: block;
+            color: #ff69b4; /* Pink */
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
         .footer {
             font-size: 14px;
@@ -111,33 +123,41 @@
             generateZip();
         }
 
-        function generateZip() {
+        async function generateZip() {
             let zip = new JSZip();
             let folder = zip.folder("Annie_Chan_999");
-            
-            for (let i = 1; i <= 999; i++) {
-                folder.file(`annie_chan_${i}.png`, "https://getanniechan.org/annie_chan.png", { binary: true });
-            }
 
-            zip.generateAsync({ type: "blob" }).then(function(content) {
-                let link = document.createElement("a");
-                link.href = URL.createObjectURL(content);
-                link.download = "Annie_Chan_999.zip";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
+            const imageUrl = "https://getanniechan.org/annie_chan.png";
+
+            try {
+                let response = await fetch(imageUrl);
+                let blob = await response.blob();
+                
+                for (let i = 1; i <= 999; i++) {
+                    folder.file(`annie_chan_${i}.png`, blob);
+                }
+
+                zip.generateAsync({ type: "blob" }).then(function(content) {
+                    let link = document.createElement("a");
+                    link.href = URL.createObjectURL(content);
+                    link.download = "Annie_Chan_999.zip";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+
+            } catch (error) {
+                alert("Failed to download images. Please check your internet connection.");
+            }
         }
     </script>
 </head>
 <body onload="checkDevice()">
     <div class="container">
-        <h1>Extras and stuff 🌸</h1> <!-- Updated Welcome Text -->
+        <h1>Extras and stuff 🌸</h1> <!-- Welcome Text -->
         <p>Additional features & experimental options.</p>
 
-        <a href="index.html">
-            <button class="default-btn">Back to Main Page</button>
-        </a>
+        <a href="index.html" class="pink-link">Back to Main Page</a>
 
         <button id="exclusiveButton" disabled>Checking Device...</button>
 
