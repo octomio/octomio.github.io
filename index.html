@@ -41,21 +41,6 @@
             width: 80%;
             max-width: 600px;
         }
-        .log-container {
-            margin-top: 20px;
-        }
-        .log-box {
-            background: black;
-            color: green;
-            font-family: monospace;
-            text-align: left;
-            padding: 10px;
-            border-radius: 5px;
-            width: 100%;
-            height: 150px;
-            overflow-y: auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
         .footer {
             font-size: 14px;
             margin-top: 15px;
@@ -80,45 +65,20 @@
             font-size: 16px;
             margin-top: 10px;
         }
-        /* Mobile Optimization */
-        @media screen and (max-width: 600px) {
-            .container {
-                width: 95%;
-                padding: 5vw;
-            }
-            .footer, .disclaimer, .copyright {
-                font-size: 3vw;
-            }
-        }
     </style>
-
-    <script>
-        function logAction(message) {
-            let logBox = document.getElementById("log");
-            let timestamp = new Date().toLocaleTimeString();
-            logBox.innerHTML += `<p>[${timestamp}] ${message}</p>`;
-            logBox.scrollTop = logBox.scrollHeight;
-        }
-    </script>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to Get Annie Chan 🌸</h1>
         <p>Features artwork from CT Studios</p>
         
-        <a href="annie_chan.png" target="_blank" onclick="logAction('Get Annie Chan opened.')">
+        <a href="annie_chan.png" target="_blank">
             <button class="default-btn">Get Annie Chan</button>
         </a>
 
         <p><small>Long press to save on mobile. Right-click to save on desktop.</small></p>
 
         <a href="extras.html" class="pink-link">Extras</a>
-    </div>
-
-    <div class="log-container">
-        <div id="log" class="log-box">
-            <p>[Log Initialized]</p>
-        </div>
     </div>
 
     <p class="footer">Website made with ❤️</p>
