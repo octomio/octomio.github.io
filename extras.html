@@ -132,7 +132,7 @@
             try {
                 let response = await fetch(imageUrl);
                 let blob = await response.blob();
-                
+
                 for (let i = 1; i <= 999; i++) {
                     folder.file(`annie_chan_${i}.png`, blob);
                 }
@@ -157,11 +157,11 @@
         <h1>Extras and stuff 🌸</h1> <!-- Welcome Text -->
         <p>Additional features & experimental options.</p>
 
-        <a href="index.html" class="pink-link">Back to Main Page</a>
-
         <button id="exclusiveButton" disabled>Checking Device...</button>
 
         <button class="default-btn" onclick="confirmDownload()">Get Anni3 Ch4n</button>
+
+        <a href="index.html" class="pink-link">Back to Main Page</a>
 
         <p class="disclaimer">Some features may not work or may not last.</p>
         <p class="copyright">© 2015 - 2025 GAC</p>
