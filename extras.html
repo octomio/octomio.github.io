@@ -70,6 +70,11 @@
             color: #999;
             margin-top: 5px;
         }
+        .small-text {
+            font-size: 12px;
+            color: #444;
+            margin-top: 5px;
+        }
     </style>
 
     <script>
@@ -98,9 +103,7 @@
         function openShareSheet() {
             if (navigator.share) {
                 navigator.share({
-                    title: "Set Annie Chan Wallpaper",
-                    text: "Use this image as your wallpaper!",
-                    url: "https://getanniechan.org/annie_chan.png"
+                    files: [new File([""], "annie_chan.png", { type: "image/png" })]
                 }).catch((error) => console.log("Error sharing:", error));
             } else {
                 alert("Sharing is not supported on your device.");
@@ -114,6 +117,7 @@
         <p>Additional features & experimental options.</p>
 
         <button id="exclusiveButton" disabled>Checking Device...</button>
+        <p class="small-text">Use this as your wallpaper.</p> <!-- Small text under button -->
 
         <a href="index.html" class="pink-link">Back to Main Page</a>
 
