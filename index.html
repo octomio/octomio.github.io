@@ -3,27 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Annie Chan</title> <!-- Title for bookmarks & tabs -->
+    <title>Get Annie Chan</title> <!-- Page Title -->
     
-    <!-- Favicon for bookmarks -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
     
-    <!-- Apple Touch Icon for iOS Home Screen -->
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    
-    <!-- Open Graph Meta Tags (for social media previews) -->
-    <meta property="og:title" content="Get Annie Chan">
-    <meta property="og:description" content="A tribute website featuring Annie Chan.">
-    <meta property="og:image" content="https://getanniechan.org/preview.jpg">
-    <meta property="og:url" content="https://getanniechan.org">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Get Annie Chan">
-    <meta name="twitter:description" content="A tribute website featuring Annie Chan.">
-    <meta name="twitter:image" content="https://getanniechan.org/preview.jpg">
-
+    <!-- Styles -->
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -40,23 +25,12 @@
             transition: background-color 0.3s;
             margin: 10px;
         }
-        /* Main Button */
         .default-btn {
             background-color: #ff69b4; /* Pink */
             color: white;
         }
         .default-btn:hover {
             background-color: #ff1493; /* Darker Pink */
-        }
-        /* Exclusive Mobile button */
-        .green-btn {
-            background-color: green;
-            color: white;
-        }
-        .gray-btn {
-            background-color: gray;
-            color: white;
-            cursor: not-allowed;
         }
         .container {
             background: white;
@@ -97,28 +71,6 @@
             color: #999;
             margin-top: 5px;
         }
-        /* Extras tab */
-        .extras-tab {
-            display: block;
-            color: #ff69b4; /* Pink */
-            text-decoration: underline;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-        /* Sections (Hidden by default) */
-        .extras-section {
-            display: none;
-            margin-top: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
         /* Mobile Optimization */
         @media screen and (max-width: 600px) {
             .container {
@@ -132,56 +84,11 @@
     </style>
 
     <script>
-        function getDeviceInfo() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            return { isIOS };
-        }
-
-        function checkDevice() {
-            var device = getDeviceInfo();
-            var exclusiveButton = document.getElementById("exclusiveButton");
-
-            if (device.isIOS) {
-                exclusiveButton.innerText = "Set Annie Chan (Beta)";
-                exclusiveButton.className = "green-btn";
-                exclusiveButton.style.cursor = "pointer";
-                exclusiveButton.disabled = false;
-                exclusiveButton.onclick = openShareSheet;
-            } else {
-                exclusiveButton.innerText = "Mobile Devices Only";
-                exclusiveButton.className = "gray-btn";
-                exclusiveButton.disabled = true;
-            }
-
-            logAction("Device detected: " + (device.isIOS ? "iOS" : "Other"));
-        }
-
-        function openShareSheet() {
-            if (navigator.share) {
-                navigator.share({
-                    title: "Set Annie Chan Wallpaper",
-                    text: "Use this image as your wallpaper!",
-                    url: "https://getanniechan.org/annie_chan.png"
-                }).catch((error) => console.log("Error sharing:", error));
-
-                logAction("Opened share sheet.");
-            } else {
-                alert("Sharing is not supported on your device.");
-                logAction("Sharing not supported.");
-            }
-        }
-
         function logAction(message) {
             let logBox = document.getElementById("log");
             let timestamp = new Date().toLocaleTimeString();
             logBox.innerHTML += `<p>[${timestamp}] ${message}</p>`;
             logBox.scrollTop = logBox.scrollHeight;
-        }
-
-        function toggleSection(id) {
-            var section = document.getElementById(id);
-            section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
         }
     </script>
 </head>
@@ -196,12 +103,9 @@
 
         <p><small>Long press to save on mobile. Right-click to save on desktop.</small></p>
 
-        <span class="extras-tab" onclick="toggleSection('extrasSection')">Extras</span>
-
-        <div id="extrasSection" class="extras-section">
-            <p class="section-title">Welcome to Extras, new features MAY be added</p>
-            <button id="exclusiveButton" disabled>Checking Device...</button>
-        </div>
+        <a href="extras.html">
+            <button class="default-btn">Extras</button>
+        </a>
     </div>
 
     <div class="log-container">
@@ -213,10 +117,5 @@
     <p class="footer">Website made with ❤️</p>
     <p class="disclaimer">GAC does not claim or own any artwork used.</p>
     <p class="copyright">© 2015 - 2025 GAC</p>
-
-    <script>
-        checkDevice();
-    </script>
-
 </body>
 </html>
