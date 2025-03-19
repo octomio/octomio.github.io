@@ -65,24 +65,52 @@
             font-size: 16px;
             margin-top: 10px;
         }
+        .version {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #777;
+        }
     </style>
+
+    <script>
+        function getIOSVersion() {
+            let match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return match ? parseFloat(match[1] + "." + match[2]) : null;
+        }
+
+        function handleDownload() {
+            let iosVersion = getIOSVersion();
+            let downloadButton = document.getElementById("downloadButton");
+
+            if (iosVersion && iosVersion >= 11) {
+                downloadButton.href = "download/annie_chan.png";
+                downloadButton.download = "annie_chan.png";
+            } else {
+                downloadButton.href = "download/annie_chan.png";
+                downloadButton.target = "_blank";
+            }
+        }
+    </script>
 </head>
-<body>
+<body onload="handleDownload()">
     <div class="container">
         <h1>Welcome to Get Annie Chan 🌸</h1>
         <p>Features artwork from CT Studios</p>
         
-        <a href="annie_chan.png" target="_blank">
+        <a id="downloadButton">
             <button class="default-btn">Get Annie Chan</button>
         </a>
 
-        <p><small>Long press to save on mobile. Right-click to save on desktop</small></p>
+        <p><small>Long press to save on mobile. Right-click to save on desktop.</small></p>
 
-        <a href="extras.html" class="pink-link">Extras</a>
+        <a href="extras/" class="pink-link">Extras</a>
     </div>
 
     <p class="footer">Website made with ❤️</p>
     <p class="disclaimer">GAC does not claim or own any artwork used.</p>
     <p class="copyright">© 2015 - 2025 GAC</p>
+    <p class="version">Version 1.1</p> <!-- Updated Version -->
 </body>
 </html>
