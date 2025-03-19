@@ -71,26 +71,33 @@
             return match ? parseFloat(match[1] + "." + match[2]) : null;
         }
 
-        function handleDownload() {
+        function handleDownload(event) {
             let iosVersion = getIOSVersion();
-            let downloadButton = document.getElementById("downloadButton");
-
+            
             if (iosVersion && iosVersion >= 11) {
-                downloadButton.href = "annie_chan.png";
-                downloadButton.download = "annie_chan.png";
+                // iOS 11+ → Auto download
+                let link = document.createElement("a");
+                link.href = "annie_chan.png";
+                link.download = "annie_chan.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             } else {
-                downloadButton.href = "annie_chan.png";
-                downloadButton.target = "_blank";
+                // iOS 10 and below → Open in a new tab
+                window.open("annie_chan.png", "_blank");
             }
+            
+            // Prevent default link behavior
+            event.preventDefault();
         }
     </script>
 </head>
-<body onload="handleDownload()">
+<body>
     <div class="container">
         <h1>Welcome to Get Annie Chan 🌸</h1>
         <p>Features artwork from CT Studios</p>
         
-        <a id="downloadButton">
+        <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event)">
             <button class="default-btn">Get Annie Chan</button>
         </a>
 
@@ -100,6 +107,6 @@
     <p class="footer">Website made with ❤️</p>
     <p class="disclaimer">GAC does not claim or own any artwork used.</p>
     <p class="copyright">© 2015 - 2025 GAC</p>
-    <p class="version">Version 1.2</p> <!-- Updated Version -->
+    <p class="version">Version 1.2.1</p> <!-- Updated Version -->
 </body>
 </html>
