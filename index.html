@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Annie Chan</title> <!-- Page Title -->
+    <title>Get Annie Chan</title>
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -14,7 +17,7 @@
             font-family: Arial, sans-serif; 
             text-align: center; 
             padding: 50px;
-            background-color: #f8c8dc; /* Soft Pink Background */
+            background-color: #f8c8dc; /* Soft Pink */
         }
         button {
             padding: 15px 25px;
@@ -46,11 +49,6 @@
             margin-top: 15px;
             color: #666;
         }
-        .disclaimer {
-            font-size: 12px;
-            color: #666;
-            margin-top: 30px;
-        }
         .copyright {
             font-size: 12px;
             color: #999;
@@ -63,9 +61,42 @@
             font-size: 12px;
             color: #777;
         }
+        /* Small Extras Button */
+        .extras-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ff69b4; /* Pink */
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .extras-link:hover {
+            color: #ff1493; /* Darker Pink */
+        }
     </style>
 
     <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log("Service Worker Registered"))
+            .catch(error => console.error("Service Worker Error:", error));
+        }
+
+        // Haptic feedback function
+        function triggerHapticFeedback() {
+            if ("vibrate" in navigator) {
+                navigator.vibrate(50);
+            } else if (window.navigator.userAgent.includes("iPhone")) {
+                try {
+                    window.navigator.vibrate(1);
+                } catch (e) {
+                    console.warn("Haptic feedback not supported.");
+                }
+            }
+        }
+
+        // Detect iOS version for auto-download
         function getIOSVersion() {
             let match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
             return match ? parseFloat(match[1] + "." + match[2]) : null;
@@ -75,7 +106,6 @@
             let iosVersion = getIOSVersion();
             
             if (iosVersion && iosVersion >= 11) {
-                // iOS 11+ → Auto download
                 let link = document.createElement("a");
                 link.href = "annie_chan.png";
                 link.download = "annie_chan.png";
@@ -83,11 +113,10 @@
                 link.click();
                 document.body.removeChild(link);
             } else {
-                // iOS 10 and below → Open in a new tab
                 window.open("annie_chan.png", "_blank");
             }
             
-            // Prevent default link behavior
+            triggerHapticFeedback();
             event.preventDefault();
         }
     </script>
@@ -95,18 +124,18 @@
 <body>
     <div class="container">
         <h1>Welcome to Get Annie Chan 🌸</h1>
-        <p>Features artwork from CT Studios</p>
         
-        <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event)">
+        <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
             <button class="default-btn">Get Annie Chan</button>
         </a>
-
-        <p><small>Long press to save on mobile. Right-click to save on desktop.</small></p>
     </div>
 
+    <!-- Extras Button -->
+    <a href="extras.html" class="extras-link">Extras</a>
+
     <p class="footer">Website made with ❤️</p>
-    <p class="disclaimer">GAC does not claim or own any artwork used.</p>
-    <p class="copyright">© 2015 - 2025 GAC</p>
-    <p class="version">Version 1.2.1</p> <!-- Updated Version -->
+    <p class="copyright">© 2025 GAC</p>
+    <p class="version">Version 1.2.2</p>
+    <p style="font-size: 12px; color: #777; margin-top: 10px;">Peace & Love</p>
 </body>
 </html>
