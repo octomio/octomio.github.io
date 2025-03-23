@@ -47,12 +47,14 @@ body {
   background-color: #d81b60;
 }
 
+.extras-container {
+  margin-top: 16px;
+}
+
 .underline-link {
   color: #e91e63;
   text-decoration: underline;
   font-size: 14px;
-  display: inline-block;
-  margin-top: 20px;
 }
 
 .credits {
