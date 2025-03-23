@@ -8,12 +8,12 @@ body {
 
 .card {
   background: #fff;
-  margin: 60px auto 30px;
-  padding: 30px 20px;
-  border-radius: 28px; /* Squircle-style */
+  margin: 40px auto 20px;
+  padding: 24px 20px;
+  border-radius: 28px;
   width: 90%;
-  max-width: 400px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  max-width: 380px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .card h1 {
@@ -37,7 +37,7 @@ body {
   color: white;
   border: none;
   padding: 14px 24px;
-  border-radius: 18px; /* Squircle button */
+  border-radius: 18px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
@@ -63,7 +63,7 @@ body {
   color: #e91e63;
   margin: 30px auto 40px;
   line-height: 1.6;
-  max-width: 400px;
+  max-width: 380px;
 }
 
 .credits a {
