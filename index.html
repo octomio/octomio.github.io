@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Annie Chan</title>
-
-  <!-- Favicon and Apple Touch Icon -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <style>
+    body {
+      background-color: #ffd6e8;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    .version {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    .extras-icon {
+      display: block;
+      margin: 20px auto 0 auto;
+      width: 50px;
+      height: 50px;
+    }
+    .btn {
+      background-color: #ff4da6;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; background-color: #f8c8dc; padding: 50px; margin: 0;">
+<body>
+  <div class="container">
+    <h1>Welcome to Get Annie Chan <span>🌸</span></h1>
+    <a class="btn" href="get.html">Get Annie Chan</a>
+    <br />
+    <a class="btn" href="extras.html">Extras</a>
 
-  <div style="background: white; padding: 20px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-    <h1>Welcome to Get Annie Chan 🌸</h1>
+    <!-- Added the image from the Extras tab -->
+    <img src="annie-icon.png" alt="Annie Chan Icon" class="extras-icon" />
 
-    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-      <button style="background-color: #ff69b4; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 20px;">
-        Get Annie Chan
-      </button>
-    </a>
-
-    <a href="extras.html" style="display: block; margin-top: 20px; font-size: 14px; color: #ff69b4; text-decoration: underline;">
-      Extras
-    </a>
+    <div class="version">© 2025 GAC<br>Version 1.2.4</div>
   </div>
-
-  <p style="font-size: 14px; margin-top: 25px; color: #666;">Website made with ❤️</p>
-  <p style="font-size: 12px; color: #999; margin-top: 5px;">© 2025 GAC</p>
-  <p style="font-size: 12px; color: #777; margin-top: 5px;">Version 1.2.3</p>
-
-  <script>
-    function triggerHapticFeedback() {
-      if ("vibrate" in navigator) {
-        navigator.vibrate(50);
-      }
-    }
-
-    function getIOSVersion() {
-      const match = navigator.userAgent.match(/OS (\d+)_/);
-      return match ? parseInt(match[1]) : null;
-    }
-
-    function handleDownload(event) {
-      const ios = getIOSVersion();
-      if (ios >= 11) {
-        const link = document.createElement("a");
-        link.href = "annie_chan.png";
-        link.download = "annie_chan.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        window.open("annie_chan.png", "_blank");
-      }
-      triggerHapticFeedback();
-      event.preventDefault();
-    }
-  </script>
 </body>
 </html>
