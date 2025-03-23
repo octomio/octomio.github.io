@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Annie Chan</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="annie_thumb.png" />
-  <link rel="apple-touch-icon" href="annie_thumb.png" sizes="180x180" />
+  <link rel="icon" type="image/png" href="annie_thumb.png">
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="annie_thumb.png">
 </head>
 <body style="font-family: Arial, sans-serif; text-align: center; background-color: #f8c8dc; padding: 50px; margin: 0;">
 
   <!-- Main Box -->
-  <div style="background: white; padding: 20px; border-radius: 25px; display: inline-block; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); max-width: 90%; width: 400px;">
-    <h1 style="margin-bottom: 20px;">
-      Welcome to Get Annie Chan
-      <img src="annie_thumb.png" alt="Annie Icon" style="height: 28px; vertical-align: middle; border-radius: 6px; margin-left: 5px;" />
-    </h1>
+  <div style="background: white; padding: 20px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <h1 style="margin-bottom: 20px;">Welcome to Get Annie Chan <img src="annie_thumb.png" alt="Icon" style="width: 24px; height: 24px; vertical-align: middle;"></h1>
 
     <!-- Download Button -->
     <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-      <button style="background-color: #e91e63; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 20px; cursor: pointer;">
+      <button style="background-color: #ff69b4; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 30px; cursor: pointer; margin-top: 10px;">
         Get Annie Chan
       </button>
     </a>
 
     <!-- Extras Button -->
-    <div style="margin-top: 16px;">
-      <a href="extras.html" style="color: #e91e63; font-size: 14px; text-decoration: underline;">Extras</a>
+    <div>
+      <a href="extras.html" style="display: block; margin-top: 15px; font-size: 14px; color: #ff69b4; text-decoration: underline;">
+        Extras
+      </a>
     </div>
   </div>
 
   <!-- Credits & Fair Use -->
-  <div style="margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 14px; color: #b30059;">
-    <h3 style="margin-bottom: 10px;">Credits & Fair Use</h3>
-    <p><strong>Get Annie Chan</strong></p>
+  <div style="margin-top: 40px; color: #b2005c; font-size: 13px; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <strong>Credits & Fair Use</strong>
     <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
     <p>Maintained & Updated by GAC Web Division</p>
     <p>Version 2.0 – 2025 Edition – Produced at GAC Web Division</p>
     <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
     <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
     <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+    <p>© 2025 GAC</p>
+    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" target="_blank" style="color: #b2005c; text-decoration: none;">Love</a></p>
   </div>
 
-  <!-- Footer -->
-  <p style="font-size: 13px; margin-top: 25px; color: #777;">© 2025 GAC</p>
-  <p style="font-size: 13px; color: #e91e63;">
-    Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" style="color: #e91e63; text-decoration: underline;">Love</a>
-  </p>
-
-  <!-- Script for dynamic download -->
+  <!-- Script -->
   <script>
     function getIOSVersion() {
       const match = navigator.userAgent.match(/OS (\d+)_/);
@@ -58,8 +54,7 @@
 
     function handleDownload(event) {
       const ios = getIOSVersion();
-      if (ios && ios >= 11) {
-        event.preventDefault();
+      if (ios >= 11) {
         const link = document.createElement("a");
         link.href = "annie_chan.png";
         link.download = "annie_chan.png";
@@ -67,11 +62,10 @@
         link.click();
         document.body.removeChild(link);
       } else {
-        // For older iOS or non-iOS
-        // allow default behavior (open in new tab)
+        window.open("annie_chan.png", "_blank");
       }
+      event.preventDefault();
     }
   </script>
-
 </body>
 </html>
