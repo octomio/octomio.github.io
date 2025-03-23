@@ -1,141 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Annie Chan</title>
-    
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    
-    <!-- Styles -->
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px;
-            background-color: #f8c8dc; /* Soft Pink */
-        }
-        button {
-            padding: 15px 25px;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            margin: 10px;
-        }
-        .default-btn {
-            background-color: #ff69b4; /* Pink */
-            color: white;
-        }
-        .default-btn:hover {
-            background-color: #ff1493; /* Darker Pink */
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-            width: 80%;
-            max-width: 600px;
-        }
-        .footer {
-            font-size: 14px;
-            margin-top: 15px;
-            color: #666;
-        }
-        .copyright {
-            font-size: 12px;
-            color: #999;
-            margin-top: 5px;
-        }
-        .version {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: #777;
-        }
-        /* Small Extras Button */
-        .extras-link {
-            display: block;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #ff69b4; /* Pink */
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .extras-link:hover {
-            color: #ff1493; /* Darker Pink */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Annie Chan</title>
 
-    <script>
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-            .then(() => console.log("Service Worker Registered"))
-            .catch(error => console.error("Service Worker Error:", error));
-        }
+  <!-- Favicon and Apple Touch Icon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-        // Haptic feedback function
-        function triggerHapticFeedback() {
-            if ("vibrate" in navigator) {
-                navigator.vibrate(50);
-            } else if (window.navigator.userAgent.includes("iPhone")) {
-                try {
-                    window.navigator.vibrate(1);
-                } catch (e) {
-                    console.warn("Haptic feedback not supported.");
-                }
-            }
-        }
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 
-        // Detect iOS version for auto-download
-        function getIOSVersion() {
-            let match = navigator.userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-            return match ? parseFloat(match[1] + "." + match[2]) : null;
-        }
-
-        function handleDownload(event) {
-            let iosVersion = getIOSVersion();
-            
-            if (iosVersion && iosVersion >= 11) {
-                let link = document.createElement("a");
-                link.href = "annie_chan.png";
-                link.download = "annie_chan.png";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                window.open("annie_chan.png", "_blank");
-            }
-            
-            triggerHapticFeedback();
-            event.preventDefault();
-        }
-    </script>
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Get Annie Chan 🌸</h1>
-        
-        <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-            <button class="default-btn">Get Annie Chan</button>
-        </a>
-    </div>
+  <div class="container">
+    <h1>Welcome to Get Annie Chan 🌸</h1>
 
-    <!-- Extras Button -->
+    <!-- Main Download Button -->
+    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
+      <button class="default-btn">Get Annie Chan</button>
+    </a>
+
+    <!-- Extras Tab -->
     <a href="extras.html" class="extras-link">Extras</a>
+  </div>
 
-    <p class="footer">Website made with ❤️</p>
-    <p class="copyright">© 2025 GAC</p>
-    <p class="version">Version 1.2.2</p>
-    <p style="font-size: 12px; color: #777; margin-top: 10px;">Peace & Love</p>
+  <!-- Footer & Info -->
+  <p class="footer">Website made with ❤️</p>
+  <p class="copyright">© 2025 GAC</p>
+  <p class="version">Version 1.2.3</p>
+  <p style="font-size: 12px; color: #777; margin-top: 10px;">
+    Peace & <a href="https://www.youtube.com/watch?v=PUT_DAFT_MAFIA_LINK_HERE" target="_blank" style="text-decoration: none; color: inherit;">Love</a>
+  </p>
+
+  <!-- JS -->
+  <script>
+    function triggerHapticFeedback() {
+      if ("vibrate" in navigator) {
+        navigator.vibrate(50);
+      }
+    }
+
+    function getIOSVersion() {
+      const match = navigator.userAgent.match(/OS (\d+)_/);
+      return match ? parseInt(match[1]) : null;
+    }
+
+    function handleDownload(event) {
+      const ios = getIOSVersion();
+      if (ios >= 11) {
+        const link = document.createElement("a");
+        link.href = "annie_chan.png";
+        link.download = "annie_chan.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        window.open("annie_chan.png", "_blank");
+      }
+      triggerHapticFeedback();
+      event.preventDefault();
+    }
+  </script>
 </body>
 </html>
