@@ -1,54 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Annie Chan</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
-
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; background-color: #f8c8dc; padding: 50px; margin: 0;">
+<body style="font-family: Arial, sans-serif; text-align: center; background-color: #f8c8dc; margin: 0; padding: 50px;">
 
-  <!-- Main Box -->
-  <div style="background: white; padding: 20px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-    <h1 style="margin-bottom: 20px;">Welcome to Get Annie Chan 
-      <img src="annie_thumb.jpg" alt="Icon" style="width: 24px; height: 24px; vertical-align: middle;">
-    </h1>
-
-    <!-- Download Button -->
+  <div style="background: white; padding: 20px; border-radius: 25px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <h1 style="margin-top: 0;">Welcome to Get Annie Chan <img src="annie_thumb.jpg" alt="Annie Icon" style="width: 24px; vertical-align: middle;"></h1>
     <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-      <button style="background-color: #ff69b4; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 30px; cursor: pointer; margin-top: 10px;">
-        Get Annie Chan
-      </button>
+      <button style="background-color: #ff4da6; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 25px; cursor: pointer;">Get Annie Chan</button>
     </a>
-
-    <!-- Extras Button -->
-    <div>
-      <a href="extras" style="display: block; margin-top: 24px; font-size: 14px; color: #ff69b4; text-decoration: underline;">
-  Extras
-</a></div>
+    <div style="margin-top: 15px;">
+      <a href="/extras" style="font-size: 14px; color: #ff4da6; text-decoration: underline;">Extras</a>
+    </div>
   </div>
 
-  <!-- Credits & Fair Use -->
-<div class="credits">
-  <strong>Credits & Fair Use</strong>
-  <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
-  <p>Maintained & Updated by GAC Web Division</p>
-  <p>Version 2.0.2 – 2025 Edition – Produced at GAC Web Division</p>
-  <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
-  <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
-  <p>Featuring artwork from ctchrysler 
-    <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank">“Annie Chan”</a> 
-    dCTb ©️2015
-  </p>
-  <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
-  <p>© 2025 GAC</p>
-  <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" style="text-decoration: none;" target="_blank">Love</a></p>
-</div>  <!-- Script -->
+  <div style="margin-top: 40px; font-size: 14px; color: #d63384;">
+    <strong>Credits & Fair Use</strong>
+    <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+    <p>Maintained & Updated by GAC Web Division</p>
+    <p>Version 2.0.1-1 – 2025 Edition – Produced at GAC Web Division</p>
+    <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+    <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+
+    <!-- Moved Up -->
+    <p>Featuring artwork from ctchrysler <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" style="color: #d63384; text-decoration: underline;">“Annie Chan”</a> dCTb ©2015</p>
+
+    <!-- Moved Down -->
+    <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+
+    <p>© 2025 GAC</p>
+    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" style="color: #d63384; text-decoration: none;">Love</a></p>
+  </div>
+
   <script>
     function getIOSVersion() {
       const match = navigator.userAgent.match(/OS (\d+)_/);
@@ -70,5 +58,6 @@
       event.preventDefault();
     }
   </script>
+
 </body>
 </html>
