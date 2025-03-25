@@ -1,57 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extras</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       background-color: #f8c8dc;
+      padding: 50px;
       margin: 0;
-      padding: 40px 10px;
     }
+
     .container {
       background: white;
-      padding: 25px 20px;
+      padding: 30px;
       border-radius: 30px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      display: inline-block;
       max-width: 600px;
-      width: 90%;
+      margin: auto;
     }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
     .button {
       display: block;
-      margin: 20px auto;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 25px;
+      width: 80%;
+      margin: 15px auto;
+      padding: 15px;
       font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
       font-weight: bold;
       color: white;
-      background-color: #ff69b4;
       text-decoration: none;
     }
-    .blue-button {
-      background-color: #3498db;
+
+    .pink-btn {
+      background-color: #ff69b4;
     }
+
+    .blue-btn {
+      background-color: #3399ff;
+    }
+
     .footer {
-      margin-top: 30px;
-      font-size: 12px;
+      font-size: 13px;
       color: #777;
+      margin-top: 25px;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 30px;
+      font-size: 14px;
+      text-decoration: underline;
+      color: #ff69b4;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Extras</h1>
-    <p><small>Enjoy fun new features and content.</small></p>
-    <a class="button" href="annie_chan_lineart.png" download>Get Line Art Annie Chan</a>
-    <a class="button blue-button" href="Lauren_com.png" download>Get Lauren</a>
+    <p class="subtitle">Enjoy fun new features and content.</p>
+
+    <a class="button pink-btn" href="annie_chan_lineart.png" download="annie_chan_lineart.png">Get Line Art Annie Chan</a>
+    <a class="button blue-btn" href="Lauren_com.png" download="Lauren_com.png">Get Lauren</a>
+
     <p class="footer">© 2025 GAC</p>
+
+    <a class="back-link" href="/">Back to Main Page</a>
   </div>
 </body>
 </html>
