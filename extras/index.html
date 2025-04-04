@@ -57,10 +57,6 @@
       background-color: #3399ff;
     }
 
-    .red-btn {
-      background-color: #e74c3c;
-    }
-
     .footer {
       font-size: 13px;
       color: #777;
@@ -83,29 +79,9 @@
 
     <a class="button pink-btn" href="/annie_chan_lineart.png" target="_blank">Get Line Art Annie Chan</a>
     <a class="button blue-btn" href="/Lauren_com.png" target="_blank">Get Lauren</a>
-    <button id="generateBtn" class="button red-btn" onclick="generateAnnie()">Generate Annie Chan</button>
 
     <p class="footer">© 2025 GAC</p>
     <a class="back-link" href="/">Back to Main Page</a>
   </div>
-
-  <script>
-    function generateAnnie() {
-      const btn = document.getElementById("generateBtn");
-      btn.disabled = true;
-
-      let dots = "";
-      const interval = setInterval(() => {
-        dots = dots.length < 3 ? dots + "." : "";
-        btn.textContent = "Generating Annie" + dots;
-      }, 400);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        alert("AI generated art is destroying human art Please support your local artists.");
-        window.location.href = "/";
-      }, 4000);
-    }
-  </script>
 </body>
 </html>
