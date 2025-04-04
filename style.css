@@ -9,7 +9,7 @@ body {
 .card {
   background: #ffe4ec;
   margin: 40px auto 20px;
-  padding: 20px;
+  padding: 20px 16px;
   border-radius: 28px;
   width: 90%;
   max-width: 380px;
@@ -17,23 +17,20 @@ body {
 }
 
 .card h1 {
-  margin: 0;
-  font-size: 28px;
+  margin-top: 0;
+  font-size: 26px;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   color: #ff69b4;
-  line-height: 1.2;
 }
 
 .card h1 img {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  object-fit: cover;
-  vertical-align: middle;
 }
 
 .button {
@@ -63,7 +60,7 @@ body {
 }
 
 .credits {
-  font-size: 12px;
+  font-size: 14px;
   color: #e91e63;
   margin: 30px auto 40px;
   line-height: 1.6;
