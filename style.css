@@ -60,11 +60,12 @@ body {
 }
 
 .credits {
-  font-size: 14px;
+  font-size: 12px;
   color: #e91e63;
-  margin: 30px auto 40px;
-  line-height: 1.6;
-  max-width: 380px;
+  margin: 20px auto 30px;
+  line-height: 1.5;
+  max-width: 360px;
+  text-align: center;
 }
 
 .credits a {
