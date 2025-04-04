@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   background-color: #f8c8dc;
@@ -8,12 +9,12 @@ body {
 
 .card {
   background: #ffe4ec;
-  margin: 20px auto 10px;
-  padding: 18px 16px;
-  border-radius: 22px;
-  width: 92%;
-  max-width: 340px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 30px auto 20px;
+  padding: 20px 16px;
+  border-radius: 28px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .card h1 {
@@ -23,7 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   color: #ff69b4;
 }
 
@@ -31,6 +32,7 @@ body {
   width: 26px;
   height: 26px;
   border-radius: 6px;
+  vertical-align: middle;
 }
 
 .button {
@@ -60,12 +62,11 @@ body {
 }
 
 .credits {
-  font-size: 12px;
+  font-size: 13px;
   color: #e91e63;
-  margin: 20px auto 30px;
+  margin: 30px auto 30px;
   line-height: 1.5;
   max-width: 360px;
-  text-align: center;
 }
 
 .credits a {
