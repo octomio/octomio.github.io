@@ -20,17 +20,20 @@ body {
   margin-top: 0;
   font-size: 26px;
   font-weight: bold;
-  display: flex;
+  display: inline-flex; /* Inline keeps it centered with image */
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   color: #ff69b4;
+  text-align: center;
 }
 
 .card h1 img {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border-radius: 6px;
+  object-fit: cover;
+  vertical-align: middle;
 }
 
 .button {
