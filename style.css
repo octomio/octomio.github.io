@@ -21,26 +21,29 @@ body {
   font-size: 30px;
   font-weight: bold;
   color: #ff69b4;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   text-align: center;
   margin-top: 0;
   margin-bottom: 20px;
-  line-height: 1.2;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 .site-title span {
-  white-space: nowrap;
+  max-width: 100%;
+  display: line-block;
 }
 
 .annie-icon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .button {
