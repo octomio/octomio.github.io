@@ -1,0 +1,87 @@
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #f8c8dc, #ffe4ec);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #222;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  padding: 30px 20px;
+  margin: 40px auto 20px;
+  width: 90%;
+  max-width: 400px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.site-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ff69b4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.annie-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.button {
+  background: rgba(255, 105, 180, 0.9);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+}
+
+.button:hover {
+  background-color: #ff4da6;
+}
+
+.extras-container {
+  margin-top: 16px;
+}
+
+.underline-link {
+  color: #e91e63;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.credits {
+  font-size: 12px;
+  color: #e91e63;
+  margin: 30px auto 40px;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+.credits a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.credits a:hover {
+  text-decoration: underline;
+}
