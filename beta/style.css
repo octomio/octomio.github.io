@@ -8,35 +8,35 @@ body {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 28px;
-  padding: 24px 20px;
+  background: #ffe4ec;
   margin: 40px auto 20px;
+  padding: 24px 20px;
+  border-radius: 28px;
   width: 90%;
-  max-width: 380px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  max-width: 340px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.site-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .site-title {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
   color: #ff69b4;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 0;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  gap: 10px;
+  flex-wrap: nowrap;
   text-align: center;
 }
 
 .annie-icon {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   border-radius: 6px;
   object-fit: cover;
 }
