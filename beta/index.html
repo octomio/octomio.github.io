@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Annie Chan</title>
+  <link rel="icon" href="beta/favicon.png" />
+  <link rel="apple-touch-icon" href="beta/apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body oncontextmenu="return false;">
+
+  <div class="card">
+    <h1 class="site-title">
+      Welcome to Get Annie Chan 
+      <img 
+        src="annie_thumb.jpg" 
+        alt="Annie Icon" 
+        class="annie-icon" 
+        onclick="location.reload();" 
+        oncontextmenu="return false;" 
+        draggable="false"
+      />
+    </h1>
+    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
+      <button class="button" draggable="false">Get Annie Chan</button>
+    </a>
+    <div class="extras-container">
+      <a href="/extras" class="underline-link" draggable="false">Extras</a>
+    </div>
+  </div>
+
+  <div class="credits">
+    <strong>Credits & Fair Use</strong>
+    <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+    <p>Maintained & Updated by GAC Web Division</p>
+    <p>Version 2.2.1 – 2025 Edition – Produced at GAC Web Division</p>
+    <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+    <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+    <p><span class="flash-highlight">Featuring artwork from ctchrysler</span> <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank">“Annie Chan”</a> dCTb ©2015</p>
+    <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+    <p>© 2025 GAC</p>
+    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" draggable="false" id="love">Love</a></p>
+  </div>
+
+  <div class="popup" id="promoPopup">
+    <button class="popup-close" onclick="closePopup()">×</button>
+    <strong>Introducing</strong><br />
+    GetMegan.org!<br />
+    Get Annie’s Friend<br />
+    Coming Soon!!<br />
+    <img src="megan_thumb.jpeg" alt="Megan Thumbnail" />
+  </div>
+
+  <script>
+    function getIOSVersion() {
+      const match = navigator.userAgent.match(/OS (\d+)_/);
+      return match ? parseInt(match[1]) : null;
+    }
+
+    function handleDownload(event) {
+      const ios = getIOSVersion();
+      if (ios >= 11) {
+        const link = document.createElement("a");
+        link.href = "annie_chan.png";
+        link.download = "annie_chan.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        window.open("annie_chan.png", "_blank");
+      }
+      event.preventDefault();
+    }
+
+    function closePopup() {
+      const popup = document.getElementById("promoPopup");
+      popup.style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
