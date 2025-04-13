@@ -1,0 +1,154 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8c8dc;
+  text-align: center;
+  margin: 0;
+  padding: 50px 10px;
+}
+
+.card {
+  background-color: #ffe6ee;
+  padding: 25px;
+  border-radius: 25px;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.site-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ff69b4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  text-align: center;
+  animation: title-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+  from { text-shadow: 0 0 5px #ffb6c1; }
+  to { text-shadow: 0 0 20px #ff69b4; }
+}
+
+.annie-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.button {
+  background-color: #ff4da6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.extras-container {
+  margin-top: 15px;
+}
+
+.underline-link {
+  font-size: 14px;
+  color: #ff4da6;
+  text-decoration: underline;
+}
+
+.credits {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #d63384;
+}
+
+.pulse {
+  animation: pulseEffect 2s infinite ease-in-out;
+}
+
+@keyframes pulseEffect {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.pulse-blue {
+  color: #3399ff;
+  animation: pulseEffect 2s infinite ease-in-out;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #5B5259;
+  border: 2px solid #ff69b4;
+  border-radius: 25px;
+  padding: 25px;
+  color: #f8c8dc;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.popup-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.popup-description {
+  font-size: 16px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #f8c8dc;
+}
+
+.popup-pill {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #5B5259;
+  color: white;
+  border: 2px solid #ff69b4;
+  border-radius: 25px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.popup-pill img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.easter-egg {
+  color: #d63384;
+  text-decoration: none;
+}
