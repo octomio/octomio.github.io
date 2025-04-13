@@ -1,104 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get Annie Chan</title>
-  <link rel="icon" href="beta/favicon.png" />
-  <link rel="apple-touch-icon" href="beta/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <title>Beta Status</title>
+  <link rel="icon" href="../favicon.png" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
-<body oncontextmenu="return false;">
-
+<body>
   <div class="card">
-    <h1 class="site-title">
-      Welcome to Get Annie Chan 
-      <img 
-        src="annie_thumb.jpg" 
-        alt="Annie Icon" 
-        class="annie-icon" 
-        onclick="location.reload();" 
-        oncontextmenu="return false;" 
-        draggable="false"
-      />
-    </h1>
-
-    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-      <button class="button" draggable="false">Get Annie Chan</button>
-    </a>
-
+    <h1 class="site-title">No Betas at the moment<br>check back another time</h1>
     <div class="extras-container">
-      <a href="/extras" class="underline-link" draggable="false">Extras</a>
+      <a href="/" class="underline-link">Go back to main page</a>
     </div>
   </div>
-
-  <div class="credits">
-    <strong>Credits & Fair Use</strong>
-    <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
-    <p>Maintained & Updated by GAC Web Division</p>
-    <p>Version 2.2.1 Beta 8 – 2025 Edition – Produced at GAC Web Division</p>
-    <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
-    <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
-    <p><span class="highlight-pulse">Featuring artwork from ctchrysler</span> <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="normal-link">“Annie Chan”</a> dCTb ©2015</p>
-    <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
-    <p>© 2025 GAC</p>
-    <p>Peace and <span class="daft-mafia" draggable="false"><a href="https://m.youtube.com/watch?v=gDg7XKHPix8">Love</a></span></p>
-  </div>
-
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <span class="popup-close" onclick="closePopup()">&times;</span>
-      <h2 class="popup-title pulse-blue">Get Megan</h2>
-      <p class="popup-message">Get Annie’s friend, coming soon</p>
-    </div>
-  </div>
-
-  <div id="popup-pill" class="popup-pill hidden" onclick="reopenPopup()">
-    <img src="beta/megan_thumb.jpeg" alt="Megan Thumbnail" />
-    <span class="pill-text">Get Megan</span>
-  </div>
-
-  <script>
-    function getIOSVersion() {
-      const match = navigator.userAgent.match(/OS (\d+)_/);
-      return match ? parseInt(match[1]) : null;
-    }
-
-    function handleDownload(event) {
-      const ios = getIOSVersion();
-      if (ios >= 11) {
-        const link = document.createElement("a");
-        link.href = "annie_chan.png";
-        link.download = "annie_chan.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        window.open("annie_chan.png", "_blank");
-      }
-      event.preventDefault();
-    }
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("popup-pill").classList.remove("hidden");
-      localStorage.setItem("popupDismissed", "true");
-    }
-
-    function reopenPopup() {
-      document.getElementById("popup").style.display = "flex";
-      document.getElementById("popup-pill").classList.add("hidden");
-    }
-
-    window.onload = function () {
-      const dismissed = localStorage.getItem("popupDismissed");
-      if (!dismissed) {
-        document.getElementById("popup").style.display = "flex";
-      } else {
-        document.getElementById("popup-pill").classList.remove("hidden");
-      }
-    };
-  </script>
 </body>
 </html>
