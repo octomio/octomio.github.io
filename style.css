@@ -1,25 +1,22 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background-color: #ffc0cb;
   margin: 0;
   padding: 0;
-  background-color: #ffccdd;
-  color: #000;
   text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
+  color: #000;
 }
 
 .card {
-  background-color: #ffe6ee;
+  background-color: #ffe4e1;
+  margin: 2rem;
   padding: 2rem;
-  margin: 2rem auto;
   border-radius: 20px;
-  max-width: 600px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h1.site-title {
-  font-size: 2.5rem;
+.site-title {
+  font-size: 30px;
   font-weight: bold;
   color: #ff69b4;
   display: flex;
@@ -35,10 +32,10 @@ h1.site-title {
 
 @keyframes glow {
   from {
-    text-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4;
+    text-shadow: 0 0 5px #ff69b4;
   }
   to {
-    text-shadow: 0 0 15px #ff69b4, 0 0 20px #ff69b4;
+    text-shadow: 0 0 20px #ff69b4;
   }
 }
 
@@ -47,58 +44,31 @@ h1.site-title {
   height: 42px;
   border-radius: 6px;
   object-fit: cover;
-  cursor: pointer;
 }
 
 .button {
-  background-color: #ff3385;
+  background-color: #ff1493;
   color: white;
   border: none;
-  padding: 12px 24px;
-  font-size: 1rem;
-  border-radius: 999px;
+  padding: 1rem 2rem;
+  font-size: 16px;
+  border-radius: 25px;
   cursor: pointer;
-  margin-top: 10px;
-  user-drag: none;
-  -webkit-user-drag: none;
-}
-
-.button:active {
-  transform: scale(0.98);
-}
-
-.extras-container {
-  margin-top: 12px;
 }
 
 .underline-link {
-  color: #ff3399;
+  color: #ff69b4;
   text-decoration: underline;
-  cursor: pointer;
-  user-drag: none;
-  -webkit-user-drag: none;
+  display: block;
+  margin-top: 1rem;
 }
 
 .credits {
-  font-size: 0.95rem;
-  padding: 1rem;
-  max-width: 650px;
-  margin: auto;
+  padding: 2rem;
+  font-size: 0.9rem;
 }
 
-.credits p {
-  margin: 0.5rem 0;
-}
-
-.credits strong {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.credits .pulse {
-  color: #ff69b4;
-  font-weight: bold;
+.pulse {
   animation: pulse 2s infinite;
 }
 
@@ -107,28 +77,22 @@ h1.site-title {
     opacity: 1;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
   }
 }
 
-a {
-  text-decoration: none;
-}
-
 a.love {
   color: #ff69b4;
 }
 
-.annie-link {
+a.annie-link {
   color: #ff69b4;
 }
 
-img[draggable="false"],
-a[draggable="false"],
-button[draggable="false"] {
+.no-drag {
   -webkit-user-drag: none;
-  user-drag: none;
+  user-select: none;
 }
