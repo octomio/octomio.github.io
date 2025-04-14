@@ -2,7 +2,7 @@ body {
   background-color: #ffcde1;
   font-family: 'Arial', sans-serif;
   text-align: center;
-  color: #000000; /* Ensures default text is black where intended */
+  color: #ff69b4; /* Set default text color to pink */
   margin: 0;
   padding: 0;
 }
@@ -57,19 +57,23 @@ body {
 .credits {
   padding: 2rem;
   font-size: 1rem;
-  color: #000; /* Forces black text where needed */
+  color: #ff69b4; /* Make all credits text pink */
 }
 
 .credits strong {
   font-weight: bold;
 }
 
-.credits .artist-line {
-  color: #ff69b4;
+.credits .pulse {
+  color: #e75480; /* Darker pink for visibility */
   animation: softPulse 2s infinite;
 }
 
-a.love,
+a.love {
+  color: #ff69b4 !important;
+  text-decoration: none !important; /* No underline */
+}
+
 a.annie-link {
   color: #ff69b4 !important;
 }
