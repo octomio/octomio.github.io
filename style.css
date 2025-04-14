@@ -1,98 +1,96 @@
 body {
+  background-color: #ffcde1;
   font-family: 'Arial', sans-serif;
-  background-color: #ffc0cb;
+  text-align: center;
+  color: #000000; /* Ensures default text is black where intended */
   margin: 0;
   padding: 0;
-  text-align: center;
-  color: #000;
 }
 
 .card {
-  background-color: #ffe4e1;
-  margin: 2rem;
-  padding: 2rem;
+  background-color: #ffe5ec;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
 }
 
 .site-title {
-  font-size: 30px;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #ff69b4;
+  margin-bottom: 1rem;
+  animation: glow 2s infinite alternate;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: 0;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  text-align: center;
-  animation: glow 2s ease-in-out infinite alternate;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.annie-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.button {
+  background-color: #ff2e84;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 1rem 0;
+}
+
+.underline-link {
+  color: #ff69b4;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.credits {
+  padding: 2rem;
+  font-size: 1rem;
+  color: #000; /* Forces black text where needed */
+}
+
+.credits strong {
+  font-weight: bold;
+}
+
+.credits .artist-line {
+  color: #ff69b4;
+  animation: softPulse 2s infinite;
+}
+
+a.love,
+a.annie-link {
+  color: #ff69b4 !important;
 }
 
 @keyframes glow {
   from {
-    text-shadow: 0 0 5px #ff69b4;
+    text-shadow: 0 0 10px #ff69b4;
   }
   to {
     text-shadow: 0 0 20px #ff69b4;
   }
 }
 
-.annie-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.button {
-  background-color: #ff1493;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 16px;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-.underline-link {
-  color: #ff69b4;
-  text-decoration: underline;
-  display: block;
-  margin-top: 1rem;
-}
-
-.credits {
-  padding: 2rem;
-  font-size: 0.9rem;
-}
-
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
+@keyframes softPulse {
   0% {
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.6;
   }
   100% {
     opacity: 1;
   }
-}
-
-a.love {
-  color: #ff69b4;
-}
-
-a.annie-link {
-  color: #ff69b4;
-}
-
-.no-drag {
-  -webkit-user-drag: none;
-  user-select: none;
 }
