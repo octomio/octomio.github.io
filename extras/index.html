@@ -70,6 +70,62 @@
       text-decoration: underline;
       color: #ff69b4;
     }
+
+    /* POPUP STYLES */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-box {
+      background-color: #5B5259;
+      border: 3px solid #ff69b4;
+      padding: 30px 20px;
+      border-radius: 25px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .popup-title {
+      font-size: 24px;
+      color: #3399ff;
+      font-weight: bold;
+      animation: softPulse 2s infinite;
+    }
+
+    .popup-subtext {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .popup-close {
+      margin-top: 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @keyframes softPulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -79,9 +135,29 @@
 
     <a class="button pink-btn" href="/annie_chan_lineart.png" target="_blank">Get Line Art Annie Chan</a>
     <a class="button blue-btn" href="/Lauren_com.png" target="_blank">Get Lauren</a>
+    <button class="button" style="background-color: #5B5259;" onclick="showPopup()">Get Megan</button>
 
     <p class="footer">© 2025 GAC</p>
     <a class="back-link" href="/">Back to Main Page</a>
   </div>
+
+  <!-- POPUP HTML -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <div class="popup-title">GetMegan.org</div>
+      <div class="popup-subtext">Get Annie’s Friend coming soon</div>
+      <button class="popup-close" onclick="hidePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById('popup').style.display = 'flex';
+    }
+
+    function hidePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
