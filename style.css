@@ -1,10 +1,12 @@
+
 body {
   background-color: #ffcde1;
   font-family: 'Arial', sans-serif;
   text-align: center;
-  color: #ff69b4; /* Set default text color to pink */
+  color: #ff69b4;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .card {
@@ -15,6 +17,8 @@ body {
   padding: 2rem;
   width: 90%;
   max-width: 500px;
+  position: relative;
+  z-index: 10;
 }
 
 .site-title {
@@ -57,25 +61,26 @@ body {
 .credits {
   padding: 2rem;
   font-size: 1rem;
-  color: #ff69b4; /* Make all credits text pink */
+  color: #ff69b4;
 }
 
 .credits strong {
   font-weight: bold;
 }
 
-.credits .pulse {
-  color: #e75480; /* Darker pink for visibility */
+.credits .artist-line {
+  color: #ff69b4;
   animation: softPulse 2s infinite;
 }
 
-a.love {
-  color: #ff69b4 !important;
-  text-decoration: none !important; /* No underline */
-}
-
+a.love,
 a.annie-link {
   color: #ff69b4 !important;
+  text-decoration: none;
+}
+
+a.love:hover {
+  text-decoration: underline;
 }
 
 @keyframes glow {
@@ -88,13 +93,21 @@ a.annie-link {
 }
 
 @keyframes softPulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.behind-card-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #ff69b4;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 1;
+  text-align: center;
+  white-space: pre-line;
 }
