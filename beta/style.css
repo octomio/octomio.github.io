@@ -1,3 +1,4 @@
+
 body {
   background-color: #ffcde1;
   font-family: 'Arial', sans-serif;
@@ -95,22 +96,4 @@ a.love:hover {
   0% { opacity: 1; }
   50% { opacity: 0.6; }
   100% { opacity: 1; }
-}
-
-/* --- NEW: Small Device Scaling --- */
-@media (max-width: 360px) {
-  .card {
-    max-width: 280px;
-    padding: 1.5rem;
-  }
-  .site-title {
-    font-size: 2rem;
-  }
-  .button {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-  .credits {
-    font-size: 0.85rem;
-  }
 }
