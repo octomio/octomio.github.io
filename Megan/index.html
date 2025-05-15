@@ -1,1 +1,125 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Annie Chan</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    header {
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    .thumbnail {
+      max-width: 400px;
+      width: 90%;
+      height: auto;
+      margin: 1rem auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .pulse {
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .button {
+      background-color: gold;
+      color: black;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      margin: 1.5rem 0;
+    }
+
+    .button:active {
+      transform: scale(0.98);
+    }
+
+    .button:focus {
+      outline: none;
+    }
+
+    .extras {
+      display: block;
+      margin: 1rem 0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .footer {
+      font-size: 0.8rem;
+      color: #555;
+      padding: 1rem;
+    }
+
+    .credits {
+      font-size: 0.75rem;
+      color: #777;
+      line-height: 1.4;
+      padding: 0 1rem 2rem;
+    }
+
+    /* Responsive layout */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .button {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+      }
+    }
+
+    /* Disable dragging */
+    img, .button, a {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Get Annie Chan</h1>
+    <img src="annie-thumbnail.png" alt="Annie Chan Thumbnail" class="thumbnail" draggable="false" />
+    <p class="pulse">Featuring artwork from ctchrysler — Annie Mei cosplaying as Shunya Yamashita’s Sera-chan</p>
+    <button class="button" onclick="window.location.href='AnnieChanDownload.png'">Get Annie Chan</button>
+    <a href="#extras" class="extras">Extras</a>
+  </header>
+  <footer class="footer">
+    <p class="credits">
+      Credits & Fair Use: This site features fan-made work inspired by original illustrations. Artwork © ctchrysler. <br/>
+      Inspired by the art of Shunya Yamashita. For personal appreciation only. <br/>
+      <a href="https://twitter.com/shunyayamashita" target="_blank" rel="noopener noreferrer">Shunya Yamashita on Twitter</a>
+    </p>
+  </footer>
+</body>
+</html>
