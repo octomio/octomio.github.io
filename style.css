@@ -1,3 +1,4 @@
+
 body {
   background-color: #ffcde1;
   font-family: 'Arial', sans-serif;
@@ -95,16 +96,4 @@ a.love:hover {
   0% { opacity: 1; }
   50% { opacity: 0.6; }
   100% { opacity: 1; }
-}
-
-.behind-card-message {
-  position: absolute;
-  top: 100px;
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  color: #ff9dcf;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.2;
 }
