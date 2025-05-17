@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +72,6 @@
       color: #ff69b4;
     }
 
-    /* POPUP STYLES */
     .popup-overlay {
       display: none;
       position: fixed;
@@ -141,12 +141,11 @@
     <a class="back-link" href="/">Back to Main Page</a>
   </div>
 
-  <!-- POPUP HTML -->
   <div class="popup-overlay" id="popup">
     <div class="popup-box">
-      <div class="popup-title">GetMegan.org</div>
-      <div class="popup-subtext">Get Annie’s Friend coming soon</div>
-      <button class="popup-close" onclick="hidePopup()">Close</button>
+      <div class="popup-title">Get Megan (Beta)</div>
+      <div class="popup-subtext">is now available</div>
+      <button class="popup-close" onclick="visitMegan()">Visit now</button>
     </div>
   </div>
 
@@ -155,8 +154,8 @@
       document.getElementById('popup').style.display = 'flex';
     }
 
-    function hidePopup() {
-      document.getElementById('popup').style.display = 'none';
+    function visitMegan() {
+      window.location.href = "https://getmegan.org";
     }
   </script>
 </body>
