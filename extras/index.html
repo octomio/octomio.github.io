@@ -110,15 +110,28 @@
       margin-top: 10px;
     }
 
-    .popup-close {
-      margin-top: 20px;
+    .popup-close,
+    .popup-x {
       background-color: #ff69b4;
       color: white;
       border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .popup-close {
       padding: 10px 20px;
       border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .popup-x {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      padding: 5px 12px;
+      font-size: 16px;
+      border-radius: 50%;
     }
 
     @keyframes softPulse {
@@ -141,8 +154,9 @@
     <a class="back-link" href="/">Back to Main Page</a>
   </div>
 
-  <div class="popup-overlay" id="popup">
-    <div class="popup-box">
+  <div class="popup-overlay" id="popup" onclick="outsideClick(event)">
+    <div class="popup-box" onclick="event.stopPropagation()">
+      <button class="popup-x" onclick="hidePopup()">×</button>
       <div class="popup-title">Get Megan (Beta)</div>
       <div class="popup-subtext">is now available</div>
       <button class="popup-close" onclick="visitMegan()">Visit now</button>
@@ -152,6 +166,16 @@
   <script>
     function showPopup() {
       document.getElementById('popup').style.display = 'flex';
+    }
+
+    function hidePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function outsideClick(event) {
+      if (event.target.id === "popup") {
+        hidePopup();
+      }
     }
 
     function visitMegan() {
