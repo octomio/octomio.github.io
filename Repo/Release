@@ -1,8 +1,0 @@
-Origin: Get Annie Chan
-Label: GAC Repo
-Suite: stable
-Version: 1.0
-Codename: getanniechan
-Architectures: iphoneos-arm
-Components: main
-Description: The unofficial GAC repo. Nothing to install… yet.
