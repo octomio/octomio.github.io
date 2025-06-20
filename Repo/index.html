@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iOS 12 Wallpaper Download</title>
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 20px 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 25px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-download {
+      background-color: #007aff;
+      color: white;
+    }
+
+    .btn-disabled {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    .btn-back {
+      background-color: #ff69b4;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Get Annie Chan Wallpaper (iOS 12 Only)</h1>
+    <p id="status-text">Checking your iOS version...</p>
+    <button id="download-btn" class="btn btn-download" style="display:none;" onclick="window.location.href='GetAnnieChanWallpaperTweak_fixed.deb'">Download Deb</button>
+    <button id="disabled-btn" class="btn btn-disabled" style="display:none;" disabled>This only supports iOS 12</button>
+    <br/>
+    <a class="btn btn-back" href="/">Back to Main Page</a>
+  </div>
+
+  <script>
+    function getiOSVersion() {
+      var match = navigator.appVersion.match(/OS (\d+)_/i);
+      return match ? parseInt(match[1], 10) : null;
+    }
+
+    var iosVersion = getiOSVersion();
+    var statusText = document.getElementById('status-text');
+    var downloadBtn = document.getElementById('download-btn');
+    var disabledBtn = document.getElementById('disabled-btn');
+
+    if (iosVersion === 12) {
+      statusText.innerText = "iOS 12 detected — you're good to go!";
+      downloadBtn.style.display = 'inline-block';
+    } else {
+      statusText.innerText = "Unsupported version";
+      disabledBtn.style.display = 'inline-block';
+    }
+  </script>
+</body>
+</html>
