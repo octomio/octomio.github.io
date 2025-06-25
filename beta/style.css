@@ -1,99 +1,58 @@
-
 body {
-  background-color: #ffcde1;
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  color: #ff69b4;
-  margin: 0;
-  padding: 0;
-  position: relative;
+    background-color: #f0f0f0; /* Light gray like v2.3.2 */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
 }
 
-.card {
-  background-color: #ffe5ec;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin: 2rem auto;
-  padding: 2rem;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
-  z-index: 10;
+.main-card {
+    background-color: white;
+    width: 90%;
+    max-width: 500px;
+    margin: 10% auto;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
-.site-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #ff69b4;
-  margin-bottom: 1rem;
-  animation: glow 2s infinite alternate;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
+h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
 }
 
-.annie-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  user-select: none;
-  -webkit-user-drag: none;
+.subtitle {
+    font-size: 1.2em;
+    margin-bottom: 1em;
 }
 
-.button {
-  background-color: #ff2e84;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  margin: 1rem 0;
+.download-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.underline-link {
-  color: #ff69b4;
-  text-decoration: underline;
-  font-size: 1rem;
+.artist-credit {
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #666;
 }
 
-.credits {
-  padding: 2rem;
-  font-size: 1rem;
-  color: #ff69b4;
+/* File tab behavior */
+.file-tab {
+    position: fixed;
+    top: -50px;
+    right: 0;
+    background-color: #ddd;
+    padding: 10px 20px;
+    border-radius: 0 0 0 8px;
+    transition: top 0.3s ease;
 }
 
-.credits strong {
-  font-weight: bold;
-}
-
-.credits .artist-line {
-  color: #ff69b4;
-  animation: softPulse 2s infinite;
-}
-
-a.love,
-a.annie-link {
-  color: #ff69b4 !important;
-  text-decoration: none;
-}
-
-a.love:hover {
-  text-decoration: underline;
-}
-
-@keyframes glow {
-  from {
-    text-shadow: 0 0 10px #ff69b4;
-  }
-  to {
-    text-shadow: 0 0 20px #ff69b4;
-  }
-}
-
-@keyframes softPulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.6; }
-  100% { opacity: 1; }
+body:hover .file-tab {
+    top: 0;
 }
