@@ -1,22 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GetAnnieChan.org</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Annie Chan</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <div class="main-card">
-        <h1>GetAnnieChan.org</h1>
-        <p class="welcome-text">Welcome to GetAnnieChan.org</p>
-        <button class="main-button">Get Annie Chan</button>
-        <p class="credit">Annie artwork by CT Chrysler</p>
-        <div class="tabs">
-            <a href="extras.html">Extras</a>
-            <a href="files.html">Files</a>
-        </div>
+<body oncontextmenu="return false;">
+  <div class="main-card">
+    <h1 class="site-title">GetAnnieChan.org</h1>
+    <p class="subtitle">Welcome to GetAnnieChan.org</p>
+    <button class="button no-drag" onclick="downloadAnnie()">Get Annie Chan</button>
+    <div class="tab-menu">
+      <div class="tab" onclick="location.href='/extras';">Extras</div>
+      <div class="tab" onclick="toggleCredits()">Credits & Fair Use</div>
     </div>
-    <div class="popup-tab" id="credit-tab">Credits & Fair Use</div>
+  </div>
+
+  <div id="credits" class="credits hidden">
+    <strong>Credits & Fair Use</strong>
+    <p>(Website by GAC) – For Entertainment Purposes Only</p>
+    <p>“Get Annie Chan” is a tribute project.</p>
+    <p><strong>Featuring artwork from ctchrysler</strong></p>
+  </div>
+
+  <script>
+    function getIOSVersion() {
+      const match = navigator.userAgent.match(/OS (\d+)_/);
+      return match ? parseInt(match[1]) : null;
+    }
+
+    function downloadAnnie() {
+      const ios = getIOSVersion();
+      if (ios >= 11) {
+        const link = document.createElement("a");
+        link.href = "annie_chan.png";
+        link.download = "annie_chan.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        window.open("annie_chan.png", "_blank");
+      }
+    }
+
+    function toggleCredits() {
+      const credits = document.getElementById("credits");
+      credits.classList.toggle("hidden");
+    }
+  </script>
 </body>
 </html>
