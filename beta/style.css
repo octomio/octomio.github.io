@@ -1,80 +1,70 @@
 
 body {
   background-color: #ffcde1;
-  font-family: Arial, sans-serif;
-  color: #333;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 
-.main-card {
-  background-color: white;
-  margin: 2rem auto;
-  padding: 2rem;
+.card {
+  background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 2rem;
   width: 90%;
   max-width: 500px;
+  position: relative;
+}
+
+.hidden {
+  display: none;
 }
 
 .site-title {
   font-size: 2.5rem;
-  font-weight: bold;
   margin-bottom: 0.5rem;
+}
+
+.pink-title {
+  color: #ff69b4;
+}
+
+.site-subtitle {
+  font-size: 1.5rem;
   color: #333;
 }
 
-.subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 1.5rem;
+.annie-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin: 1rem 0;
 }
 
 .button {
   background-color: #ff2e84;
   color: white;
   padding: 0.75rem 1.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border: none;
   border-radius: 25px;
+  margin: 0.5rem;
   cursor: pointer;
 }
 
-.tab-menu {
-  margin-top: 2rem;
+.button-row {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.tab {
-  padding: 0.5rem 1rem;
-  background-color: #ffe5ec;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.tab:hover {
-  background-color: #ffcee6;
-}
-
-.credits {
-  margin: 2rem auto;
-  max-width: 600px;
-  padding: 1rem;
-  background-color: #fff0f5;
-  border-radius: 10px;
-  display: none;
-}
-
-.credits strong {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.credits.hidden {
-  display: none;
+.version {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  font-size: 0.8rem;
+  color: gray;
 }

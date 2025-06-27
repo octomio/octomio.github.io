@@ -2,53 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Get Annie Chan</title>
-  <link rel="icon" href="favicon.png" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body oncontextmenu="return false;">
-  <div class="main-card">
-    <h1 class="site-title">Welcome to</h1>
-    <p class="subtitle">GetAnnieChan.org</p>
-    <button class="button no-drag" onclick="downloadAnnie()">Get Annie Chan</button>
-    <div class="tab-menu">
-      <div class="tab" onclick="location.href='/extras';">Extras</div>
-      <div class="tab" onclick="toggleCredits()">Credits & Fair Use</div>
+<body>
+  <div class="card" id="main-card">
+    <h1 class="site-title pink-title">Welcome to</h1>
+    <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" />
+    <h2 class="site-subtitle">GetAnnieChan.org</h2>
+    <a href="annie_chan.png" download>
+      <button class="button">Get Annie Chan</button>
+    </a>
+    <div class="button-row">
+      <button class="button" onclick="showCredits()">Credits & Fair Use</button>
+      <a href="/extras" class="button">Extras</a>
     </div>
+    <p class="version">v3.0 beta 2</p>
   </div>
 
-  <div id="credits" class="credits hidden">
-    <strong>Credits & Fair Use</strong>
-    <p>(Website by GAC) – For Entertainment Purposes Only</p>
-    <p>“Get Annie Chan” is a tribute project.</p>
-    <p><strong>Featuring artwork from ctchrysler</strong></p>
+  <div class="card hidden" id="credits-card">
+    <h2>Credits & Fair Use</h2>
+    <p><strong>Credits:</strong> Artwork by CT Chrysler</p>
+    <p><strong>Fair Use Disclaimer:</strong> This is a non-commercial tribute. All rights belong to their respective owners.</p>
+    <button class="button" onclick="showMain()">Back</button>
   </div>
 
   <script>
-    function getIOSVersion() {
-      const match = navigator.userAgent.match(/OS (\d+)_/);
-      return match ? parseInt(match[1]) : null;
+    function showCredits() {
+      document.getElementById('main-card').classList.add('hidden');
+      document.getElementById('credits-card').classList.remove('hidden');
     }
-
-    function downloadAnnie() {
-      const ios = getIOSVersion();
-      if (ios >= 11) {
-        const link = document.createElement("a");
-        link.href = "annie_chan.png";
-        link.download = "annie_chan.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        window.open("annie_chan.png", "_blank");
-      }
-    }
-
-    function toggleCredits() {
-      const credits = document.getElementById("credits");
-      credits.classList.toggle("hidden");
+    function showMain() {
+      document.getElementById('credits-card').classList.add('hidden');
+      document.getElementById('main-card').classList.remove('hidden');
     }
   </script>
 </body>
