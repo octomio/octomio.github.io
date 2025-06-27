@@ -1,15 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>404 – Page Not Found</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 - Page Not Found</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffcde1;
+      color: #ff69b4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background-color: #ffe5ec;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ff69b4;
+      text-decoration: underline;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Oops!</h1>
-    <p>This page doesn’t exist.</p>
-    <a class="button" href="/">Go Home</a>
+  <div class="container">
+    <h1>404 - Not Found</h1>
+    <p>The page you’re looking for doesn’t exist.</p>
+    <a href="/">Back to Home</a>
   </div>
 </body>
 </html>
