@@ -2,40 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Get Annie Chan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annie Chan</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .anniversary-popup {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffe5ec;
+      border: 2px solid #ff69b4;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 90%;
+      text-align: center;
+      z-index: 9999;
+      color: #ff2e84;
+    }
+
+    .anniversary-popup button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #ff2e84;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body>
-  <div class="card" id="main-card">
-    <h1 class="site-title pink-title">Welcome to</h1>
-    <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" />
-    <h2 class="site-subtitle">GetAnnieChan.org</h2>
-    <a href="annie_chan.png" download>
-      <button class="button">Get Annie Chan</button>
+<body oncontextmenu="return false;">
+  <div class="card">
+    <h1 class="site-title">
+      Welcome to Get Annie Chan
+      <img 
+        src="annie_thumb.jpg" 
+        alt="Annie Icon" 
+        class="annie-icon" 
+        onclick="location.reload();" 
+        oncontextmenu="return false;" 
+        draggable="false"
+      />
+    </h1>
+
+    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
+      <button class="button no-drag">Get Annie Chan</button>
     </a>
-    <div class="button-row">
-      <button class="button" onclick="showCredits()">Credits & Fair Use</button>
-      <a href="/extras" class="button">Extras</a>
+
+    <div class="extras-container">
+      <a href="/extras" class="underline-link no-drag">Extras</a>
     </div>
-    <p class="version">v3.0 beta 2</p>
   </div>
 
-  <div class="card hidden" id="credits-card">
-    <h2>Credits & Fair Use</h2>
-    <p><strong>Credits:</strong> Artwork by CT Chrysler</p>
-    <p><strong>Fair Use Disclaimer:</strong> This is a non-commercial tribute. All rights belong to their respective owners.</p>
-    <button class="button" onclick="showMain()">Back</button>
+  <div class="credits">
+    <strong>Credits & Fair Use</strong>
+    <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+    <p>Maintained & Updated by GAC Web Division</p>
+    <p>Version 2.3.2 – 2025 Edition – Produced at GAC Web Division</p>
+    <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+    <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+
+    <p class="artist-line">
+      <strong>Featuring artwork from ctchrysler</strong> 
+      <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as 
+      <a href="https://twitter.com/shunyayamashita" target="_blank" class="annie-link" style="text-decoration: underline;">Shunya Yamashita’s</a> Sera-chan.<br>
+      <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
+    </p>
+    <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+    <p>© 2025 GAC</p>
+    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
+  </div>
+
+  <div id="popup" class="anniversary-popup" style="display: none;">
+    <h2>🎉 15 Years of Annie</h2>
+    <p>June 30, 2011 – Thank you CT.</p>
+    <button onclick="document.getElementById('popup').style.display='none';">Close</button>
   </div>
 
   <script>
-    function showCredits() {
-      document.getElementById('main-card').classList.add('hidden');
-      document.getElementById('credits-card').classList.remove('hidden');
+    function getIOSVersion() {
+      const match = navigator.userAgent.match(/OS (\d+)_/);
+      return match ? parseInt(match[1]) : null;
     }
-    function showMain() {
-      document.getElementById('credits-card').classList.add('hidden');
-      document.getElementById('main-card').classList.remove('hidden');
+
+    function handleDownload(event) {
+      const ios = getIOSVersion();
+      if (ios >= 11) {
+        const link = document.createElement("a");
+        link.href = "annie_chan.png";
+        link.download = "annie_chan.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        window.open("annie_chan.png", "_blank");
+      }
+      event.preventDefault();
+    }
+
+    // Anniversary popup logic (June 30 only)
+    const today = new Date();
+    if (today.getMonth() === 5 && today.getDate() === 30) {
+      document.getElementById("popup").style.display = "block";
     }
   </script>
 </body>
