@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .anniversary-popup {
+    .popup {
       position: fixed;
       top: 20%;
       left: 50%;
@@ -24,7 +24,7 @@
       color: #ff2e84;
     }
 
-    .anniversary-popup button {
+    .popup button {
       margin-top: 1rem;
       padding: 0.5rem 1rem;
       border: none;
@@ -38,12 +38,13 @@
 <body oncontextmenu="return false;">
   <div class="card">
     <h1 class="site-title">
-      Welcome to Get Annie Chan
+      Welcome to Get 
+      <span id="annieName" style="cursor: pointer;">Annie</span> Chan
       <img 
         src="annie_thumb.jpg" 
         alt="Annie Icon" 
         class="annie-icon" 
-        onclick="location.reload();" 
+        id="annieIcon"
         oncontextmenu="return false;" 
         draggable="false"
       />
@@ -62,7 +63,7 @@
     <strong>Credits & Fair Use</strong>
     <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
     <p>Maintained & Updated by GAC Web Division</p>
-    <p>Version 3.0 Beta 3 – 2025 Edition – Produced at GAC Web Division</p>
+    <p>Version 3.0 beta 3 – 2025 Edition – Produced at GAC Web Division</p>
     <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
     <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
 
@@ -74,12 +75,12 @@
     </p>
     <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
     <p>© 2025 GAC</p>
-    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
+    <p>Peace and <span style="color: #ff69b4;">Love</span></p>
   </div>
 
-  <div id="popup" class="anniversary-popup" style="display: none;">
-    <h2>🎉 15 Years of Annie</h2>
-    <p>June 30, 2011 – Thank you CT.</p>
+  <div id="popup" class="popup" style="display: none;">
+    <h2 id="popup-title">🎉</h2>
+    <p id="popup-message"></p>
     <button onclick="document.getElementById('popup').style.display='none';">Close</button>
   </div>
 
@@ -104,9 +105,39 @@
       event.preventDefault();
     }
 
-    // Anniversary popup logic (June 30 only)
+    // Show June 30 popup automatically
     const today = new Date();
     if (today.getMonth() === 5 && today.getDate() === 30) {
+      showPopup("🎉 14 Years of Annie", "June 30, 2011 – Thank you CT.");
+    }
+
+    // 10 taps on icon = Dec 23 Annie Chan popup
+    let iconTaps = 0;
+    const icon = document.getElementById("annieIcon");
+    icon.addEventListener("click", () => {
+      iconTaps++;
+      if (iconTaps === 10) {
+        showPopup("🎉 10 Years of Annie Chan", "December 23, 2015 – Thank you CT.");
+        iconTaps = 0;
+      }
+    });
+
+    // Taps on "Annie" equal to (Current Year - 2011) = June 30 pop-up
+    let nameTaps = 0;
+    const annieName = document.getElementById("annieName");
+    const requiredTaps = new Date().getFullYear() - 2011;
+
+    annieName.addEventListener("click", () => {
+      nameTaps++;
+      if (nameTaps === requiredTaps) {
+        showPopup("🎉 " + requiredTaps + " Years of Annie", "June 30, 2011 – Thank you CT.");
+        nameTaps = 0;
+      }
+    });
+
+    function showPopup(title, message) {
+      document.getElementById("popup-title").textContent = title;
+      document.getElementById("popup-message").textContent = message;
       document.getElementById("popup").style.display = "block";
     }
   </script>
