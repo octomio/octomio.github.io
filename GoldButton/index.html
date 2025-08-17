@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gold Button Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>Gold Button Test</h1>
+    <button class="button" onclick="showPopup()">Get Annie Chan</button>
+    <div class="popup" id="popup">
+      <h2>🎉 10 Years of Annie Chan</h2>
+      <p>December 23, 2015 – Thank you CT.</p>
+    </div>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
