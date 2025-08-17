@@ -2,12 +2,14 @@ body {
   background-color: #ffcde1;
   font-family: 'Arial', sans-serif;
   text-align: center;
+  color: #ff69b4;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .card {
-  background-color: #fff;
+  background-color: #ffe5ec;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   margin: 2rem auto;
@@ -15,61 +17,82 @@ body {
   width: 90%;
   max-width: 500px;
   position: relative;
-}
-
-.hidden {
-  display: none;
+  z-index: 10;
 }
 
 .site-title {
   font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.pink-title {
+  font-weight: bold;
   color: #ff69b4;
-}
-
-.site-subtitle {
-  font-size: 1.5rem;
-  color: #333;
+  margin-bottom: 1rem;
+  animation: glow 2s infinite alternate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .annie-icon {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
-  margin: 1rem 0;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .button {
   background-color: #ff2e84;
   color: white;
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border: none;
   border-radius: 25px;
-  margin: 0.5rem;
   cursor: pointer;
+  margin: 1rem 0;
 }
 
-.button-row {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+.underline-link {
+  color: #ff69b4;
+  text-decoration: underline;
+  font-size: 1rem;
 }
 
-.version {
-  position: absolute;
-  bottom: 10px;
-  left: 15px;
-  font-size: 0.8rem;
-  color: gray;
+.credits {
+  padding: 2rem;
+  font-size: 1rem;
+  color: #ff69b4;
 }
 
-/* Gold Button for Dec 23 */
-.button.gold {
-  background-color: #FFD700;
-  color: black;
+.credits strong {
+  font-weight: bold;
+}
+
+.credits .artist-line {
+  color: #ff69b4;
+  animation: softPulse 2s infinite;
+}
+
+a.love,
+a.annie-link {
+  color: #ff69b4 !important;
+  text-decoration: none;
+}
+
+a.love:hover {
+  text-decoration: underline;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ff69b4;
+  }
+  to {
+    text-shadow: 0 0 20px #ff69b4;
+  }
+}
+
+@keyframes softPulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
