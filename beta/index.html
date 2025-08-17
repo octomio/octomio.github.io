@@ -16,13 +16,14 @@
       <button class="button" id="downloadButton">Get Annie Chan</button>
     </a>
     <div class="button-row">
-      <button class="button" onclick="showCredits()">Credits & Fair Use</button>
+      <button class="button" onclick="toggleCredits()">Credits & Fair Use</button>
       <a href="/extras" class="button">Extras</a>
     </div>
-    <p class="version">v3.0 beta 5</p>
+    <p class="version">v3.0 beta 6</p>
   </div>
 
-  <div class="credits hidden" id="credits-card">
+  <div class="credits-popup" id="creditsPopup">
+    <button onclick="toggleCredits()" style="float:right; background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
     <h2>Credits & Fair Use</h2>
     <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
     <p>Maintained & Updated by GAC Web Division</p>
@@ -38,18 +39,22 @@
     <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
     <p>© 2025 GAC</p>
     <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
-    <button class="button" onclick="showMain()">Back</button>
+    <button class="button" onclick="toggleCredits()">Done</button>
   </div>
 
   <script>
-    function showCredits() {
-      document.getElementById('main-card').classList.add('hidden');
-      document.getElementById('credits-card').classList.remove('hidden');
+    function toggleCredits() {
+      const popup = document.getElementById("creditsPopup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
     }
-    function showMain() {
-      document.getElementById('credits-card').classList.add('hidden');
-      document.getElementById('main-card').classList.remove('hidden');
-    }
+
+    document.addEventListener("click", function(e) {
+      const popup = document.getElementById("creditsPopup");
+      const button = e.target.closest(".button");
+      if (popup.style.display === "block" && !popup.contains(e.target) && !button) {
+        popup.style.display = "none";
+      }
+    });
 
     function showPopup(title, message) {
       const popup = document.createElement('div');
