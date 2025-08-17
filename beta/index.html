@@ -8,7 +8,8 @@
 </head>
 <body>
   <div class="card" id="main-card">
-    <h1 class="site-title pink-title">Welcome to <span id="annieName" style="cursor: pointer;">Annie</span> Chan
+    <h1 class="site-title">
+      Welcome to <span id="annieName" style="cursor: pointer;">Annie</span> Chan
       <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" id="annieIcon" />
     </h1>
     <a href="annie_chan.png" id="downloadLink">
@@ -18,13 +19,25 @@
       <button class="button" onclick="showCredits()">Credits & Fair Use</button>
       <a href="/extras" class="button">Extras</a>
     </div>
-    <p class="version">v3.0 beta 4</p>
+    <p class="version">v3.0 beta 5</p>
   </div>
 
-  <div class="card hidden" id="credits-card">
+  <div class="credits hidden" id="credits-card">
     <h2>Credits & Fair Use</h2>
-    <p><strong>Credits:</strong> Artwork by CT Chrysler</p>
-    <p><strong>Fair Use Disclaimer:</strong> This is a non-commercial tribute. All rights belong to their respective owners.</p>
+    <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+    <p>Maintained & Updated by GAC Web Division</p>
+    <p>Version 2.3.2 – 2025 Edition – Produced at GAC Web Division</p>
+    <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+    <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+    <p class="artist-line">
+      <strong>Featuring artwork from ctchrysler</strong> 
+      <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as 
+      <a href="https://twitter.com/shunyayamashita" target="_blank" class="annie-link" style="text-decoration: underline;">Shunya Yamashita’s</a> Sera-chan.<br>
+      <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
+    </p>
+    <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+    <p>© 2025 GAC</p>
+    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
     <button class="button" onclick="showMain()">Back</button>
   </div>
 
@@ -33,7 +46,6 @@
       document.getElementById('main-card').classList.add('hidden');
       document.getElementById('credits-card').classList.remove('hidden');
     }
-
     function showMain() {
       document.getElementById('credits-card').classList.add('hidden');
       document.getElementById('main-card').classList.remove('hidden');
@@ -63,14 +75,11 @@
     const isJune30 = today.getMonth() === 5 && today.getDate() === 30;
     const isDec23 = today.getMonth() === 11 && today.getDate() === 23;
 
-    // June 30 auto popup
     if (isJune30) {
       showPopup("🎉 " + (currentYear - 2011) + " Years of Annie", "June 30, 2011 – Thank you CT.");
     }
 
-    // Dec 23 gold button popup
     const downloadButton = document.getElementById("downloadButton");
-    const downloadLink = document.getElementById("downloadLink");
     if (isDec23) {
       downloadButton.classList.add("gold");
       downloadButton.addEventListener("click", function(e) {
@@ -87,7 +96,6 @@
       });
     }
 
-    // Annie name taps = original Annie popup
     let nameTaps = 0;
     const annieName = document.getElementById("annieName");
     const requiredTaps = currentYear - 2011;
@@ -99,18 +107,20 @@
       }
     });
 
-    // Annie icon 1-tap refresh + 10-tap Annie Chan popup
     let iconTaps = 0;
+    let refreshTimeout;
     const annieIcon = document.getElementById("annieIcon");
     annieIcon.addEventListener("click", () => {
       iconTaps++;
-      if (iconTaps === 1) {
-        setTimeout(() => { iconTaps = 0; }, 800);
-        location.reload();
-      }
+      clearTimeout(refreshTimeout);
       if (iconTaps === 10) {
         showPopup("🎉 " + (currentYear - 2015) + " Years of Annie Chan", "December 23, 2015 – Thank you CT.");
         iconTaps = 0;
+      } else {
+        refreshTimeout = setTimeout(() => {
+          if (iconTaps === 1) location.reload();
+          iconTaps = 0;
+        }, 1200);
       }
     });
   </script>
