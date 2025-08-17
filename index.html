@@ -104,6 +104,7 @@
       event.preventDefault();
     }
 
+    // Anniversary popup logic (June 30 only)
     const today = new Date();
     if (today.getMonth() === 5 && today.getDate() === 30) {
       document.getElementById("popup").style.display = "block";
