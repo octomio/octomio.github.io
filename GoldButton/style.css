@@ -7,6 +7,7 @@ body {
   margin: 0;
   padding: 2rem;
   color: #ff69b4;
+  overflow-x: hidden;
 }
 
 .card {
@@ -16,6 +17,7 @@ body {
   max-width: 500px;
   margin: auto;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+  position: relative;
 }
 
 h1 {
@@ -31,22 +33,24 @@ h1 {
 
 .button {
   position: relative;
-  background: linear-gradient(to bottom, #fff8b3, #e6c200);
-  border: 1px solid #cfa800;
-  color: #3e3000;
+  background: linear-gradient(to bottom, #f7ce68, #c29100);
+  border: 1px solid #a57900;
+  color: #fff;
   font-size: 1.2rem;
   padding: 0.75rem 1.5rem;
   border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
+  z-index: 1;
 }
 
 .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
 }
 
 .button::before {
@@ -59,11 +63,34 @@ h1 {
   background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
   transform: rotate(25deg);
   animation: shine 3s infinite linear;
+  z-index: 2;
 }
 
 @keyframes shine {
   0% { transform: translateX(-100%) rotate(25deg); }
   100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 3s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sparkle:nth-child(1) { top: 20%; left: 40%; animation-delay: 0s; }
+.sparkle:nth-child(2) { top: 60%; left: 70%; animation-delay: 1s; }
+.sparkle:nth-child(3) { top: 45%; left: 30%; animation-delay: 2s; }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 .popup {
