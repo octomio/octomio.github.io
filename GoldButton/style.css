@@ -7,17 +7,6 @@ body {
   margin: 0;
   padding: 2rem;
   color: #ff69b4;
-  overflow-x: hidden;
-}
-
-.card {
-  background-color: #fff8f8;
-  border-radius: 20px;
-  padding: 2rem;
-  max-width: 500px;
-  margin: auto;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-  position: relative;
 }
 
 h1 {
@@ -31,74 +20,57 @@ h1 {
   to { text-shadow: 0 0 20px #ff69b4; }
 }
 
+.card {
+  background-color: #fff8f8;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
 .button {
-  position: relative;
-  background: linear-gradient(to bottom, #f7ce68, #c29100);
-  border: 1px solid #a57900;
-  color: #fff;
   font-size: 1.2rem;
   padding: 0.75rem 1.5rem;
   border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  margin: 1rem 0;
+  color: white;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden;
-  z-index: 1;
 }
 
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+/* v1 - Flat Yellow */
+.button-flat {
+  background: #FFD700;
+  border: none;
+  color: black;
 }
 
-.button::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
-  transform: rotate(25deg);
-  animation: shine 3s infinite linear;
-  z-index: 2;
+/* v2 - CSS Gradient Shine */
+.button-gradient {
+  background: linear-gradient(to bottom, #f7ce68, #c29100);
+  border: 1px solid #a57900;
 }
 
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  100% { transform: translateX(100%) rotate(25deg); }
+/* v3 - Richer Gold Gradient + Shadow */
+.button-rich {
+  background: linear-gradient(to bottom, #fff1a8, #e6c200);
+  border: 1px solid #a57c00;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
 }
 
-/* Sparkles */
-.sparkle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0;
-  animation: sparkle 3s infinite ease-in-out;
-  pointer-events: none;
-  z-index: 0;
+/* v4 - Background Image Based */
+.button-image {
+  background: url('gold_texture_sample.jpg') no-repeat center;
+  background-size: cover;
+  border: 1px solid #d4af37;
 }
 
-.sparkle:nth-child(1) { top: 20%; left: 40%; animation-delay: 0s; }
-.sparkle:nth-child(2) { top: 60%; left: 70%; animation-delay: 1s; }
-.sparkle:nth-child(3) { top: 45%; left: 30%; animation-delay: 2s; }
-
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-.popup {
-  margin-top: 2rem;
-  background-color: #ffe5ec;
-  border: 2px solid #ff69b4;
-  border-radius: 15px;
-  padding: 1.5rem;
-  color: #ff2e84;
-  display: none;
+/* v5 - Placeholder Sparkle idea (no real sparkle, just visual) */
+.button-sparkle {
+  background: linear-gradient(135deg, #fff8b3 25%, #e6c200 75%);
+  border: 1px solid #b48b00;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
 }

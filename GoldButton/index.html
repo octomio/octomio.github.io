@@ -3,26 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gold Button Test</title>
+  <title>Gold Button Styles Test</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <h1>Gold Button Style Showcase</h1>
+
   <div class="card">
-    <h1>Gold Button Test</h1>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <button class="button" onclick="showPopup()">Get Annie Chan</button>
-    <div class="popup" id="popup">
-      <h2>🎉 10 Years of Annie Chan</h2>
-      <p>December 23, 2015 – Thank you CT.</p>
-    </div>
+    <h2>V1 – Flat Yellow (Default Emoji Style)</h2>
+    <button class="button button-flat">Get Annie Chan</button>
   </div>
 
-  <script>
-    function showPopup() {
-      document.getElementById('popup').style.display = 'block';
-    }
-  </script>
+  <div class="card">
+    <h2>V2 – CSS Gradient Shine</h2>
+    <button class="button button-gradient">Get Annie Chan</button>
+  </div>
+
+  <div class="card">
+    <h2>V3 – Rich Gold Gradient + Shadow</h2>
+    <button class="button button-rich">Get Annie Chan</button>
+  </div>
+
+  <div class="card">
+    <h2>V4 – Image-Based Background (Mock)</h2>
+    <button class="button button-image">Get Annie Chan</button>
+    <p style="font-size: 0.85rem; color: gray;">(Replace with real texture later)</p>
+  </div>
+
+  <div class="card">
+    <h2>V5 – Sparkle Look (Visual only)</h2>
+    <button class="button button-sparkle">Get Annie Chan</button>
+  </div>
 </body>
 </html>
