@@ -15,15 +15,15 @@
       <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" id="annieIcon" draggable="false" oncontextmenu="return false" />
     </h1>
 
-    <a id="downloadLink" href="annie_chan.png">
-      <button class="button" id="getAnnieBtn">Get Annie Chan</button>
-    </a>
+    <div class="primary-actions">
+      <a id="downloadLink" href="annie_chan.png">
+        <button class="button" id="getAnnieBtn">Get Annie Chan</button>
+      </a>
 
-    <div class="extras-container">
-      <a href="/extras" class="underline-link">Extras</a>
+      <a href="/extras" class="extras-link">Extras</a>
+
+      <button class="button" id="creditsBtn">Credits & Fair Use</button>
     </div>
-
-    <button class="button" id="creditsBtn">Credits & Fair Use</button>
   </div>
 
   <!-- Credits Modal -->
@@ -85,12 +85,12 @@
     // Date checks
     const today = new Date();
     const isJune30   = today.getMonth() === 5 && today.getDate() === 30;
-    const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23); // gold 22–23
+    const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
 
     if (isJune30)   document.getElementById('popupJune30').classList.add('show');
     if (isDecAnniv) document.getElementById('popupDec22').classList.add('show');
 
-    // Gold button (V2 style + shine) for Dec 22–23, with popup then download
+    // Gold button (V2 + shine) for Dec 22–23
     const getBtn = document.getElementById('getAnnieBtn');
     const dlLink = document.getElementById('downloadLink');
 
@@ -117,12 +117,11 @@
           a.href = dlLink.getAttribute('href');
           a.download = 'annie_chan.png';
           document.body.appendChild(a); a.click(); a.remove();
-        } // else let iOS <11 open in new tab
+        }
       });
     }
 
-    // Easter eggs
-    // Title taps required = currentYear - 2011
+    // Easter eggs (only the two approved)
     let nameTaps = 0;
     const requiredTaps = year - 2011;
     document.getElementById('annieName').addEventListener('click', () => {
@@ -133,7 +132,6 @@
       }
     });
 
-    // Icon: 1 tap refresh (delayed), 10 taps => Dec 22 popup
     let iconTaps = 0, refreshTimer;
     const icon = document.getElementById('annieIcon');
     icon.addEventListener('click', () => {
