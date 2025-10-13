@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Annie Chan</title>
+  <title>Get Annie Chan</title>
   <link rel="icon" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
@@ -11,29 +11,25 @@
 <body oncontextmenu="return false;">
   <div class="card">
     <h1 class="site-title">
-      Welcome to Get Annie Chan
-      <img 
-        src="annie_thumb.jpg" 
-        alt="Annie Icon" 
-        class="annie-icon" 
-        oncontextmenu="return false;" 
-        draggable="false"
-      />
+      Welcome to Get <span id="annieName" style="cursor:pointer;">Annie</span> Chan
+      <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" id="annieIcon" draggable="false" oncontextmenu="return false"/>
     </h1>
 
-    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-      <button class="button no-drag">Get Annie Chan</button>
+    <a id="downloadLink" href="annie_chan.png">
+      <button class="button" id="getAnnieBtn">Get Annie Chan</button>
     </a>
 
     <div class="extras-container">
-      <a href="/extras" class="underline-link no-drag">Extras</a>
+      <a href="/extras" class="underline-link">Extras</a>
     </div>
 
-    <button class="button no-drag credits-toggle" onclick="toggleCredits()">Credits & Fair Use</button>
+    <button class="button" id="creditsBtn">Credits & Fair Use</button>
   </div>
 
-  <div id="creditsCard" class="credits-card" onclick="event.stopPropagation();">
-    <div class="credits-content">
+  <!-- Credits Modal -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="credits-modal" id="creditsModal" role="dialog" aria-modal="true">
+      <div class="close-x" id="closeX">✕</div>
       <h2>Credits & Fair Use</h2>
       <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
       <p>Maintained & Updated by GAC Web Division</p>
@@ -49,41 +45,117 @@
       <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
       <p>© 2025 GAC</p>
       <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
-      <button onclick="toggleCredits()" class="done-button">Done</button>
-      <div class="close-x" onclick="toggleCredits()">✕</div>
+      <button class="done-button" id="doneBtn">Done</button>
     </div>
   </div>
 
+  <!-- Popups -->
+  <div class="popup" id="popupJune30">
+    <h2 id="juneTitle">🎉 Years of Annie</h2>
+    <p>June 30, 2011 – Thank you CT.</p>
+    <button onclick="document.getElementById('popupJune30').classList.remove('show')">Close</button>
+  </div>
+
+  <div class="popup" id="popupDec22">
+    <h2 id="decTitle">🎉 Years of Annie Chan</h2>
+    <p>December 22, 2015 – Thank you CT.</p>
+    <button onclick="document.getElementById('popupDec22').classList.remove('show')">Close</button>
+  </div>
+
   <script>
-    function getIOSVersion() {
-      const match = navigator.userAgent.match(/OS (\d+)_/);
-      return match ? parseInt(match[1]) : null;
+    // Credits modal logic
+    const overlay = document.getElementById('overlay');
+    const creditsBtn = document.getElementById('creditsBtn');
+    const closeX = document.getElementById('closeX');
+    const doneBtn = document.getElementById('doneBtn');
+
+    function openCredits(){
+      overlay.classList.add('show');
+      document.body.classList.add('no-scroll');
+      overlay.setAttribute('aria-hidden','false');
+    }
+    function closeCredits(){
+      overlay.classList.remove('show');
+      document.body.classList.remove('no-scroll');
+      overlay.setAttribute('aria-hidden','true');
     }
 
-    function handleDownload(event) {
-      const ios = getIOSVersion();
-      if (ios >= 11) {
-        const link = document.createElement("a");
-        link.href = "annie_chan.png";
-        link.download = "annie_chan.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        window.open("annie_chan.png", "_blank");
+    creditsBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openCredits(); });
+    closeX.addEventListener('click', closeCredits);
+    doneBtn.addEventListener('click', closeCredits);
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCredits(); });
+
+    // Dynamic years
+    const year = new Date().getFullYear();
+    document.getElementById('juneTitle').textContent = `🎉 ${year - 2011} Years of Annie`;
+    document.getElementById('decTitle').textContent  = `🎉 ${year - 2015} Years of Annie Chan`;
+
+    // Date checks
+    const today = new Date();
+    const isJune30 = today.getMonth() === 5 && today.getDate() === 30;
+    const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23); // gold for 22–23
+
+    if(isJune30){ document.getElementById('popupJune30').classList.add('show'); }
+    if(isDecAnniv){ document.getElementById('popupDec22').classList.add('show'); }
+
+    // Gold button for Dec 22–23, popup on click + download
+    const getBtn = document.getElementById('getAnnieBtn');
+    const downloadLink = document.getElementById('downloadLink');
+
+    if(isDecAnniv){
+      getBtn.classList.add('gold');
+      getBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        const p = document.getElementById('popupDec22');
+        p.classList.add('show');
+        setTimeout(()=>{
+          const a = document.createElement('a');
+          a.href = downloadLink.getAttribute('href');
+          a.download = 'annie_chan.png';
+          document.body.appendChild(a); a.click(); a.remove();
+        }, 900);
+      });
+    }else{
+      // iOS-friendly download fallback for normal days
+      function iOSversion(){ const m = navigator.userAgent.match(/OS (\d+)_/); return m ? parseInt(m[1]) : null; }
+      downloadLink.addEventListener('click', function(e){
+        const ios = iOSversion();
+        if(ios && ios < 11){ return; } // open default
+        e.preventDefault();
+        const a = document.createElement('a');
+        a.href = downloadLink.getAttribute('href');
+        a.download = 'annie_chan.png';
+        document.body.appendChild(a); a.click(); a.remove();
+      });
+    }
+
+    // Easter eggs
+    // "Annie" taps required = currentYear - 2011
+    let nameTaps = 0;
+    const requiredTaps = year - 2011;
+    document.getElementById('annieName').addEventListener('click', ()=>{
+      nameTaps++;
+      if(nameTaps === requiredTaps){
+        document.getElementById('popupJune30').classList.add('show');
+        nameTaps = 0;
       }
-      event.preventDefault();
-    }
+    });
 
-    function toggleCredits() {
-      const card = document.getElementById("creditsCard");
-      card.classList.toggle("show");
-    }
-
-    document.addEventListener("click", function (e) {
-      const card = document.getElementById("creditsCard");
-      if (card.classList.contains("show")) {
-        toggleCredits();
+    // Icon: 1-tap refresh (delayed) vs 10-tap popup (Dec 22 celebration)
+    let iconTaps = 0;
+    let refreshTimer;
+    const icon = document.getElementById('annieIcon');
+    icon.addEventListener('click', ()=>{
+      iconTaps++;
+      clearTimeout(refreshTimer);
+      if(iconTaps === 10){
+        document.getElementById('popupDec22').classList.add('show');
+        iconTaps = 0;
+      }else{
+        refreshTimer = setTimeout(()=>{
+          if(iconTaps === 1) location.reload();
+          iconTaps = 0;
+        }, 1100);
       }
     });
   </script>
