@@ -10,8 +10,12 @@
 </head>
 <body oncontextmenu="return false;">
   <div class="card">
-    <h1 class="site-title">
-      Welcome to Get <span id="annieName" style="cursor:pointer;">Annie</span> Chan
+    <h1 class="site-title" id="title">
+      <span class="chunk">Welcome</span>
+      <span class="chunk">to</span>
+      <span class="chunk">Get</span>
+      <span class="chunk" id="annieName">Annie</span>
+      <span class="chunk">Chan</span>
       <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" id="annieIcon" draggable="false" oncontextmenu="return false" />
     </h1>
 
@@ -63,7 +67,9 @@
   </div>
 
   <script>
-    // Credits modal logic
+    // ===== Remove any Daft Mafia egg (none exists here) =====
+
+    // ===== Credits modal logic =====
     const overlay = document.getElementById('overlay');
     const creditsBtn = document.getElementById('creditsBtn');
     const closeX = document.getElementById('closeX');
@@ -77,12 +83,12 @@
     doneBtn.addEventListener('click', closeCredits);
     overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCredits(); });
 
-    // Dynamic titles
+    // ===== Dynamic titles =====
     const year = new Date().getFullYear();
     document.getElementById('juneTitle').textContent = `🎉 ${year - 2011} Years of Annie`;
     document.getElementById('decTitle').textContent  = `🎉 ${year - 2015} Years of Annie Chan`;
 
-    // Date checks
+    // ===== Date checks =====
     const today = new Date();
     const isJune30   = today.getMonth() === 5 && today.getDate() === 30;
     const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
@@ -90,7 +96,7 @@
     if (isJune30)   document.getElementById('popupJune30').classList.add('show');
     if (isDecAnniv) document.getElementById('popupDec22').classList.add('show');
 
-    // Gold button (V2 + shine) for Dec 22–23
+    // ===== Gold button (V2 + shine) for Dec 22–23 =====
     const getBtn = document.getElementById('getAnnieBtn');
     const dlLink = document.getElementById('downloadLink');
 
@@ -121,7 +127,8 @@
       });
     }
 
-    // Easter eggs (only the two approved)
+    // ===== Easter eggs (KEEP) =====
+    // Title: tap "Annie" currentYear-2011 times
     let nameTaps = 0;
     const requiredTaps = year - 2011;
     document.getElementById('annieName').addEventListener('click', () => {
@@ -132,6 +139,7 @@
       }
     });
 
+    // Icon: 1 tap refresh (delayed), 10 taps => Dec 22 popup
     let iconTaps = 0, refreshTimer;
     const icon = document.getElementById('annieIcon');
     icon.addEventListener('click', () => {

@@ -30,25 +30,27 @@ body{
   margin:2rem auto;
   padding:2rem 2rem 1.5rem;
   width:90%;
-  max-width:520px;
+  max-width:560px;
   position:relative;
   z-index:1;
 }
 
+/* Title: balanced, no weird line breaks */
 .site-title{
-  font-size:2.2rem;
-  font-weight:700;
-  margin:0 0 1rem;
+  margin:0 0 1.2rem;
   display:flex;
+  flex-wrap:wrap;
+  gap:.45rem .55rem;
   justify-content:center;
   align-items:center;
-  gap:.5rem;
+  font-size: clamp(1.9rem, 4.2vw, 2.4rem);
+  font-weight:700;
+  line-height:1.1;
   animation:glow 2s infinite alternate;
 }
-@keyframes glow{
-  from { text-shadow:0 0 10px var(--pink); }
-  to   { text-shadow:0 0 20px var(--pink); }
-}
+.site-title .chunk{ white-space:nowrap; }
+#annieName{ cursor:pointer; }
+@keyframes glow{ from{ text-shadow:0 0 10px var(--pink);} to{ text-shadow:0 0 20px var(--pink);} }
 
 .annie-icon{
   width:48px; height:48px;
@@ -121,16 +123,11 @@ body{
   max-height:82vh; overflow:auto;
 }
 
-/* Embedded links in modal: not blue, no underline until interaction */
-.credits-modal a{
-  color:inherit;
-  text-decoration:none;
-}
+/* Embedded links in modal: inherit color, only underline on interaction */
+.credits-modal a{ color:inherit; text-decoration:none; }
 .credits-modal a:hover,
 .credits-modal a:focus,
-.credits-modal a:active{
-  text-decoration:underline;
-}
+.credits-modal a:active{ text-decoration:underline; }
 
 .close-x{
   position:absolute; top:.6rem; right:.8rem;
@@ -158,6 +155,6 @@ body{
 .popup button{ margin-top:.7rem; padding:.45rem .9rem; border:none; background:var(--pink-deep); color:#fff; border-radius:10px; cursor:pointer; }
 
 @media (max-width:380px){
-  .site-title{ font-size:1.8rem; }
+  .site-title{ font-size:1.7rem; }
   .annie-icon{ width:42px; height:42px; }
 }
