@@ -48,7 +48,7 @@
       </p>
       <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
       <p>© 2025 GAC</p>
-      <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
+      <p>Peace and <span class="love-text">Love</span></p>
       <button class="done-button" id="doneBtn">Done</button>
     </div>
   </div>
@@ -67,9 +67,7 @@
   </div>
 
   <script>
-    // ===== Remove any Daft Mafia egg (none exists here) =====
-
-    // ===== Credits modal logic =====
+    // Credits modal logic
     const overlay = document.getElementById('overlay');
     const creditsBtn = document.getElementById('creditsBtn');
     const closeX = document.getElementById('closeX');
@@ -83,12 +81,12 @@
     doneBtn.addEventListener('click', closeCredits);
     overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCredits(); });
 
-    // ===== Dynamic titles =====
+    // Dynamic titles
     const year = new Date().getFullYear();
     document.getElementById('juneTitle').textContent = `🎉 ${year - 2011} Years of Annie`;
     document.getElementById('decTitle').textContent  = `🎉 ${year - 2015} Years of Annie Chan`;
 
-    // ===== Date checks =====
+    // Date checks
     const today = new Date();
     const isJune30   = today.getMonth() === 5 && today.getDate() === 30;
     const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
@@ -96,7 +94,7 @@
     if (isJune30)   document.getElementById('popupJune30').classList.add('show');
     if (isDecAnniv) document.getElementById('popupDec22').classList.add('show');
 
-    // ===== Gold button (V2 + shine) for Dec 22–23 =====
+    // Gold button (V2 + shine) for Dec 22–23
     const getBtn = document.getElementById('getAnnieBtn');
     const dlLink = document.getElementById('downloadLink');
 
@@ -115,7 +113,7 @@
     } else {
       // iOS-friendly download handling for normal days
       dlLink.addEventListener('click', (e) => {
-        const m = navigator.userAgent.match(/OS (\d+)_/);
+        const m = navigator.userAgent.match(/OS (\\d+)_/);
         const ios = m ? parseInt(m[1]) : null;
         if (!ios || ios >= 11) {
           e.preventDefault();
@@ -127,8 +125,7 @@
       });
     }
 
-    // ===== Easter eggs (KEEP) =====
-    // Title: tap "Annie" currentYear-2011 times
+    // Easter eggs (kept)
     let nameTaps = 0;
     const requiredTaps = year - 2011;
     document.getElementById('annieName').addEventListener('click', () => {
@@ -139,7 +136,6 @@
       }
     });
 
-    // Icon: 1 tap refresh (delayed), 10 taps => Dec 22 popup
     let iconTaps = 0, refreshTimer;
     const icon = document.getElementById('annieIcon');
     icon.addEventListener('click', () => {
