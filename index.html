@@ -3,112 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Annie Chan</title>
+  <title>Get Annie Chan</title>
   <link rel="icon" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .anniversary-popup {
-      position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #ffe5ec;
-      border: 2px solid #ff69b4;
-      padding: 1.5rem;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      max-width: 90%;
-      text-align: center;
-      z-index: 9999;
-      color: #ff2e84;
-    }
-
-    .anniversary-popup button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      background-color: #ff2e84;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <!-- Send iOS <=13 to /Legacy -->
+  <script>
+  (function() {
+    try {
+      var ua = navigator.userAgent || "";
+      var m = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
+      var ios = m ? parseInt(m[2], 10) : null;
+      if (ios && ios <= 13) {
+        window.location.replace("/Legacy");
+      }
+    } catch(e) {}
+  })();
+  </script>
 </head>
 <body oncontextmenu="return false;">
   <div class="card">
-    <h1 class="site-title">
-      Welcome to Get Annie Chan
-      <img 
-        src="annie_thumb.jpg" 
-        alt="Annie Icon" 
-        class="annie-icon" 
-        onclick="location.reload();" 
-        oncontextmenu="return false;" 
-        draggable="false"
-      />
+    <h1 class="site-title" id="title">
+      <span class="chunk">Welcome</span>
+      <span class="chunk">to</span>
+      <span class="chunk">Get</span>
+      <span class="chunk" id="annieName">Annie</span>
+      <span class="chunk">Chan</span>
+      <img src="annie_thumb.jpg" alt="Annie Icon" class="annie-icon" id="annieIcon" draggable="false" oncontextmenu="return false" />
     </h1>
 
-    <a id="downloadButton" href="annie_chan.png" onclick="handleDownload(event);">
-      <button class="button no-drag">Get Annie Chan</button>
-    </a>
+    <div class="primary-actions">
+      <a id="downloadLink" href="annie_chan.png">
+        <button class="button" id="getAnnieBtn">Get Annie Chan</button>
+      </a>
 
-    <div class="extras-container">
-      <a href="/extras" class="underline-link no-drag">Extras</a>
+      <a href="/extras" class="extras-link">Extras</a>
+
+      <button class="button" id="creditsBtn">Credits & Fair Use</button>
     </div>
   </div>
 
-  <div class="credits">
-    <strong>Credits & Fair Use</strong>
-    <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
-    <p>Maintained & Updated by GAC Web Division</p>
-    <p>Version 2.3.2 – 2025 Edition – Produced at GAC Web Division</p>
-    <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
-    <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
-
-    <p class="artist-line">
-      <strong>Featuring artwork from ctchrysler</strong> 
-      <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as 
-      <a href="https://twitter.com/shunyayamashita" target="_blank" class="annie-link" style="text-decoration: underline;">Shunya Yamashita’s</a> Sera-chan.<br>
-      <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
-    </p>
-    <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
-    <p>© 2025 GAC</p>
-    <p>Peace and <a href="https://m.youtube.com/watch?v=gDg7XKHPix8" class="love">Love</a></p>
+  <!-- Credits Modal -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="credits-modal" role="dialog" aria-modal="true">
+      <button class="close-x" id="closeX" aria-label="Close">✕</button>
+      <h2>Credits & Fair Use</h2>
+      <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+      <p>Maintained & Updated by GAC Web Division</p>
+      <p id="versionLine">Version 3.0 – YEAR Edition – Produced at GAC Web Division</p>
+      <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+      <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+      <p class="artist-line">
+        <strong>Featuring artwork from ctchrysler</strong>
+        <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as 
+        <a href="https://twitter.com/shunyayamashita" target="_blank" class="annie-link" style="text-decoration: underline;">Shunya Yamashita’s</a> Sera-chan.<br>
+        <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
+      </p>
+      <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+      <p id="copyrightLine">© YEAR GAC</p>
+      <p>Peace and Love</p>
+      <button class="done-button" id="doneBtn">Done</button>
+    </div>
   </div>
 
-  <div id="popup" class="anniversary-popup" style="display: none;">
-    <h2>🎉 15 Years of Annie</h2>
+  <!-- Popups -->
+  <div class="popup" id="popupJune30">
+    <h2 id="juneTitle">🎉 Years of Annie</h2>
     <p>June 30, 2011 – Thank you CT.</p>
-    <button onclick="document.getElementById('popup').style.display='none';">Close</button>
+    <button onclick="document.getElementById('popupJune30').classList.remove('show')">Close</button>
+  </div>
+
+  <div class="popup" id="popupDec22">
+    <h2 id="decTitle">🎉 Years of Annie Chan</h2>
+    <p>December 22, 2015 – Thank you CT.</p>
+    <button onclick="document.getElementById('popupDec22').classList.remove('show')">Close</button>
   </div>
 
   <script>
-    function getIOSVersion() {
-      const match = navigator.userAgent.match(/OS (\d+)_/);
-      return match ? parseInt(match[1]) : null;
-    }
+    // Auto-year for version + copyright
+    (function() {
+      var y = new Date().getFullYear();
+      var v = document.getElementById('versionLine');
+      var c = document.getElementById('copyrightLine');
+      if (v) v.textContent = 'Version 3.0 – ' + y + ' Edition – Produced at GAC Web Division';
+      if (c) c.textContent = '© ' + y + ' GAC';
+    })();
 
-    function handleDownload(event) {
-      const ios = getIOSVersion();
-      if (ios >= 11) {
-        const link = document.createElement("a");
-        link.href = "annie_chan.png";
-        link.download = "annie_chan.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        window.open("annie_chan.png", "_blank");
-      }
-      event.preventDefault();
-    }
+    // Credits modal logic
+    const overlay = document.getElementById('overlay');
+    const creditsBtn = document.getElementById('creditsBtn');
+    const closeX = document.getElementById('closeX');
+    const doneBtn = document.getElementById('doneBtn');
 
-    // Anniversary popup logic (June 30 only)
+    function openCredits(){ overlay.classList.add('show'); document.body.classList.add('no-scroll'); overlay.setAttribute('aria-hidden','false'); }
+    function closeCredits(){ overlay.classList.remove('show'); document.body.classList.remove('no-scroll'); overlay.setAttribute('aria-hidden','true'); }
+
+    creditsBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openCredits(); });
+    closeX.addEventListener('click', closeCredits);
+    doneBtn.addEventListener('click', closeCredits);
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCredits(); });
+
+    // Dynamic titles
+    const year = new Date().getFullYear();
+    document.getElementById('juneTitle').textContent = '🎉 ' + (year - 2011) + ' Years of Annie';
+    document.getElementById('decTitle').textContent  = '🎉 ' + (year - 2015) + ' Years of Annie Chan';
+
+    // Date checks
     const today = new Date();
-    if (today.getMonth() === 5 && today.getDate() === 30) {
-      document.getElementById("popup").style.display = "block";
+    const isJune30   = today.getMonth() === 5 && today.getDate() === 30;
+    const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
+
+    if (isJune30)   document.getElementById('popupJune30').classList.add('show');
+    if (isDecAnniv) document.getElementById('popupDec22').classList.add('show');
+
+    // Gold button (V2 + shine) for Dec 22–23
+    const getBtn = document.getElementById('getAnnieBtn');
+    const dlLink = document.getElementById('downloadLink');
+
+    if (isDecAnniv) {
+      getBtn.classList.add('gold');
+      getBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popupDec22').classList.add('show');
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = dlLink.getAttribute('href');
+          a.download = 'annie_chan.png';
+          document.body.appendChild(a); a.click(); a.remove();
+        }, 900);
+      });
+    } else {
+      dlLink.addEventListener('click', (e) => {
+        const m = navigator.userAgent.match(/OS (\d+)_/);
+        const ios = m ? parseInt(m[1]) : null;
+        if (!ios || ios >= 11) {
+          e.preventDefault();
+          const a = document.createElement('a');
+          a.href = dlLink.getAttribute('href');
+          a.download = 'annie_chan.png';
+          document.body.appendChild(a); a.click(); a.remove();
+        }
+      });
     }
+
+    // Easter eggs
+    let nameTaps = 0;
+    const requiredTaps = year - 2011;
+    document.getElementById('annieName').addEventListener('click', () => {
+      nameTaps++;
+      if (nameTaps === requiredTaps) {
+        document.getElementById('popupJune30').classList.add('show');
+        nameTaps = 0;
+      }
+    });
+
+    let iconTaps = 0, refreshTimer;
+    const icon = document.getElementById('annieIcon');
+    icon.addEventListener('click', () => {
+      iconTaps++;
+      clearTimeout(refreshTimer);
+      if (iconTaps === 10) {
+        document.getElementById('popupDec22').classList.add('show');
+        iconTaps = 0;
+      } else {
+        refreshTimer = setTimeout(() => {
+          if (iconTaps === 1) location.reload();
+          iconTaps = 0;
+        }, 1100);
+      }
+    });
   </script>
 </body>
 </html>
