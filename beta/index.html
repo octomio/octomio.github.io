@@ -7,6 +7,19 @@
   <link rel="icon" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Send iOS <=13 to /Legacy -->
+  <script>
+  (function() {
+    try {
+      var ua = navigator.userAgent || "";
+      var m = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
+      var ios = m ? parseInt(m[2], 10) : null;
+      if (ios && ios <= 13) {
+        window.location.replace("/Legacy");
+      }
+    } catch(e) {}
+  })();
+  </script>
 </head>
 <body oncontextmenu="return false;">
   <div class="card">
@@ -37,7 +50,7 @@
       <h2>Credits & Fair Use</h2>
       <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
       <p>Maintained & Updated by GAC Web Division</p>
-      <p>Version 2.3.2 – 2025 Edition – Produced at GAC Web Division</p>
+      <p id="versionLine">Version 3.0 – YEAR Edition – Produced at GAC Web Division</p>
       <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
       <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
       <p class="artist-line">
@@ -47,8 +60,8 @@
         <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
       </p>
       <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
-      <p>© 2025 GAC</p>
-      <p>Peace and <span class="love-text">Love</span></p>
+      <p id="copyrightLine">© YEAR GAC</p>
+      <p>Peace and Love</p>
       <button class="done-button" id="doneBtn">Done</button>
     </div>
   </div>
@@ -67,6 +80,15 @@
   </div>
 
   <script>
+    // Auto-year for version + copyright
+    (function() {
+      var y = new Date().getFullYear();
+      var v = document.getElementById('versionLine');
+      var c = document.getElementById('copyrightLine');
+      if (v) v.textContent = 'Version 3.0 – ' + y + ' Edition – Produced at GAC Web Division';
+      if (c) c.textContent = '© ' + y + ' GAC';
+    })();
+
     // Credits modal logic
     const overlay = document.getElementById('overlay');
     const creditsBtn = document.getElementById('creditsBtn');
@@ -83,8 +105,8 @@
 
     // Dynamic titles
     const year = new Date().getFullYear();
-    document.getElementById('juneTitle').textContent = `🎉 ${year - 2011} Years of Annie`;
-    document.getElementById('decTitle').textContent  = `🎉 ${year - 2015} Years of Annie Chan`;
+    document.getElementById('juneTitle').textContent = '🎉 ' + (year - 2011) + ' Years of Annie';
+    document.getElementById('decTitle').textContent  = '🎉 ' + (year - 2015) + ' Years of Annie Chan';
 
     // Date checks
     const today = new Date();
@@ -111,9 +133,8 @@
         }, 900);
       });
     } else {
-      // iOS-friendly download handling for normal days
       dlLink.addEventListener('click', (e) => {
-        const m = navigator.userAgent.match(/OS (\\d+)_/);
+        const m = navigator.userAgent.match(/OS (\d+)_/);
         const ios = m ? parseInt(m[1]) : null;
         if (!ios || ios >= 11) {
           e.preventDefault();
@@ -125,7 +146,7 @@
       });
     }
 
-    // Easter eggs (kept)
+    // Easter eggs
     let nameTaps = 0;
     const requiredTaps = year - 2011;
     document.getElementById('annieName').addEventListener('click', () => {
