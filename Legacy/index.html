@@ -6,16 +6,25 @@
   <title>Get Annie Chan (Legacy)</title>
   <link rel="icon" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- Allow only iOS/iPadOS 13.0 and below; others go back to main -->
+
+  <!-- Normal legacy CSS (iOS 10–13) -->
+  <link rel="stylesheet" href="style_legacy.css" />
+
+  <!-- Ultra Legacy CSS (iOS 9 and below) -->
+  <link id="ultraLegacyCSS" rel="stylesheet" href="style_legacy_ultra.css" disabled />
+
+  <!-- Allow only iOS/iPadOS <=13 on Legacy; others go back to main -->
   <script>
   (function() {
     try {
       var ua = navigator.userAgent || "";
       var m = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
       var ios = m ? parseInt(m[2], 10) : null;
-      if (!ios || ios >= 14) {
-        window.location.replace("/");
+      if (!ios || ios >= 14) { window.location.replace("/"); }
+      // Enable Ultra Legacy for iOS 9 and below
+      if (ios && ios <= 9) {
+        var l = document.getElementById('ultraLegacyCSS'); if (l) l.disabled = false;
+        document.documentElement.setAttribute('data-ultra','1');
       }
     } catch(e) { window.location.replace("/"); }
   })();
@@ -39,11 +48,14 @@
 
       <a href="/extras" class="extras-link">Extras</a>
 
+      <!-- Modal button for normal legacy -->
       <button class="button" id="creditsBtn">Credits & Fair Use</button>
+      <!-- Link fallback for Ultra Legacy -->
+      <a id="creditsBtnLink" href="credits_ultra.html" class="button" style="display:none">Credits &amp; Fair Use</a>
     </div>
   </div>
 
-  <!-- Credits Modal -->
+  <!-- Credits Modal (hidden in Ultra mode) -->
   <div class="overlay" id="overlay" aria-hidden="true">
     <div class="credits-modal" role="dialog" aria-modal="true">
       <button class="close-x" id="closeX" aria-label="Close">✕</button>
@@ -89,93 +101,116 @@
       if (c) c.textContent = '© ' + y + ' GAC';
     })();
 
-    // Modal logic (legacy-friendly)
-    function addClass(el,c){ if (el.classList) el.classList.add(c); else el.className += ' ' + c; }
-    function removeClass(el,c){ if (el.classList) el.classList.remove(c); else el.className = el.className.replace(c,''); }
-    var overlay = document.getElementById('overlay');
-    var creditsBtn = document.getElementById('creditsBtn');
-    var closeX = document.getElementById('closeX');
-    var doneBtn = document.getElementById('doneBtn');
+    // Ultra mode swaps modal button for link
+    (function(){
+      if (document.documentElement.getAttribute('data-ultra') === '1') {
+        var b = document.getElementById('creditsBtn');
+        var l = document.getElementById('creditsBtnLink');
+        if (b) b.style.display = 'none';
+        if (l) l.style.display = 'inline-block';
+      }
+    })();
 
-    function openCredits(){ addClass(overlay,'show'); addClass(document.body,'no-scroll'); overlay.setAttribute('aria-hidden','false'); }
-    function closeCredits(){ removeClass(overlay,'show'); removeClass(document.body,'no-scroll'); overlay.setAttribute('aria-hidden','true'); }
-
-    creditsBtn.addEventListener('click', function(e){ e.stopPropagation(); openCredits(); }, false);
-    closeX.addEventListener('click', closeCredits, false);
-    doneBtn.addEventListener('click', closeCredits, false);
-    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeCredits(); }, false);
+    // Modal logic (kept for iOS 10–13)
+    (function(){
+      if (document.documentElement.getAttribute('data-ultra') === '1') return;
+      function addClass(el,c){ if (el.classList) el.classList.add(c); else el.className += ' ' + c; }
+      function removeClass(el,c){ if (el.classList) el.classList.remove(c); else el.className = el.className.replace(c,''); }
+      var overlay = document.getElementById('overlay');
+      var creditsBtn = document.getElementById('creditsBtn');
+      var closeX = document.getElementById('closeX');
+      var doneBtn = document.getElementById('doneBtn');
+      function openCredits(){ addClass(overlay,'show'); addClass(document.body,'no-scroll'); overlay.setAttribute('aria-hidden','false'); }
+      function closeCredits(){ removeClass(overlay,'show'); removeClass(document.body,'no-scroll'); overlay.setAttribute('aria-hidden','true'); }
+      creditsBtn && creditsBtn.addEventListener('click', function(e){ e.stopPropagation(); openCredits(); }, false);
+      closeX && closeX.addEventListener('click', closeCredits, false);
+      doneBtn && doneBtn.addEventListener('click', closeCredits, false);
+      overlay && overlay.addEventListener('click', function(e){ if(e.target === overlay) closeCredits(); }, false);
+    })();
 
     // Titles
-    var year = new Date().getFullYear();
-    document.getElementById('juneTitle').innerHTML = '🎉 ' + (year - 2011) + ' Years of Annie';
-    document.getElementById('decTitle').innerHTML  = '🎉 ' + (year - 2015) + ' Years of Annie Chan';
+    (function(){
+      var year = new Date().getFullYear();
+      document.getElementById('juneTitle').innerHTML = '🎉 ' + (year - 2011) + ' Years of Annie';
+      document.getElementById('decTitle').innerHTML  = '🎉 ' + (year - 2015) + ' Years of Annie Chan';
+    })();
 
     // Dates
-    var today = new Date();
-    var isJune30   = today.getMonth() === 5 && today.getDate() === 30;
-    var isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
-    if (isJune30)   addClass(document.getElementById('popupJune30'),'show');
-    if (isDecAnniv) addClass(document.getElementById('popupDec22'),'show');
+    (function(){
+      var today = new Date();
+      var isJune30   = today.getMonth() === 5 && today.getDate() === 30;
+      var isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
+      if (isJune30)   document.getElementById('popupJune30').className += ' show';
+      if (isDecAnniv) document.getElementById('popupDec22').className += ' show';
+    })();
 
-    // Gold button (download fallback)
-    var getBtn = document.getElementById('getAnnieBtn');
-    var dlLink = document.getElementById('downloadLink');
-    if (isDecAnniv) {
-      addClass(getBtn,'gold');
-      getBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        addClass(document.getElementById('popupDec22'),'show');
-        setTimeout(function(){
-          try{
-            var a = document.createElement('a');
-            a.href = dlLink.getAttribute('href');
-            a.setAttribute('download','annie_chan.png');
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
-          }catch(err){
-            window.open(dlLink.getAttribute('href'), '_blank');
-          }
-        }, 900);
-      }, false);
-    } else {
-      dlLink.addEventListener('click', function(e){
-        try{
+    // Download / gold button for Dec 22–23
+    (function(){
+      var today = new Date();
+      var isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
+      var getBtn = document.getElementById('getAnnieBtn');
+      var dlLink = document.getElementById('downloadLink');
+      if (isDecAnniv) {
+        if (getBtn) getBtn.className += ' gold';
+        getBtn && getBtn.addEventListener('click', function(e){
           e.preventDefault();
-          var a = document.createElement('a');
-          a.href = dlLink.getAttribute('href');
-          a.setAttribute('download','annie_chan.png');
-          document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        }catch(err){
-          window.open(dlLink.getAttribute('href'), '_blank');
-        }
-      }, false);
-    }
-
-    // Easter eggs
-    var nameTaps = 0;
-    var requiredTaps = year - 2011;
-    document.getElementById('annieName').addEventListener('click', function(){
-      nameTaps++;
-      if (nameTaps === requiredTaps){
-        addClass(document.getElementById('popupJune30'),'show');
-        nameTaps = 0;
-      }
-    }, false);
-
-    var iconTaps = 0, refreshTimer;
-    var icon = document.getElementById('annieIcon');
-    icon.addEventListener('click', function(){
-      iconTaps++;
-      clearTimeout(refreshTimer);
-      if (iconTaps === 10){
-        addClass(document.getElementById('popupDec22'),'show');
-        iconTaps = 0;
+          var dec = document.getElementById('popupDec22'); if (dec) dec.className += ' show';
+          setTimeout(function(){
+            try{
+              var a = document.createElement('a'); a.href = dlLink.getAttribute('href'); a.setAttribute('download','annie_chan.png');
+              document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            }catch(err){ window.open(dlLink.getAttribute('href'), '_blank'); }
+          }, 900);
+        }, false);
       } else {
-        refreshTimer = setTimeout(function(){
-          if (iconTaps === 1) location.reload();
-          iconTaps = 0;
-        }, 1100);
+        dlLink && dlLink.addEventListener('click', function(e){
+          try{
+            e.preventDefault();
+            var a = document.createElement('a'); a.href = dlLink.getAttribute('href'); a.setAttribute('download','annie_chan.png');
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          }catch(err){ window.open(dlLink.getAttribute('href'), '_blank'); }
+        }, false);
       }
-    }, false);
+    })();
+
+    // ===== Ultra Legacy Easter eggs (iOS 9 and below) =====
+    (function () {
+      if (document.documentElement.getAttribute('data-ultra') !== '1') return;
+
+      // Disable single-tap refresh
+      var icon = document.getElementById('annieIcon');
+      if (icon) icon.onclick = null;
+
+      // Long-press on “Annie” for June popup
+      var nameEl = document.getElementById('annieName');
+      var pressTimer;
+      if (nameEl) {
+        nameEl.addEventListener('touchstart', function () {
+          pressTimer = setTimeout(function () {
+            var june = document.getElementById('popupJune30');
+            if (june) june.className += ' show';
+          }, 1200);
+        }, false);
+        nameEl.addEventListener('touchend', function () { clearTimeout(pressTimer); }, false);
+        nameEl.addEventListener('touchmove', function () { clearTimeout(pressTimer); }, false);
+      }
+
+      // Triple-tap icon within 2s for Dec popup
+      var taps = 0, windowTimer;
+      if (icon) {
+        icon.addEventListener('touchend', function () {
+          taps++;
+          clearTimeout(windowTimer);
+          if (taps >= 3) {
+            var dec = document.getElementById('popupDec22');
+            if (dec) dec.className += ' show';
+            taps = 0;
+          } else {
+            windowTimer = setTimeout(function(){ taps = 0; }, 2000);
+          }
+        }, false);
+      }
+    })();
   </script>
 </body>
 </html>
