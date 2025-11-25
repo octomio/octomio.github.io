@@ -2,16 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Get Annie Chan – VR View (Beta)</title>
+  <title>Get Annie Chan – VR View (Beta 2)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <!-- Reuse main GAC styles -->
   <link rel="stylesheet" href="/style.css" />
 
-  <style>
-    /* VR-specific layout on top of main style.css */
+  <!-- Lock /VR to real VR browsers only -->
+  <script>
+  (function () {
+    var ua = navigator.userAgent || "";
 
+    // Meta Quest / Oculus browser
+    var isQuest =
+      /OculusBrowser/i.test(ua) ||
+      /Meta Quest/i.test(ua) ||
+      /Quest [2-4]/i.test(ua);
+
+    // Apple Vision Pro / visionOS
+    var isVision =
+      /VisionOS/i.test(ua) ||
+      /AppleVision/i.test(ua);
+
+    // If NOT VR, send them back home
+    if (!isQuest && !isVision) {
+      window.location.replace("/");
+    }
+  })();
+  </script>
+
+  <style>
     body {
       background-color: #ffcde1;
       margin: 0;
@@ -30,11 +51,22 @@
     .vr-card {
       background-color: #ffe5ec;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
       padding: 2rem 2rem 1.7rem;
       max-width: 720px;
       width: 100%;
       text-align: center;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .vr-card:hover {
+      transform: translateY(-4px) translateZ(20px);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
     }
 
     .vr-title {
@@ -61,22 +93,35 @@
     }
 
     .vr-main-button {
-      background-color: #ff2e84;
+      background: linear-gradient(145deg, #ff2e84, #ff86c0);
       color: #fff;
       padding: 0.9rem 1.9rem;
       font-size: 1.1rem;
       border: none;
       border-radius: 28px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+      transform: translateZ(0) translateY(0);
+      transform-style: preserve-3d;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
       display: inline-block;
     }
 
     .vr-main-button:hover,
-    .vr-main-button:focus {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+    .vr-main-button:focus-visible {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.7);
+    }
+
+    .vr-main-button:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
     }
 
     .vr-note {
@@ -96,13 +141,28 @@
     }
 
     .vr-credits-button {
-      background: none;
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 105, 180, 0.5);
       color: #c56b9d;
-      text-decoration: underline;
       cursor: pointer;
       font-size: 0.9rem;
-      padding: 0.4rem 0.7rem;
+      padding: 0.4rem 0.9rem;
+      margin-top: 0.4rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transform: translateY(0);
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .vr-credits-button:hover,
+    .vr-credits-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .vr-credits-button:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     }
 
     /* Fullscreen “pop-out” overlay */
@@ -129,20 +189,37 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: translateZ(0) scale(0.9);
+      transform-style: preserve-3d;
+      perspective: 1200px;
       opacity: 0;
-      animation: vrPopIn 0.35s ease-out forwards;
+      animation: vrPopIn 0.4s ease-out forwards;
+    }
+
+    .vr-art-frame::after {
+      content: "";
+      position: absolute;
+      bottom: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.7), transparent);
+      opacity: 0.75;
+      filter: blur(4px);
+      pointer-events: none;
     }
 
     .vr-art {
       max-width: 100%;
       max-height: 100%;
       border-radius: 20px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-      border: 3px solid #ff69b4;
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.85),
+        0 0 0 2px rgba(255, 105, 180, 0.9);
       background: #000;
       user-select: none;
       -webkit-user-drag: none;
+      transform: translateZ(40px);
     }
 
     .vr-close {
@@ -164,11 +241,11 @@
 
     @keyframes vrPopIn {
       0% {
-        transform: translateZ(0) scale(0.85);
+        transform: rotateX(8deg) rotateY(-6deg) scale(0.85);
         opacity: 0;
       }
       100% {
-        transform: translateZ(0) scale(1);
+        transform: rotateX(0deg) rotateY(0deg) scale(1);
         opacity: 1;
       }
     }
@@ -252,6 +329,77 @@
       100% { opacity: 1; }
     }
 
+    /* Full-view hint bar */
+
+    .vr-fullview-hint {
+      position: fixed;
+      top: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 11000;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .vr-fullview-hint.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .vr-fullview-hint button {
+      border: none;
+      background: #ff2e84;
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    /* Draggable download pill */
+
+    .vr-download-floating {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 10050;
+      background: linear-gradient(145deg, #ff2e84, #ff86c0);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+      touch-action: none;
+      transform: translateY(0);
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .vr-download-floating:hover,
+    .vr-download-floating:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .vr-download-floating:active {
+      transform: translateY(1px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .vr-download-floating.hidden {
+      display: none;
+    }
+
     @media (max-width: 480px) {
       .vr-card {
         padding: 1.6rem 1.2rem 1.2rem;
@@ -268,12 +416,18 @@
   </style>
 </head>
 <body oncontextmenu="return false;">
+  <!-- Full-view hint -->
+  <div class="vr-fullview-hint" id="vrFullviewHint">
+    <span>For best experience, please enter full view in your VR browser.</span>
+    <button id="vrHintDismiss">Got it</button>
+  </div>
+
   <div class="vr-wrapper">
     <div class="vr-card">
       <h1 class="vr-title">Get Annie Chan – VR View</h1>
-      <div class="vr-beta">GAC VR (Beta)</div>
+      <div class="vr-beta">GAC VR (Beta 2)</div>
 
-      <!-- Annie thumbnail (soft preview) -->
+      <!-- Annie thumbnail -->
       <img
         src="/annie_thumb.jpg"
         alt="Annie preview"
@@ -303,7 +457,7 @@
 
   <!-- Fullscreen overlay with big Annie artwork -->
   <div class="vr-overlay" id="vrOverlay">
-    <div class="vr-art-frame">
+    <div class="vr-art-frame" id="vrArtFrame">
       <button class="vr-close" id="vrCloseButton" aria-label="Close">✕</button>
       <img
         src="/annie_chan.png"
@@ -338,6 +492,11 @@
     </div>
   </div>
 
+  <!-- Draggable download pill (hidden until Annie has popped once) -->
+  <button class="vr-download-floating hidden" id="vrDownloadBtn">
+    Download Annie
+  </button>
+
   <script>
     // Auto-year for VR version + copyright
     (function () {
@@ -348,14 +507,16 @@
       if (c) c.textContent = '© ' + y + ' GAC';
     })();
 
-    // VR pop-out logic with silent download on close
+    // VR pop-out logic (no auto-download; enables floating download pill after first close)
     (function () {
-      var openBtn   = document.getElementById('vrOpenButton');
-      var overlay   = document.getElementById('vrOverlay');
-      var closeBtn  = document.getElementById('vrCloseButton');
-      var hasDownloaded = false;
+      var openBtn  = document.getElementById('vrOpenButton');
+      var overlay  = document.getElementById('vrOverlay');
+      var closeBtn = document.getElementById('vrCloseButton');
+      var frame    = document.getElementById('vrArtFrame');
+      var dlBtn    = document.getElementById('vrDownloadBtn');
+      var hasShownDownload = false;
 
-      if (!openBtn || !overlay || !closeBtn) return;
+      if (!openBtn || !overlay || !closeBtn || !frame || !dlBtn) return;
 
       function openOverlay() {
         overlay.classList.add('show');
@@ -363,21 +524,9 @@
 
       function closeOverlay() {
         overlay.classList.remove('show');
-        // After the moment, silently trigger download once
-        if (!hasDownloaded) {
-          hasDownloaded = true;
-          try {
-            var link = document.createElement('a');
-            link.href = '/annie_chan.png';
-            link.download = 'annie_chan.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          } catch (e) {
-            try {
-              window.open('/annie_chan.png', '_blank');
-            } catch (err) {}
-          }
+        if (!hasShownDownload) {
+          hasShownDownload = true;
+          dlBtn.classList.remove('hidden');
         }
       }
 
@@ -396,6 +545,49 @@
           closeOverlay();
         }
       });
+
+      // Make Annie's frame draggable
+      (function () {
+        var dragging = false;
+        var offsetX = 0, offsetY = 0;
+
+        function getPos(e) {
+          if (e.touches && e.touches[0]) {
+            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          }
+          return { x: e.clientX, y: e.clientY };
+        }
+
+        function startDrag(e) {
+          dragging = true;
+          var pos = getPos(e);
+          var rect = frame.getBoundingClientRect();
+          offsetX = pos.x - rect.left;
+          offsetY = pos.y - rect.top;
+          frame.style.position = 'relative';
+          e.preventDefault();
+        }
+
+        function onMove(e) {
+          if (!dragging) return;
+          var pos = getPos(e);
+          var x = pos.x - offsetX;
+          var y = pos.y - offsetY;
+          frame.style.left = x + 'px';
+          frame.style.top  = y + 'px';
+        }
+
+        function endDrag() {
+          dragging = false;
+        }
+
+        frame.addEventListener('mousedown', startDrag);
+        frame.addEventListener('touchstart', startDrag);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('touchmove', onMove);
+        window.addEventListener('mouseup', endDrag);
+        window.addEventListener('touchend', endDrag);
+      })();
     })();
 
     // VR Credits modal logic with "first visit" auto-open
@@ -430,7 +622,6 @@
           openCredits();
         }
       } catch (e) {
-        // If localStorage fails, just auto-open once
         openCredits();
       }
 
@@ -454,6 +645,107 @@
       overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
           closeCredits(true);
+        }
+      });
+    })();
+
+    // Full-view hint bar
+    (function () {
+      var HINT_KEY = 'gacVrFullviewHintSeen';
+      var bar = document.getElementById('vrFullviewHint');
+      var btn = document.getElementById('vrHintDismiss');
+
+      if (!bar || !btn) return;
+
+      function tooSmall() {
+        return window.innerHeight < 500 || window.innerWidth < 500;
+      }
+
+      function maybeShowHint() {
+        var seen = null;
+        try { seen = localStorage.getItem(HINT_KEY); } catch (e) {}
+        if (!seen && tooSmall()) {
+          bar.classList.add('show');
+        }
+      }
+
+      window.addEventListener('resize', maybeShowHint);
+      window.addEventListener('load', maybeShowHint);
+
+      btn.addEventListener('click', function () {
+        bar.classList.remove('show');
+        try { localStorage.setItem(HINT_KEY, '1'); } catch (e) {}
+      });
+    })();
+
+    // Draggable download pill + manual download
+    (function () {
+      var btn = document.getElementById('vrDownloadBtn');
+      if (!btn) return;
+
+      var dragging = false;
+      var offsetX = 0, offsetY = 0;
+
+      function getPos(e) {
+        if (e.touches && e.touches[0]) {
+          return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
+      }
+
+      function startDrag(e) {
+        dragging = true;
+        var pos = getPos(e);
+        var rect = btn.getBoundingClientRect();
+        offsetX = pos.x - rect.left;
+        offsetY = pos.y - rect.top;
+        // switch to left/top based positioning
+        btn.style.left = (rect.left + window.scrollX) + 'px';
+        btn.style.top  = (rect.top + window.scrollY) + 'px';
+        btn.style.right = 'auto';
+        btn.style.bottom = 'auto';
+        e.preventDefault();
+      }
+
+      function onMove(e) {
+        if (!dragging) return;
+        var pos = getPos(e);
+        var x = pos.x - offsetX;
+        var y = pos.y - offsetY;
+        btn.style.left = x + 'px';
+        btn.style.top  = y + 'px';
+      }
+
+      function endDrag() {
+        dragging = false;
+      }
+
+      btn.addEventListener('mousedown', startDrag);
+      btn.addEventListener('touchstart', startDrag);
+
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('touchmove', onMove);
+
+      window.addEventListener('mouseup', endDrag);
+      window.addEventListener('touchend', endDrag);
+
+      // Download click (only when not dragging)
+      btn.addEventListener('click', function (e) {
+        if (dragging) {
+          e.preventDefault();
+          return;
+        }
+        try {
+          var a = document.createElement('a');
+          a.href = '/annie_chan.png';
+          a.download = 'annie_chan.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        } catch (err) {
+          try {
+            window.open('/annie_chan.png', '_blank');
+          } catch (err2) {}
         }
       });
     })();
