@@ -7,12 +7,39 @@
   <link rel="icon" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Send Quest / Apple Vision Pro to /VR -->
+  <script>
+  (function () {
+    try {
+      var ua   = navigator.userAgent || "";
+      var path = location.pathname || "/";
+
+      // Meta Quest / Oculus browser
+      var isQuest =
+        /OculusBrowser/i.test(ua) ||
+        /Meta Quest/i.test(ua) ||
+        /Quest [2-4]/i.test(ua);
+
+      // Apple Vision Pro / visionOS (future-friendly)
+      var isVision =
+        /VisionOS/i.test(ua) ||
+        /AppleVision/i.test(ua);
+
+      // Only redirect from the main page
+      if ((isQuest || isVision) && (path === "/" || path === "/index.html")) {
+        window.location.replace("/VR/");
+      }
+    } catch (e) {}
+  })();
+  </script>
+
   <!-- Send iOS <=13 to /Legacy -->
   <script>
   (function() {
     try {
       var ua = navigator.userAgent || "";
-      var m = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
+      var m  = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
       var ios = m ? parseInt(m[2], 10) : null;
       if (ios && ios <= 13) {
         window.location.replace("/Legacy");
