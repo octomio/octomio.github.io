@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credits & Fair Use – Get Annie Chan</title>
+  <link rel="icon" href="../favicon.png" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    #legacyInfo, #ultraInfo { display:none; }
+    #redirectNote{ text-align:center; padding:2rem 1rem; font-size:.95rem; }
+  </style>
+</head>
+<body>
+  <div id="redirectNote">
+    <p>Loading Credits &amp; Fair Use…</p>
+  </div>
+
+  <!-- Legacy (iOS 10–14) -->
+  <div id="legacyInfo">
+    <div class="card">
+      <h1 class="site-title">Credits &amp; Fair Use</h1>
+      <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+      <p>Maintained &amp; Updated by GAC Web Division</p>
+      <p>Version 3.1 – <span class="year-slot">YEAR</span> Edition – Produced at GAC Web Division</p>
+      <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+      <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+      <p class="artist-line">
+        <strong>Featuring artwork from ctchrysler</strong>
+        <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as 
+        <a href="https://twitter.com/shunyayamashita" target="_blank" class="annie-link" style="text-decoration: underline;">Shunya Yamashita’s</a> Sera-chan.<br>
+        <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
+      </p>
+      <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+      <p>© <span class="year-slot">YEAR</span> GAC</p>
+      <p>Peace and Love</p>
+      <p style="margin-top:1.2rem;">
+        <a href="/Legacy/" class="extras-link">← Back to Get Annie Chan (Legacy)</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Ultra Legacy (iOS 9 and lower) -->
+  <div id="ultraInfo">
+    <div class="card">
+      <h1 class="site-title">Credits &amp; Fair Use</h1>
+      <p style="font-size:.95rem;">
+        This is the ultra-legacy version of the Credits &amp; Fair Use page for very old devices.
+      </p>
+      <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
+      <p>Maintained &amp; Updated by GAC Web Division</p>
+      <p>Version 3.1 – <span class="year-slot">YEAR</span> Edition – Produced at GAC Web Division</p>
+      <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
+      <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
+      <p>
+        Featuring artwork from ctchrysler – Annie Mei cosplaying as Shunya Yamashita’s Sera-chan.
+      </p>
+      <p><strong>Fair Use Disclaimer:</strong> This site falls under fair use as a non-commercial, transformative tribute. If the original creator wishes for its removal, it will be taken down immediately.</p>
+      <p>© <span class="year-slot">YEAR</span> GAC</p>
+      <p>Peace and Love</p>
+      <p style="margin-top:1.2rem;">
+        <a href="/UltraLegacy/" class="extras-link">← Back to Get Annie Chan (Ultra Legacy)</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    try {
+      var ua  = navigator.userAgent || "";
+      var m   = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
+      var ios = m ? parseInt(m[2], 10) : null;
+
+      // Modern / non-iOS: bounce back to main and open modal
+      if (!ios || ios >= 15) {
+        window.location.replace("/#info");
+        return;
+      }
+
+      var redirectNote = document.getElementById('redirectNote');
+      if (redirectNote) redirectNote.style.display = "none";
+
+      var legacy  = document.getElementById('legacyInfo');
+      var ultra   = document.getElementById('ultraInfo');
+
+      if (ios >= 10) {
+        if (legacy) legacy.style.display = "block";
+      } else {
+        if (ultra) ultra.style.display = "block";
+      }
+
+      // Auto-year fill
+      var y = new Date().getFullYear();
+      var slots = document.getElementsByClassName('year-slot');
+      for (var i = 0; i < slots.length; i++) {
+        slots[i].innerHTML = "" + y;
+      }
+    } catch(e) {
+      window.location.replace("/");
+    }
+  })();
+  </script>
+</body>
+</html>
