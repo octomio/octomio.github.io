@@ -48,7 +48,7 @@ body{
 .site-title .chunk{ white-space:nowrap; }
 #annieName{ cursor:pointer; }
 
-/* 🧩 Flex gap fallback for iOS ≤14 */
+/* Flex gap fallback for iOS <=14 */
 .site-title > * + * { margin-left:.5rem; }
 @supports (gap:.5rem) {
   .site-title > * + * { margin-left:0; }

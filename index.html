@@ -8,41 +8,17 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Send Quest / Apple Vision Pro to /VR -->
-  <script>
-  (function () {
-    try {
-      var ua   = navigator.userAgent || "";
-      var path = location.pathname || "/";
-
-      // Meta Quest / Oculus browser
-      var isQuest =
-        /OculusBrowser/i.test(ua) ||
-        /Meta Quest/i.test(ua) ||
-        /Quest [2-4]/i.test(ua);
-
-      // Apple Vision Pro / visionOS (future-friendly)
-      var isVision =
-        /VisionOS/i.test(ua) ||
-        /AppleVision/i.test(ua);
-
-      // Only redirect from the main page
-      if ((isQuest || isVision) && (path === "/" || path === "/index.html")) {
-        window.location.replace("/VR/");
-      }
-    } catch (e) {}
-  })();
-  </script>
-
-  <!-- Send iOS <=13 to /Legacy -->
+  <!-- Send iOS 9 and lower to UltraLegacy, 10–14 to Legacy -->
   <script>
   (function() {
     try {
       var ua = navigator.userAgent || "";
       var m  = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
       var ios = m ? parseInt(m[2], 10) : null;
-      if (ios && ios <= 13) {
-        window.location.replace("/Legacy");
+      if (ios && ios <= 9) {
+        window.location.replace("/UltraLegacy/");
+      } else if (ios && ios <= 14) {
+        window.location.replace("/Legacy/");
       }
     } catch(e) {}
   })();
@@ -77,7 +53,7 @@
       <h2>Credits & Fair Use</h2>
       <p>(Website by GAC) – Published by GAC / For Entertainment Purposes Only</p>
       <p>Maintained & Updated by GAC Web Division</p>
-      <p id="versionLine">Version 3.0 – YEAR Edition – Produced at GAC Web Division</p>
+      <p id="versionLine">Version 3.1 – YEAR Edition – Produced at GAC Web Division</p>
       <p>"This artwork speaks to me, and the rest of the world should see it. Support the artist."</p>
       <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
       <p class="artist-line">
@@ -112,7 +88,7 @@
       var y = new Date().getFullYear();
       var v = document.getElementById('versionLine');
       var c = document.getElementById('copyrightLine');
-      if (v) v.textContent = 'Version 3.0 – ' + y + ' Edition – Produced at GAC Web Division';
+      if (v) v.textContent = 'Version 3.1 – ' + y + ' Edition – Produced at GAC Web Division';
       if (c) c.textContent = '© ' + y + ' GAC';
     })();
 
@@ -122,13 +98,31 @@
     const closeX = document.getElementById('closeX');
     const doneBtn = document.getElementById('doneBtn');
 
-    function openCredits(){ overlay.classList.add('show'); document.body.classList.add('no-scroll'); overlay.setAttribute('aria-hidden','false'); }
-    function closeCredits(){ overlay.classList.remove('show'); document.body.classList.remove('no-scroll'); overlay.setAttribute('aria-hidden','true'); }
+    function openCredits(){
+      overlay.classList.add('show');
+      document.body.classList.add('no-scroll');
+      overlay.setAttribute('aria-hidden','false');
+    }
+    function closeCredits(){
+      overlay.classList.remove('show');
+      document.body.classList.remove('no-scroll');
+      overlay.setAttribute('aria-hidden','true');
+    }
 
-    creditsBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openCredits(); });
+    creditsBtn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openCredits();
+    });
     closeX.addEventListener('click', closeCredits);
     doneBtn.addEventListener('click', closeCredits);
-    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeCredits(); });
+    overlay.addEventListener('click', (e)=>{
+      if(e.target === overlay) closeCredits();
+    });
+
+    // Auto-open credits when coming from /info redirect
+    if (location.hash === '#info') {
+      openCredits();
+    }
 
     // Dynamic titles
     const year = new Date().getFullYear();
