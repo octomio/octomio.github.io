@@ -6,10 +6,77 @@
   <title>Credits & Fair Use – Get Annie Chan</title>
   <link rel="icon" href="../favicon.png" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+
+  <!-- Main CSS (used where supported) -->
   <link rel="stylesheet" href="../style.css" />
+
+  <!-- Fallback / override styles so Legacy + UltraLegacy look pink and not white/blue -->
   <style>
-    #legacyInfo, #ultraInfo { display:none; }
-    #redirectNote{ text-align:center; padding:2rem 1rem; font-size:.95rem; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+      background: #ffcde1;        /* match main bg */
+      color: #ff69b4;
+    }
+
+    .card {
+      background: #ffe5ec;        /* solid pink card even if CSS vars fail */
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      margin: 2rem auto;
+      padding: 1.5rem 1.25rem 1.25rem;
+      max-width: 560px;
+    }
+
+    .site-title {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0.4rem 0;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+
+    /* Make links pink instead of bright blue */
+    a {
+      color: #ff69b4;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+      text-decoration: underline;
+    }
+
+    .artist-line {
+      margin-top: 0.6rem;
+    }
+
+    .extras-link {
+      font-size: 0.9rem;
+      color: #eaa0c4;
+    }
+
+    .extras-link:hover,
+    .extras-link:focus {
+      color: #ff69b4;
+    }
+
+    #legacyInfo,
+    #ultraInfo {
+      display: none;
+    }
+
+    #redirectNote {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
