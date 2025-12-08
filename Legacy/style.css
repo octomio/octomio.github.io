@@ -1,1 +1,33 @@
-@import url('../style.css');
+/* Legacy/style.css
+   Pink version, reusing main theme via import.
+*/
+@import url("../style.css");
+
+/* Let the main background show through */
+body {
+  background: var(--bg);
+}
+
+/* Slightly smaller card on older devices */
+.card {
+  max-width: 520px;
+}
+
+/* Legacy note */
+.legacy-tag {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Make all links inherit pink, not bright blue */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: underline;
+}
