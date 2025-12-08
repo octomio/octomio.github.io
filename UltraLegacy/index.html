@@ -1,48 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get Annie Chan – Ultra Legacy</title>
-  <link rel="icon" href="../favicon.png" />
-  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Only allow iOS 9 and below here -->
-  <script>
-  (function() {
-    try {
-      var ua  = navigator.userAgent || "";
-      var m   = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
-      var ios = m ? parseInt(m[2], 10) : null;
-
-      if (!ios || ios > 9) {
-        window.location.replace("/");
-      }
-    } catch(e) {}
-  })();
-  </script>
+  <meta charset="UTF-8">
+  <title>Get Annie Chan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body oncontextmenu="return false;">
-  <div class="card">
-    <h1 class="site-title">
-      <span class="chunk">Get Annie Chan</span>
-    </h1>
-
-    <p style="font-size:.9rem; margin-bottom:1rem;">
-      This is the ultra-legacy version of the site for very old devices.
+<body>
+  <div class="wrapper">
+    <h1>Get Annie Chan</h1>
+    <p class="subtitle">
+      This is the ultra-legacy version of the site<br>
+      for very old devices.
     </p>
 
-    <div class="primary-actions">
-      <a href="../annie_chan.png">
-        <button class="button">View Annie Chan</button>
-      </a>
+    <a href="../annie_chan.png" class="button">Get Annie Chan</a>
 
-      <a href="/info" class="button">Credits &amp; Fair Use</a>
-    </div>
+    <!-- Static credits page shared with Legacy -->
+    <a href="../info" class="button secondary">Credits &amp; Fair Use</a>
 
-    <p style="font-size:.8rem; color:#c46b96; margin-top:.5rem;">
-      If the image opens by itself, tap and hold to save it.
+    <p class="hint">
+      GAC (Ultra legacy)
     </p>
   </div>
 </body>
