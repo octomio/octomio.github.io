@@ -1,0 +1,75 @@
+/* Backlog page – simple, respectful, archival */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+               Arial, system-ui, sans-serif;
+  background: #ffcde1;
+  color: #ff69b4;
+  text-align: center;
+}
+
+.card {
+  background: #ffe5ec;
+  max-width: 520px;
+  margin: 2.5rem auto;
+  padding: 2rem 1.5rem 1.75rem;
+  border-radius: 22px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+}
+
+.title {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ff69b4;
+}
+
+.subtitle {
+  margin: 0.4rem 0 0.2rem;
+  font-size: 1rem;
+  color: #ff2e84;
+}
+
+.disclaimer {
+  margin: 0 0 1.6rem;
+  font-size: 0.85rem;
+  color: #b0588c;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.btn {
+  display: block;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.24);
+}
+
+/* OG mirrors */
+.btn-primary {
+  background: #ff2e84;
+  color: #ffffff;
+}
+
+/* Other sites */
+.btn-secondary {
+  background: #ffffff;
+  color: #ff2e84;
+  border: 1px solid #ff2e84;
+}
