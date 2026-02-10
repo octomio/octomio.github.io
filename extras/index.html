@@ -4,87 +4,141 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extras</title>
+
   <link rel="icon" href="../favicon.png" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
 
-  <!-- Use main site styling -->
+  <!-- Use main site stylesheet for consistent vibe -->
   <link rel="stylesheet" href="../style.css" />
 
+  <!-- Send iOS <=13 to /Legacy (same approach as main site) -->
+  <script>
+  (function() {
+    try {
+      var ua = navigator.userAgent || "";
+      var m  = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
+      var ios = m ? parseInt(m[2], 10) : null;
+      if (ios && ios <= 13) {
+        // If you later create /Legacy/extras/ you can change this target:
+        window.location.replace("/Legacy/");
+      }
+    } catch(e) {}
+  })();
+  </script>
+
+  <!-- Extras page-specific polish -->
   <style>
-    /* Keep Extras calm: reuse main card, but slightly smaller title */
-    .extras-title{
-      margin:0 0 .4rem;
-      font-size:clamp(1.7rem,4vw,2.1rem);
-      font-weight:700;
-      color:var(--pink);
-      animation:glow 2s infinite alternate;
-    }
-    .extras-subtitle{
-      margin:0 0 1.2rem;
-      color:var(--muted);
-      font-size:.95rem;
+    /* Use the same background/card feel as main, but keep it calm */
+    body { text-align: center; }
+
+    .extras-card {
+      /* reuse main .card feel but keep it independent */
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      margin: 2rem auto;
+      padding: 2rem 2rem 1.6rem;
+      width: 90%;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Extras-only buttons container */
-    .extras-actions{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+    .extras-title {
+      margin: 0 0 .35rem;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1.1;
+      animation: glow 2s infinite alternate;
     }
 
-    /* Keep links from turning blue */
-    .extras-actions a{ color:inherit; text-decoration:none; }
-
-    /* Small, calm back link */
-    .extras-back{
-      display:inline-block;
-      margin-top:1rem;
-      font-size:.95rem;
-      color:var(--muted);
-      text-decoration:none;
-    }
-    .extras-back:hover,.extras-back:focus{
-      text-decoration:underline;
-      color:var(--pink);
+    .extras-subtitle {
+      margin: 0 0 1.4rem;
+      color: var(--muted);
+      font-size: .98rem;
+      font-weight: 600;
     }
 
-    /* Button accents that still feel “GAC” */
-    .button.blue{
-      background:#3399ff;
-      box-shadow:0 6px 14px rgba(0,0,0,.18);
-    }
-    .button.purple{
-      background:#800080;
-      box-shadow:0 6px 14px rgba(0,0,0,.18);
-    }
-    .button.megan{
-      background:#5B5259;
-      box-shadow:0 6px 14px rgba(0,0,0,.18);
+    /* Symmetry: every button same width + centered */
+    .extras-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .85rem;
     }
 
-    /* Footer */
-    .extras-footer{
-      margin-top:1.1rem;
-      font-size:.9rem;
-      color:var(--muted);
+    .extras-actions .button {
+      width: 85%;
+      max-width: 420px;
+      text-align: center;
+
+      /* Force white text everywhere */
+      color: #fff;
+
+      /* Keep the main pill feel */
+      border-radius: 999px;
+      padding: .9rem 1.6rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    /* Button color variants */
+    .button.pink    { background: var(--pink-deep); }
+    .button.blue    { background: #3399ff; }
+    .button.megan   { background: #5B5259; }
+    .button.purple  { background: #6a00a8; }
+
+    /* Make sure hover doesn't change text color */
+    .extras-actions .button:hover,
+    .extras-actions .button:focus {
+      color: #fff;
+    }
+
+    .extras-footer {
+      margin-top: 1.35rem;
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 700;
+    }
+
+    .extras-back {
+      display: inline-block;
+      margin-top: .9rem;
+      font-size: 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .extras-back:hover,
+    .extras-back:focus {
+      color: var(--pink);
+      text-decoration: underline;
+    }
+
+    /* Small screens */
+    @media (max-width: 420px){
+      .extras-card { padding: 1.6rem 1.2rem 1.3rem; }
+      .extras-actions .button { width: 90%; }
     }
   </style>
 </head>
 
 <body oncontextmenu="return false;">
-  <div class="card">
+  <div class="extras-card">
     <h1 class="extras-title">Extras</h1>
     <p class="extras-subtitle">More love.</p>
 
     <div class="extras-actions">
-      <a class="button" href="/annie_chan_lineart.png" target="_blank" rel="noopener">Get Line Art Annie Chan</a>
+      <a class="button pink" href="/annie_chan_lineart.png" target="_blank" rel="noopener">Get Line Art Annie Chan</a>
       <a class="button blue" href="/Lauren_com.png" target="_blank" rel="noopener">Get Lauren</a>
       <a class="button megan" href="https://getmegan.org" target="_blank" rel="noopener">GetMegan.org</a>
 
-      <a class="button purple" href="/Ref/">Sampled by</a>
+      <!-- "Sampled by" will be its own page later -->
+      <a class="button purple" href="/Ref">Sampled by</a>
     </div>
 
-    <p class="extras-footer">© <span id="yearSlot">YEAR</span> GAC</p>
+    <div class="extras-footer" id="extrasCopyright">© YEAR GAC</div>
     <a class="extras-back" href="/">Back to Main Page</a>
   </div>
 
@@ -92,8 +146,8 @@
     // Auto-year
     (function(){
       var y = new Date().getFullYear();
-      var s = document.getElementById('yearSlot');
-      if (s) s.textContent = y;
+      var el = document.getElementById('extrasCopyright');
+      if (el) el.textContent = '© ' + y + ' GAC';
     })();
   </script>
 </body>
