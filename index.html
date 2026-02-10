@@ -24,6 +24,7 @@
   })();
   </script>
 </head>
+
 <body oncontextmenu="return false;">
   <div class="card">
     <h1 class="site-title" id="title">
@@ -58,7 +59,7 @@
       <p>“Get Annie Chan” is a tribute project. GAC does not claim ownership of any artwork used. All rights belong to their respective creators.</p>
       <p class="artist-line">
         <strong>Featuring artwork from ctchrysler</strong>
-        <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as 
+        <a href="https://www.deviantart.com/dctb/art/Annie-Chan-579680748" target="_blank" class="annie-link">“Annie Chan”</a> — Annie Mei cosplaying as
         <a href="https://twitter.com/shunyayamashita" target="_blank" class="annie-link" style="text-decoration: underline;">Shunya Yamashita’s</a> Sera-chan.<br>
         <em>It’s been a while since I’ve drawn her in a sailor outfit!</em>
       </p>
@@ -83,7 +84,16 @@
   </div>
 
   <script>
-    // Auto-year for version + copyright
+    // ---------- helpers ----------
+    function getIOSMajor() {
+      try {
+        var ua = navigator.userAgent || "";
+        var m = ua.match(/(CPU iPhone|CPU OS|iPad).*OS (\d+)_/i);
+        return m ? parseInt(m[2], 10) : null;
+      } catch (e) { return null; }
+    }
+
+    // ---------- Auto-year for version + copyright ----------
     (function() {
       var y = new Date().getFullYear();
       var v = document.getElementById('versionLine');
@@ -92,11 +102,11 @@
       if (c) c.textContent = '© ' + y + ' GAC';
     })();
 
-    // Credits modal logic
-    const overlay = document.getElementById('overlay');
-    const creditsBtn = document.getElementById('creditsBtn');
-    const closeX = document.getElementById('closeX');
-    const doneBtn = document.getElementById('doneBtn');
+    // ---------- Credits modal logic ----------
+    var overlay = document.getElementById('overlay');
+    var creditsBtn = document.getElementById('creditsBtn');
+    var closeX = document.getElementById('closeX');
+    var doneBtn = document.getElementById('doneBtn');
 
     function openCredits(){
       overlay.classList.add('show');
@@ -109,13 +119,13 @@
       overlay.setAttribute('aria-hidden','true');
     }
 
-    creditsBtn.addEventListener('click', (e)=>{
+    creditsBtn.addEventListener('click', function(e){
       e.stopPropagation();
       openCredits();
     });
     closeX.addEventListener('click', closeCredits);
     doneBtn.addEventListener('click', closeCredits);
-    overlay.addEventListener('click', (e)=>{
+    overlay.addEventListener('click', function(e){
       if(e.target === overlay) closeCredits();
     });
 
@@ -124,42 +134,41 @@
       openCredits();
     }
 
-    // Dynamic titles
-    const year = new Date().getFullYear();
+    // ---------- Dynamic popup titles ----------
+    var year = new Date().getFullYear();
     document.getElementById('juneTitle').textContent = '🎉 ' + (year - 2011) + ' Years of Annie';
     document.getElementById('decTitle').textContent  = '🎉 ' + (year - 2015) + ' Years of Annie Chan';
 
-    // Date checks
-    const today = new Date();
-    const isJune30   = today.getMonth() === 5 && today.getDate() === 30;
-    const isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
+    // ---------- Date checks ----------
+    var today = new Date();
+    var isJune30   = today.getMonth() === 5 && today.getDate() === 30;
+    var isDecAnniv = today.getMonth() === 11 && (today.getDate() === 22 || today.getDate() === 23);
 
     if (isJune30)   document.getElementById('popupJune30').classList.add('show');
     if (isDecAnniv) document.getElementById('popupDec22').classList.add('show');
 
-    // Gold button (V2 + shine) for Dec 22–23
-    const getBtn = document.getElementById('getAnnieBtn');
-    const dlLink = document.getElementById('downloadLink');
+    // ---------- Download behavior (kept as-is) ----------
+    var getBtn = document.getElementById('getAnnieBtn');
+    var dlLink = document.getElementById('downloadLink');
 
     if (isDecAnniv) {
       getBtn.classList.add('gold');
-      getBtn.addEventListener('click', (e) => {
+      getBtn.addEventListener('click', function(e) {
         e.preventDefault();
         document.getElementById('popupDec22').classList.add('show');
-        setTimeout(() => {
-          const a = document.createElement('a');
+        setTimeout(function() {
+          var a = document.createElement('a');
           a.href = dlLink.getAttribute('href');
           a.download = 'annie_chan.png';
           document.body.appendChild(a); a.click(); a.remove();
         }, 900);
       });
     } else {
-      dlLink.addEventListener('click', (e) => {
-        const m = navigator.userAgent.match(/OS (\d+)_/);
-        const ios = m ? parseInt(m[1]) : null;
+      dlLink.addEventListener('click', function(e) {
+        var ios = getIOSMajor(); // reuse same detection
         if (!ios || ios >= 11) {
           e.preventDefault();
-          const a = document.createElement('a');
+          var a = document.createElement('a');
           a.href = dlLink.getAttribute('href');
           a.download = 'annie_chan.png';
           document.body.appendChild(a); a.click(); a.remove();
@@ -167,10 +176,10 @@
       });
     }
 
-    // Easter eggs
-    let nameTaps = 0;
-    const requiredTaps = year - 2011;
-    document.getElementById('annieName').addEventListener('click', () => {
+    // ---------- Easter eggs ----------
+    var nameTaps = 0;
+    var requiredTaps = year - 2011;
+    document.getElementById('annieName').addEventListener('click', function() {
       nameTaps++;
       if (nameTaps === requiredTaps) {
         document.getElementById('popupJune30').classList.add('show');
@@ -178,21 +187,75 @@
       }
     });
 
-    let iconTaps = 0, refreshTimer;
-    const icon = document.getElementById('annieIcon');
-    icon.addEventListener('click', () => {
+    var iconTaps = 0, refreshTimer;
+    var icon = document.getElementById('annieIcon');
+    icon.addEventListener('click', function() {
       iconTaps++;
       clearTimeout(refreshTimer);
       if (iconTaps === 10) {
         document.getElementById('popupDec22').classList.add('show');
         iconTaps = 0;
       } else {
-        refreshTimer = setTimeout(() => {
+        refreshTimer = setTimeout(function() {
           if (iconTaps === 1) location.reload();
           iconTaps = 0;
         }, 1100);
       }
     });
+
+    // ----------  ----------
+    (function () {
+      var btn = document.getElementById('getAnnieBtn');
+      if (!btn) return;
+
+      var startX = 0, startY = 0;
+      var tracking = false;
+      var SWIPE_X = 70;   // distance left
+      var MAX_Y = 35;     // ignore if too vertical
+
+      function getPoint(e) {
+        if (e.touches && e.touches.length) return e.touches[0];
+        if (e.changedTouches && e.changedTouches.length) return e.changedTouches[0];
+        return e;
+      }
+
+      function onStart(e) {
+        var p = getPoint(e);
+        startX = p.clientX;
+        startY = p.clientY;
+        tracking = true;
+      }
+
+      function onEnd(e) {
+        if (!tracking) return;
+        tracking = false;
+
+        var p = getPoint(e);
+        var dx = p.clientX - startX;
+        var dy = p.clientY - startY;
+
+        if (dx <= -SWIPE_X && Math.abs(dy) <= MAX_Y) {
+          // stop normal click/download
+          if (e && typeof e.preventDefault === "function") e.preventDefault();
+          if (e && typeof e.stopPropagation === "function") e.stopPropagation();
+
+          window.location.href = "/backlog";
+        }
+      }
+
+      // Touch
+      btn.addEventListener('touchstart', onStart, { passive: true });
+      btn.addEventListener('touchend', onEnd, { passive: false });
+
+      // Mouse (desktop drag)
+      btn.addEventListener('mousedown', onStart);
+      btn.addEventListener('mouseup', onEnd);
+
+      // If cursor leaves while dragging, still decide
+      btn.addEventListener('mouseleave', function (e) {
+        if (tracking) onEnd(e);
+      });
+    })();
   </script>
 </body>
 </html>
