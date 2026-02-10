@@ -1,101 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extras</title>
-  <link rel="icon" type="image/png" href="../favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+  <link rel="icon" href="../favicon.png" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+
+  <!-- Use main site styling -->
+  <link rel="stylesheet" href="../style.css" />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f8c8dc;
-      padding: 50px 15px;
-      margin: 0;
+    /* Keep Extras calm: reuse main card, but slightly smaller title */
+    .extras-title{
+      margin:0 0 .4rem;
+      font-size:clamp(1.7rem,4vw,2.1rem);
+      font-weight:700;
+      color:var(--pink);
+      animation:glow 2s infinite alternate;
+    }
+    .extras-subtitle{
+      margin:0 0 1.2rem;
+      color:var(--muted);
+      font-size:.95rem;
     }
 
-    .container {
-      background: #ffe4ec;
-      padding: 30px 20px;
-      border-radius: 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      max-width: 600px;
-      margin: auto;
+    /* Extras-only buttons container */
+    .extras-actions{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
+    /* Keep links from turning blue */
+    .extras-actions a{ color:inherit; text-decoration:none; }
+
+    /* Small, calm back link */
+    .extras-back{
+      display:inline-block;
+      margin-top:1rem;
+      font-size:.95rem;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    .extras-back:hover,.extras-back:focus{
+      text-decoration:underline;
+      color:var(--pink);
     }
 
-    p.subtitle {
-      font-size: 14px;
-      margin-bottom: 25px;
-      color: #555;
+    /* Button accents that still feel “GAC” */
+    .button.blue{
+      background:#3399ff;
+      box-shadow:0 6px 14px rgba(0,0,0,.18);
+    }
+    .button.purple{
+      background:#800080;
+      box-shadow:0 6px 14px rgba(0,0,0,.18);
+    }
+    .button.megan{
+      background:#5B5259;
+      box-shadow:0 6px 14px rgba(0,0,0,.18);
     }
 
-    .button {
-      display: block;
-      width: 90%;
-      margin: 15px auto;
-      padding: 14px 0;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      color: white;
-      text-decoration: none;
-    }
-
-    .pink-btn {
-      background-color: #ff69b4;
-    }
-
-    .blue-btn {
-      background-color: #3399ff;
-    }
-
-    .purple-btn {
-      background-color: #800080;
-    }
-
-    .footer {
-      font-size: 13px;
-      color: #777;
-      margin-top: 25px;
-    }
-
-    .back-link {
-      display: block;
-      margin-top: 30px;
-      font-size: 14px;
-      text-decoration: underline;
-      color: #ff69b4;
+    /* Footer */
+    .extras-footer{
+      margin-top:1.1rem;
+      font-size:.9rem;
+      color:var(--muted);
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Extras</h1>
-    <p class="subtitle">Enjoy fun new features and content.</p>
 
-    <a class="button pink-btn" href="/annie_chan_lineart.png" target="_blank">Get Line Art Annie Chan</a>
-    <a class="button blue-btn" href="/Lauren_com.png" target="_blank">Get Lauren</a>
-    <a class="button" style="background-color: #5B5259;" href="https://getmegan.org" target="_blank">GetMegan.org</a>
-    <button class="button purple-btn" onclick="sampledComingSoon()">Sampled by</button>
+<body oncontextmenu="return false;">
+  <div class="card">
+    <h1 class="extras-title">Extras</h1>
+    <p class="extras-subtitle">More love.</p>
 
-    <p class="footer">© 2026 GAC</p>
-    <a class="back-link" href="/">Back to Main Page</a>
+    <div class="extras-actions">
+      <a class="button" href="/annie_chan_lineart.png" target="_blank" rel="noopener">Get Line Art Annie Chan</a>
+      <a class="button blue" href="/Lauren_com.png" target="_blank" rel="noopener">Get Lauren</a>
+      <a class="button megan" href="https://getmegan.org" target="_blank" rel="noopener">GetMegan.org</a>
+
+      <!-- Sampled by now points to /Ref -->
+      <a class="button purple" href="/Ref/">Sampled by</a>
+    </div>
+
+    <p class="extras-footer">© <span id="yearSlot">YEAR</span> GAC</p>
+    <a class="extras-back" href="/">Back to Main Page</a>
   </div>
 
   <script>
-    function sampledComingSoon() {
-      const button = event.target;
-      button.textContent = "Coming soon";
-    }
+    // Auto-year
+    (function(){
+      var y = new Date().getFullYear();
+      var s = document.getElementById('yearSlot');
+      if (s) s.textContent = y;
+    })();
   </script>
 </body>
 </html>
